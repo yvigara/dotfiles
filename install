@@ -150,7 +150,6 @@ brew_install_or_upgrade 'jq'
 brew_install_or_upgrade 'wget'
 brew_install_or_upgrade 'httpie'
 brew_install_or_upgrade 'sysdig'
-brew_install_or_upgrade 'gnu-sed'
 brew_install_or_upgrade 'brew-cask'
 brew_install_or_upgrade 'the_silver_searcher'
 brew_install_or_upgrade 'vim'
@@ -171,6 +170,7 @@ brew_install_or_upgrade 'libyaml'
 
 brew install 'cask'
 brew install 'Caskroom/cask/iterm2'
+brew install 'gnu-sed --with-default-names'
 
 ruby_version="$(curl -sSL http://ruby.thoughtbot.com/latest)"
 
