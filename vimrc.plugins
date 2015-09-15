@@ -1,4 +1,5 @@
 set hidden
+filetype off
 if &compatible
   set nocompatible
 end
@@ -12,7 +13,6 @@ Plug 'pbrisbin/vim-mkdir'
 Plug 'scrooloose/syntastic'
 Plug 'thoughtbot/vim-rspec'
 Plug 'morhetz/gruvbox'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'tpope/vim-haml'
@@ -38,14 +38,13 @@ Plug 'ervandew/supertab'
 Plug 'Keithbsmiley/rspec.vim'
 Plug 'vim-scripts/AutoComplPop'
 Plug 'ciaranm/detectindent'
-"Plug 'endel/ctrlp-filetype.vim'
 Plug 'lilydjwg/colorizer'
 Plug 'Yggdroot/indentLine'
 Plug 'mkitt/tabline.vim'
 Plug 'vim-scripts/mru.vim'
 Plug 'elzr/vim-json'
 Plug 'fatih/vim-go'
-"Plug 'ryanoasis/vim-webdevicons'
+Plug 'ryanoasis/vim-devicons'
 Plug 'mrk21/yaml-vim'
 "Plug 'stephpy/vim-yaml'
 
