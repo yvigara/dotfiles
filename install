@@ -42,6 +42,19 @@ brew_is_upgradable() {
   ! brew outdated --quiet "$name" >/dev/null
 }
 
+brew_cask_install() {
+  if brew_cask_is_installed "$1"; then
+      brew install "Caskroom/cask/$1"
+  else
+    fancy_echo "Installing %s ..." "$1"
+    brew cask install "$@"
+  fi
+}
+
+brew_cask_is_installed() {
+  brew cask list -1 | grep -Fqx "$1"
+}
+
 brew_tap() {
   brew tap "$1" 2> /dev/null
 }
@@ -150,8 +163,7 @@ brew_install_or_upgrade 'jq'
 brew_install_or_upgrade 'wget'
 brew_install_or_upgrade 'httpie'
 brew_install_or_upgrade 'sysdig'
-brew_install_or_upgrade 'gnu-sed'
-brew_install_or_upgrade 'brew-cask'
+brew_install_or_upgrade 'gnu-sed' '--with-default-names'
 brew_install_or_upgrade 'the_silver_searcher'
 brew_install_or_upgrade 'vim'
 brew_install_or_upgrade 'ctags'
@@ -169,9 +181,15 @@ brew_install_or_upgrade 'openssl'
 brew unlink openssl && brew link openssl --force
 brew_install_or_upgrade 'libyaml'
 
-brew install 'cask'
-brew install 'Caskroom/cask/iterm2'
+brew_tap 'caskroom/cask'
+brew_install_or_upgrade 'brew-cask'
+brew_cask_install 'iterm2'
+brew_cask_install 'java'
+brew_cask_install 'virtualbox'
+brew_cask_install 'vagrant'
+brew_cask_install 'packer'
 
+exit 1
 ruby_version="$(curl -sSL http://ruby.thoughtbot.com/latest)"
 
 eval "$(rbenv init - bash)"
