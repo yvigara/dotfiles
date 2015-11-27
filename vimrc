@@ -18,19 +18,13 @@ if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
   runtime! macros/matchit.vim
 endif
 
-filetype plugin indent on
-
 "*****************************************************************************
 "" Basic Setup
 "*****************************************************************************"
 "" Encoding
-set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8
 set termencoding=utf-8
-
-"" Fix backspace indent
-set backspace=indent,eol,start
 
 "" Tabs. May be overriten by autocmd rules
 set tabstop=2
@@ -46,7 +40,6 @@ set hidden
 
 "" Searching
 set hlsearch
-set incsearch
 set ignorecase
 set smartcase
 
@@ -59,10 +52,6 @@ set ttyfast
 set nobackup
 set noswapfile
 
-set fileformats=unix,dos,mac
-set showcmd
-set shell=/bin/sh
-
 " session management
 let g:session_directory = "~/.vim/session"
 let g:session_autoload = "no"
@@ -72,8 +61,6 @@ let g:session_command_aliases = 1
 "*****************************************************************************
 "" Visual Settings
 "*****************************************************************************
-syntax on
-set ruler
 set number
 
 let no_buffers_menu=1
@@ -107,10 +94,6 @@ endif
 
 "" Disable the blinking cursor.
 set gcr=a:blinkon0
-set scrolloff=3
-
-"" Status bar
-set laststatus=2
 
 "" Use modeline overrides
 set modeline
@@ -126,13 +109,11 @@ if exists("*fugitive#statusline")
   set statusline+=%{fugitive#statusline()}
 endif
 
-set history=500
 set autowrite     " Automatically :write before running commands
 
 " Tabs and indentation (Default to two spaces)
 set shiftround
 set smartindent
-set display+=lastline
 set nojoinspaces
 set showmatch
 set matchtime=1
@@ -248,7 +229,6 @@ augroup vimrc-remember-cursor-position
   autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 augroup END
 
-set autoread
 
 "*****************************************************************************
 "" Mappings
@@ -329,6 +309,7 @@ let g:syntastic_style_error_symbol='⚡'
 let g:syntastic_style_warning_symbol = '⚠'
 let g:syntastic_auto_loc_list=1
 let g:syntastic_aggregate_errors = 1
+nmap <silent> <leader>s :SyntasticToggleMode<cr>
 
 let g:syntastic_puppet_checkers=['puppetlint']
 
