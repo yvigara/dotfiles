@@ -173,6 +173,7 @@ brew_install_or_upgrade 'hub'
 
 brew_install_or_upgrade 'rbenv'
 brew_install_or_upgrade 'ruby-build'
+brew_install_or_upgrade 'glide'
 
 # shellcheck disable=SC2016
 #append_to_zshrc 'eval "$(rbenv init - --no-rehash bash)"' 1
@@ -225,7 +226,6 @@ $HOME/nerd-fonts/install.sh
 git_clone_or_update $HOME/gruvbox-generalized https://github.com/morhetz/gruvbox-generalized.git
 
 go get -u github.com/nsf/gocode
-go get -u github.com/constabulary/gb/...
 go get -u github.com/jstemmer/gotags
 
 go get -u github.com/alecthomas/gometalinter
