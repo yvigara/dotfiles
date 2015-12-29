@@ -1,3 +1,4 @@
+export GO15VENDOREXPERIMENT=1
 export GOPATH=$HOME/golang
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin:$GOROOT/bin
