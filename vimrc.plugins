@@ -59,6 +59,10 @@ Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
 "Plug 'stephpy/vim-yaml'
 Plug 'kien/rainbow_parentheses.vim'
+Plug 'hashivim/vim-vaultproject'
+Plug 'hashivim/vim-packer'
+Plug 'hashivim/vim-terraform'
+Plug 'hashivim/vim-vagrant'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.plugins.local
