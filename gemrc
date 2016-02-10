@@ -1,4 +1,4 @@
 ---
-gem: --no-ri --no-rdoc
+gem: --no-ri --no-rdoc -n/usr/local/bin
 benchmark: false
 bulk_threshold: 1000
