@@ -1,2 +1,2 @@
-EXCLUDES="install README.md LICENSE"
+EXCLUDES="install lib README.md LICENSE"
 DOTFILES_DIRS="$HOME/dotfiles-local $HOME/dotfiles"
