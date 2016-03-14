@@ -117,5 +117,6 @@ go get -u golang.org/x/tools/cmd/oracle
 go get -u golang.org/x/tools/cmd/gorename
 go get -u github.com/golang/lint/golint
 go get -u github.com/kisielk/errcheck
+go get -u github.com/frairon/go-outline-parser
 
 env RCRC=$HOME/dotfiles/rcrc rcup
