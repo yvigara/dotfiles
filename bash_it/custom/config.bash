@@ -11,6 +11,7 @@ VISUAL=vim
 EDITOR=vim
 PAGER="less -R"
 LESS="-R"
+alias vi=vim
 
 export EDITOR VISUAL PAGER LESS
 export CLICOLOR=1
