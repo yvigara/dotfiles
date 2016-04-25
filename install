@@ -109,6 +109,7 @@ git_clone_or_update $HOME/nerd-fonts https://github.com/ryanoasis/nerd-fonts.git
 $HOME/nerd-fonts/install.sh
 git_clone_or_update $HOME/gruvbox-generalized https://github.com/morhetz/gruvbox-generalized.git
 
+mkdir $HOME/golang
 go get -u github.com/nsf/gocode
 go get -u github.com/jstemmer/gotags
 
