@@ -106,8 +106,7 @@ fi
 
 git_clone_or_update $HOME/.bash_it https://github.com/Bash-it/bash-it.git
 git_clone_or_update $HOME/dotfiles https://github.com/yvigara/dotfiles.git
-git_clone_or_update $HOME/nerd-fonts https://github.com/ryanoasis/nerd-fonts.git
-$HOME/nerd-fonts/install.sh
+cd ~/Library/Fonts && curl -fLo "Inconsolata for Powerline Nerd Font Complete Mono.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Inconsolata/complete/Inconsolata%20for%20Powerline%20Nerd%20Font%20Complete%20Mono.otf
 git_clone_or_update $HOME/gruvbox-generalized https://github.com/morhetz/gruvbox-generalized.git
 
 mkdir $HOME/golang
