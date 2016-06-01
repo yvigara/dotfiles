@@ -27,3 +27,5 @@
   autosquash = true
 [include]
   path = ~/.gitconfig.local
+[gitreview]
+  username = yvigara
