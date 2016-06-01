@@ -2,6 +2,7 @@
 *.sw[nop]
 .bundle
 .env
+.python-version
 db/*.sqlite3
 log/*.log
 rerun.txt
