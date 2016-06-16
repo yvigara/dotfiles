@@ -63,6 +63,7 @@ Plug 'hashivim/vim-vaultproject'
 Plug 'hashivim/vim-packer'
 Plug 'hashivim/vim-terraform'
 Plug 'hashivim/vim-vagrant'
+Plug 'timakro/vim-searchant'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.plugins.local
