@@ -19,6 +19,9 @@
   excludesfile = ~/.gitignore
   autocrlf = input
   editor = vim
+  pager = diff-so-fancy | less --tabs=4 -RFX
+[diff]
+  compactionHeuristic = true
 [commit]
   template = ~/.gitmessage
 [fetch]
@@ -29,3 +32,8 @@
   path = ~/.gitconfig.local
 [gitreview]
   username = yvigara
+[color "diff-highlight"]
+  oldNormal = red bold
+  oldHighlight = red bold 52
+  newNormal = green bold
+  newHighlight = green bold 22
