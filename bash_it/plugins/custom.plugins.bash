@@ -15,6 +15,3 @@ preexec () {
     set_xterm_title "$1 {`dirs -0`} (${USER}@${HOSTNAME})"
 }
 
-case "$TERM" in
-    xterm*|rxvt*) preexec_install;;
-esac
