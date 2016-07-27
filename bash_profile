@@ -29,7 +29,3 @@ export SCM_CHECK=true
 # Load Bash It
 source $BASH_IT/bash_it.sh
 eval "$(direnv hook bash)"
-eval "$(rbenv init - --no-rehash)"
-export PYENV_ROOT=/usr/local/opt/pyenv
-eval "$(pyenv init -)"
-if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
