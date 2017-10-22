@@ -178,7 +178,7 @@ let g:airline_mode_map = {
 let g:airline_section_c = airline#section#create(['%<', '%{getcwd()}', " | ", 'file', "\ua0", 'readonly'])
 
 
-let g:airline_extensions = ['branch', 'ctrlspace', 'tagbar', 'tabline', 'syntastic', 'whitespace']
+let g:airline_extensions = ['branch', 'tagbar', 'tabline', 'syntastic', 'whitespace']
 
 
 let g:airline#extensions#ctrlspace#enabled = 1
@@ -422,6 +422,8 @@ augroup END
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
 			\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 			\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+autocmd BufRead,BufNewFile playbooks/* set ft=ansible
 
 "" Include user's local vim config
 if filereadable(expand("~/.vimrc.local"))
