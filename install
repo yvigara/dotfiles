@@ -30,6 +30,7 @@ brew_install_or_upgrade 'git'
 brew_install_or_upgrade 'jq'
 brew_install_or_upgrade 'openssl'
 brew_install_or_upgrade 'wget'
+brew_install_or_upgrade 'fasd'
 brew_install_or_upgrade 'httpie'
 brew_install_or_upgrade 'sysdig'
 brew_install_or_upgrade 'lua'
@@ -72,7 +73,9 @@ brew_cask_install 'iterm2'
 brew_cask_install 'java'
 brew_cask_install 'virtualbox'
 brew_cask_install 'vagrant'
-brew_cask_install 'atom'
+brew_cask_install 'firefox'
+brew_cask_install 'google-chrome'
+brew_cask_install 'visual-studio-code'
 
 find_latest_ruby() {
   rbenv install -l | grep -v - | tail -1 | sed -e 's/^ *//'
@@ -117,7 +120,7 @@ go get -u github.com/jstemmer/gotags
 go get -u github.com/alecthomas/gometalinter
 go get -u golang.org/x/tools/cmd/goimports
 go get -u github.com/rogpeppe/godef
-go get -u golang.org/x/tools/cmd/oracle
+go get -u golang.org/x/tools/cmd/guru
 go get -u golang.org/x/tools/cmd/gorename
 go get -u github.com/golang/lint/golint
 go get -u github.com/kisielk/errcheck
