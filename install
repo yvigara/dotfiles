@@ -111,6 +111,13 @@ fi
 git_clone_or_update $HOME/.bash_it https://github.com/Bash-it/bash-it.git
 git_clone_or_update $HOME/dotfiles https://github.com/yvigara/dotfiles.git
 cd ~/Library/Fonts && curl -fLo "Inconsolata for Powerline Nerd Font Complete Mono.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Inconsolata/complete/Inconsolata%20for%20Powerline%20Nerd%20Font%20Complete%20Mono.otf
+cd ~/Library/Fonts && curl -fLo "Sauce Code Pro Nerd Font Complete Mono Windows Compatible.ttf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/SourceCodePro/Regular/complete/Sauce%20Code%20Pro%20Nerd%20Font%20Complete%20Mono%20Windows%20Compatible.ttf
+cd ~/Library/Fonts && curl -fLo "Sauce Code Pro Semibold Nerd Font Complete Mono Windows Compatible.ttf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/SourceCodePro/Semibold/complete/Sauce%20Code%20Pro%20Semibold%20Nerd%20Font%20Complete%20Mono%20Windows%20Compatible.ttf
+cd ~/Library/Fonts && curl -fLo "Sauce Code Pro Medium Nerd Font Complete Mono Windows Compatible.ttf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/SourceCodePro/Medium/complete/Sauce%20Code%20Pro%20Medium%20Nerd%20Font%20Complete%20Mono%20Windows%20Compatible.ttf
+cd ~/Library/Fonts && curl -fLo "Sauce Code Pro Light Nerd Font Complete Mono Windows Compatible.ttf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/SourceCodePro/Light/complete/Sauce%20Code%20Pro%20Light%20Nerd%20Font%20Complete%20Mono%20Windows%20Compatible.ttf
+cd ~/Library/Fonts && curl -fLo "Sauce Code Pro ExtraLight Nerd Font Complete Mono Windows Compatible.ttf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/SourceCodePro/Extra-Light/complete/Sauce%20Code%20Pro%20ExtraLight%20Nerd%20Font%20Complete%20Mono%20Windows%20Compatible.ttf
+cd ~/Library/Fonts && curl -fLo "Sauce Code Pro Bold Nerd Font Complete Mono Windows Compatible.ttf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/SourceCodePro/Bold/complete/Sauce%20Code%20Pro%20Bold%20Nerd%20Font%20Complete%20Mono%20Windows%20Compatible.ttf
+cd ~/Library/Fonts && curl -fLo "Sauce Code Pro Black Nerd Font Complete Mono Windows Compatible.ttf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/SourceCodePro/Black/complete/Sauce%20Code%20Pro%20Black%20Nerd%20Font%20Complete%20Mono%20Windows%20Compatible.ttf
 git_clone_or_update $HOME/gruvbox-generalized https://github.com/morhetz/gruvbox-generalized.git
 
 mkdir $HOME/golang
