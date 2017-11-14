@@ -134,3 +134,7 @@ go get -u github.com/kisielk/errcheck
 go get -u github.com/frairon/go-outline-parser
 
 env RCRC=$HOME/dotfiles/rcrc rcup
+
+bash-it enable plugin alias-completion base docker git go history osx pyenv ssh sshagent virtualenv visual-studio-code fasd
+bash-it enable alias ag ansible clipboard curl general git homebrew-cask homebrew osx vault vim
+bash-it enable completion bash-it brew defaults docker git go kubectl packer ssh system terraform vagrant vault virtualbox
