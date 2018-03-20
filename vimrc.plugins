@@ -6,6 +6,17 @@ end
 
 call plug#begin('~/.vim/plugged')
 
+"if !has('nvim')
+"Plug 'roxma/vim-hug-neovim-rpc'
+"endif
+
+"Plug 'roxma/nvim-completion-manager'
+
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+
 Plug 'christoomey/vim-run-interactive'
 "Plug 'ctrlpvim/ctrlp.vim'
 "Plug 'szw/vim-ctrlspace'
@@ -49,7 +60,7 @@ Plug 'elzr/vim-json'
 Plug 'fatih/vim-go'
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 Plug 'Shougo/vimproc.vim',  { 'do': 'make' }
-Plug 'Shougo/neocomplete.vim'
+"Plug 'Shougo/neocomplete.vim'
 Plug 'Shougo/vimfiler.vim'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/unite-outline'
