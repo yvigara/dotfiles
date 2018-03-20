@@ -25,6 +25,8 @@ export SCM_CHECK=true
 # Set vcprompt executable path for scm advance info in prompt (demula theme)
 # https://github.com/xvzf/vcprompt
 #export VCPROMPT_EXECUTABLE=~/.vcprompt/bin/vcprompt
+export POWERLINE_PROMPT="user_info scm python_venv in_vim cwd"
+
 
 # Load Bash It
 source $BASH_IT/bash_it.sh
