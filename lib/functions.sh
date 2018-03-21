@@ -35,7 +35,8 @@ brew_is_upgradable() {
 
 brew_cask_install() {
   if brew_cask_is_installed "$1"; then
-      brew install "Caskroom/cask/$1"
+    fancy_echo "%s Already installed..." "$1"
+    #brew install "Caskroom/cask/$1"
   else
     fancy_echo "Installing %s ..." "$1"
     brew cask install "$@"
