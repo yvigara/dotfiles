@@ -99,7 +99,7 @@ cd ~/Library/Fonts && curl -fLo "Sauce Code Pro Bold Nerd Font Complete Mono Win
 cd ~/Library/Fonts && curl -fLo "Sauce Code Pro Black Nerd Font Complete Mono Windows Compatible.ttf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/SourceCodePro/Black/complete/Sauce%20Code%20Pro%20Black%20Nerd%20Font%20Complete%20Mono%20Windows%20Compatible.ttf
 git_clone_or_update $HOME/gruvbox-generalized https://github.com/morhetz/gruvbox-generalized.git
 
-mkdir $HOME/golang
+mkdir -p $HOME/golang
 go get -u github.com/nsf/gocode
 go get -u github.com/jstemmer/gotags
 
