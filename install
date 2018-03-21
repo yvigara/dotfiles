@@ -110,6 +110,11 @@ go get -u github.com/golang/lint/golint
 go get -u github.com/kisielk/errcheck
 go get -u github.com/frairon/go-outline-parser
 
+# Specify the preferences directory
+defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/dotfiles/iterm2_profile"
+# Tell iTerm2 to use the custom preferences in the directory
+defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
+
 env RCRC=$HOME/dotfiles/rcrc rcup
 
 bash-it enable plugin alias-completion base docker git go history osx pyenv ssh sshagent virtualenv visual-studio-code fasd
