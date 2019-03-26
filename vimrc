@@ -142,6 +142,7 @@ set novisualbell
 if !has("gui_running")
   let g:gruvbox_italic=0
 endif
+let g:gruvbox_contrast_dark = 'soft'
 set background=dark
 colorscheme gruvbox
 
