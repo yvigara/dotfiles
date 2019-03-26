@@ -2,6 +2,7 @@
 *.sw[nop]
 .bundle
 .env
+.envrc
 .python-version
 db/*.sqlite3
 log/*.log

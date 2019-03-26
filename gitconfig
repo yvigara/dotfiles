@@ -37,3 +37,9 @@
   oldHighlight = red bold 52
   newNormal = green bold
   newHighlight = green bold 22
+[filter "strongbox"]
+	clean = strongbox -clean %f
+	smudge = strongbox -smudge %f
+	required = true
+[diff "strongbox"]
+	textconv = strongbox -diff
