@@ -106,9 +106,11 @@ go get -u golang.org/x/tools/cmd/goimports
 go get -u github.com/rogpeppe/godef
 go get -u golang.org/x/tools/cmd/guru
 go get -u golang.org/x/tools/cmd/gorename
-go get -u github.com/golang/lint/golint
+go get -u golang.org/x/lint/golint
 go get -u github.com/kisielk/errcheck
 go get -u github.com/frairon/go-outline-parser
+
+go get -u github.com/uw-labs/strongbox
 
 # Specify the preferences directory
 defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/dotfiles/iterm2_profile"
