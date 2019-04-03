@@ -9,6 +9,12 @@ HISTCONTROL="erasedups:ignoreboth"
 HISTTIMEFORMAT="%y-%m-%d %H:%M:%S "
 export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear"
 shopt -s histappend
+
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
+bind '"\e[C": forward-char'
+bind '"\e[D": backward-char'
+
 export MANWIDTH=80
 VISUAL=vim
 EDITOR=vim
