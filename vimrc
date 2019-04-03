@@ -204,7 +204,8 @@ set background=dark
 colorscheme gruvbox
 
 " }}}
-" AirLine Config: {{{
+
+" Plugin: Lightline {{{
 
 let g:lightline = {
       \ 'colorscheme': 'gruvbox',
@@ -348,83 +349,6 @@ set guioptions-=e  " Don't use GUI tabline
 
 "  }}}
 
-" AirLine Config: {{{
-
-" vim-airline
-let g:airline_theme = 'hybrid'
-let g:airline_skip_empty_sections = 1
-let g:airline#extensions#syntastic#enabled = 1
-let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_detect_modified=1
-let g:airline_detect_paste=1
-let g:bufferline_echo = 0
-let g:airline_left_sep=''
-let g:airline_right_sep=''
-"let g:airline_section_z=''
-
-
-let g:airline_mode_map = {
-      \ '__' : '-',
-      \ 'n'  : 'N',
-      \ 'i'  : 'I',
-      \ 'R'  : 'R',
-      \ 'c'  : 'C',
-      \ 'v'  : 'V',
-      \ 'V'  : 'V',
-      \ '' : 'V',
-      \ 's'  : 'S',
-      \ 'S'  : 'S',
-      \ '' : 'S',
-      \ }
-
-"let g:airline_section_c = airline#section#create(['%<', '%{getcwd()}', " | ", 'file', "\ua0", 'readonly'])
-
-
-let g:airline_extensions = ['branch', 'tagbar', 'tabline', 'syntastic', 'whitespace']
-
-
-let g:airline#extensions#ctrlspace#enabled = 1
-
-
-" Tabline config
-let g:airline#extensions#tabline#show_tab_nr = 1
-let g:airline#extensions#tabline#tab_nr_type= 2
-let g:airline#extensions#tabline#show_tab_type = 1
-let g:airline#extensions#tabline#buffers_label = 'BUFFERS'
-let g:airline#extensions#tabline#tabs_label = 'TABS'
-
-let g:airline#extensions#tabline#show_buffers = 1
-let g:airline#extensions#tabline#fnamecollapse = 3
-let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-let g:airline#extensions#tabline#fnamecollapse = 1
-let g:airline#extensions#tabline#fnametruncate = 0
-"let g:airline#extensions#tabline#show_tab_type = 0
-let g:airline#extensions#tabline#buffer_idx_mode = 1
-let g:airline#extensions#tabline#left_sep = ''
-let g:airline#extensions#tabline#left_alt_sep = ''
-let g:airline#extensions#tabline#right_sep = ''
-let g:airline#extensions#tabline#right_alt_sep = ''
-
-
-"nmap <leader>1 <Plug>AirlineSelectTab1
-"nmap <leader>2 <Plug>AirlineSelectTab2
-"nmap <leader>3 <Plug>AirlineSelectTab3
-"nmap <leader>4 <Plug>AirlineSelectTab4
-"nmap <leader>5 <Plug>AirlineSelectTab5
-"nmap <leader>6 <Plug>AirlineSelectTab6
-"nmap <leader>7 <Plug>AirlineSelectTab7
-"nmap <leader>8 <Plug>AirlineSelectTab8
-"nmap <leader>9 <Plug>AirlineSelectTab9
-
-let g:airline#extensions#tagbar#enabled = 1
-
-let g:airline#extensions#whitespace#symbol = '!'
-let g:airline#extensions#whitespace#enabled = 1
-
-" }}}
-
 "*****************************************************************************
 "" Autocmd Rules
 "*****************************************************************************
@@ -522,58 +446,11 @@ let g:niji_matching_filetypes = ['lisp', 'clojure', 'java', 'ruby', 'python', 'g
 
 let g:acp_enableAtStartup = 0
 
-" JJM Highlight extra white space.
-"let s:aqua = s:getGruvColor('GruvboxAqua')
-"highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
-"hi! link DarkBlue GruvboxAqua
-"
-"highlight ExtraWhitespace ctermbg=DarkBlue  guibg=DarkBlue
-"hi! link ExtraWhitespace GruvboxGreen
-"
-""call s:HL('ExtraWhitespace', s:aqua, s:none, s:bold)
-"match ExtraWhitespace /\s\+$/
-"augroup MyAutoCmd
-"  autocmd BufWinEnter * if &modifiable && &ft!='defx' | match ExtraWhitespace /\s\+$/ | endif
-"  autocmd InsertEnter * if &modifiable && &ft!='defx' | match ExtraWhitespace /\s\+\%#\@<!$/ | endif
-"  autocmd InsertLeave * if &modifiable && &ft!='defx' | match ExtraWhitespace /\s\+$/ | endif
-"  autocmd BufWinLeave * if &modifiable && &ft!='defx' | call clearmatches() | endif
-"augroup END
-"
-"highlight TrailingWhitespace ctermbg=red guibg=red
-"highlight TabWhitespace ctermbg=darkgreen guibg=darkgreen
-"highlight DoubleSpaceAfterPeriod ctermbg=red guibg=red
-"autocmd Syntax * syn match TrailingWhitespace /\s\+$/
-"autocmd Syntax * syn match TabWhitespace /[\t]/
-"autocmd Syntax * syn match DoubleSpaceAfterPeriod /\.  /
-" Give an indicator when we approach col 80 (>72)
-"au BufWinEnter * let w:m1=matchadd('Search', '\%<81v.\%>72v', -1)
-" Give a strong indicator when we exceed col 80(>80)
-"au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-" Give an indicator of tailing white space.
-"au BufWinEnter * let w:m3=matchadd('ErrorMsg', '\s\+$', -1)
-" Give an indicator of spaces before a tab.
-"au BufWinEnter * let w:m3=matchadd('ErrorMsg', ' \+\ze\t', -1)
-"au BufNewFile,BufRead *.yaml,*.yml,*.eyaml setf yaml
-"autocmd StdinReadPre * let s:std_in=1
-
 
 " Plugin: netrw {{{
-"let g:netrw_liststyle    = 3
-"let g:netrw_banner       = 0
-"let g:netrw_winsize      = 10
-"let g:netrw_preview      = 1
-"let g:netrw_browse_split = 4
-"let g:netrw_altv         = 1
-"let g:netrw_keepdir      = 0
-"let g:netrw_sort_options = 'i'
-
 " Disable netrw
 let g:loaded_netrw       = 1
 let g:loaded_netrwPlugin = 1
-
-"autocmd FileType netrw set nolist
-
-"nmap <leader>e :Lexplore .<CR>
 " }}}
 
 " Plugin: vim-better-whitespace {{{
@@ -912,7 +789,7 @@ let g:webdevicons_enable = 1
 let g:webdevicons_enable_denite = 1
 " }}}
 
-" Vim-go: {{{
+" Plugin: Vim-go {{{
 "let g:syntastic_go_checkers = ['go', 'golint', 'errcheck']
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
@@ -989,7 +866,7 @@ let g:ansible_unindent_after_newline = 1
 
 " }}}
 
-" Language-Specific Configuration {{{{{{
+" Language-Specific Configuration {{{
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 let g:LanguageClient_loggingLevel = 'DEBUG'
 let g:LanguageClient_loggingFile =  expand('~/.local/share/nvim/LanguageClient.log')
@@ -1019,7 +896,7 @@ autocmd FileType * call LC_maps()
 "nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 "nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 
-" }}}}}}
+" }}}
 
 " Plugin: Deoplete {{{
 let g:deoplete#enable_at_startup = 1
@@ -1051,14 +928,6 @@ call deoplete#custom#option('ignore_sources', {'vim': ['tag']})
 " public settings
 call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
 call deoplete#custom#source('file/include', 'matchers', ['matcher_head'])
-
-" autocmd! User deoplete call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
-" autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-" set completeopt-=preview
-
-" inoremap <expr><C-h> deoplete#mappings#smart_close_popup()."\<C-h>"
-" inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
-" set isfname-==
 
 " }}}
 
