@@ -35,8 +35,11 @@ brew_install_or_upgrade 'httpie'
 brew_install_or_upgrade 'sysdig'
 brew_install_or_upgrade 'lua'
 brew_install_or_upgrade 'bash'
+brew_install_or_upgrade 'rg'
 brew_install_or_upgrade 'gnu-sed' '--with-default-names'
 brew_install_or_upgrade 'the_silver_searcher'
+brew_install_or_upgrade 'neovim'
+brew_install_or_upgrade 'fzf'
 brew_install_or_upgrade 'vim' '--with-lua'
 brew_install_or_upgrade 'ctags'
 brew_install_or_upgrade 'tmux'
@@ -45,7 +48,8 @@ brew_install_or_upgrade 'diff-so-fancy'
 brew_install_or_upgrade 'bash-completion'
 
 brew_install_or_upgrade 'python'
-brew_install_or_upgrade 'python3'
+brew_install_or_upgrade 'python@2'
+brew_install_or_upgrade 'npm'
 brew_install_or_upgrade 'pyenv'
 brew_install_or_upgrade 'pyenv-virtualenv'
 brew_install_or_upgrade 'pyenv-virtualenvwrapper'
@@ -101,7 +105,6 @@ mkdir -p $HOME/golang
 go get -u github.com/nsf/gocode
 go get -u github.com/jstemmer/gotags
 
-go get -u github.com/alecthomas/gometalinter
 go get -u golang.org/x/tools/cmd/goimports
 go get -u github.com/rogpeppe/godef
 go get -u golang.org/x/tools/cmd/guru
@@ -112,13 +115,21 @@ go get -u github.com/frairon/go-outline-parser
 
 go get -u github.com/uw-labs/strongbox
 
+go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
+go get -u golang.org/x/tools/cmd/gopls
+
+npm install -g yaml-language-server
+
+pip3 install --user --upgrade pynvim
+pip3 install --user --upgrade 'python-language-server[all]'
+
 # Specify the preferences directory
-defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/dotfiles/iterm2_profile"
+defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/dotfiles/iterm2_profile/"
 # Tell iTerm2 to use the custom preferences in the directory
 defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 
 env RCRC=$HOME/dotfiles/rcrc rcup
 
-bash-it enable plugin alias-completion base docker git go history osx pyenv ssh sshagent virtualenv visual-studio-code fasd
-bash-it enable alias ag ansible clipboard curl general git homebrew-cask homebrew osx vault vim
+bash-it enable plugin direnv go pyenv
+bash-it enable alias ag general git osx
 bash-it enable completion bash-it brew defaults docker git go kubectl packer ssh system terraform vagrant vault virtualbox
