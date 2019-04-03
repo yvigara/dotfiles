@@ -119,9 +119,27 @@ go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
 go get -u golang.org/x/tools/cmd/gopls
 
 npm install -g yaml-language-server
+npm install -g neovim
 
-pip3 install --user --upgrade pynvim
-pip3 install --user --upgrade 'python-language-server[all]'
+# Create Neovim Virtual Env
+xcode-select --install
+CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv install 3.7.2
+pyenv virtualenv system neovim2
+pyenv virtualenv 3.7.2 neovim3
+
+pyenv activate neovim2
+pip install --upgrade pip
+pip install --upgrade pynvim
+pip install --upgrade 'python-language-server[all]'
+
+pyenv activate neovim3
+pip install --upgrade pip
+pip install --upgrade pynvim
+pip install --upgrade 'python-language-server[all]'
+pip install --upgrade ansible
+pip install --upgrade flake8
+
+pyenv deactivate
 
 # Specify the preferences directory
 defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/dotfiles/iterm2_profile/"
