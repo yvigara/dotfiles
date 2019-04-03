@@ -6,17 +6,57 @@ end
 
 call plug#begin('~/.vim/plugged')
 
-"if !has('nvim')
-"Plug 'roxma/vim-hug-neovim-rpc'
-"endif
+if !has('nvim')
+  Plug 'roxma/vim-hug-neovim-rpc'
+  Plug 'roxma/nvim-yarp'
+endif
 
-"Plug 'roxma/nvim-completion-manager'
+" Plug 'roxma/nvim-completion-manager'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
+" -----------------------------------------------------------------------------
+" Fuzzy finder
+" -----------------------------------------------------------------------------
+"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+"Plug 'junegunn/fzf.vim'
 
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'Shougo/defx.nvim'
+  Plug 'Shougo/denite.nvim'
+endif
+Plug 'kristijanhusak/defx-git'
+Plug 'kristijanhusak/defx-icons'
+Plug 'Shougo/neco-syntax'
+Plug 'Shougo/neoyank.vim'
+Plug 'Shougo/neomru.vim'
+
+Plug 'andrewstuart/vim-kubernetes'
+"Plug 'justinmk/vim-dirvish'
+"Plug 'kristijanhusak/vim-dirvish-git'
+Plug 'ntpeters/vim-better-whitespace'
+
+" insert or delete brackets, parens, quotes in pair
+Plug 'jiangmiao/auto-pairs'
+
+" .editorconfig support
+Plug 'editorconfig/editorconfig-vim'
+
+" detect indent style (tabs vs. spaces)
+Plug 'tpope/vim-sleuth'
+
+Plug 'ekalinin/Dockerfile.vim'
+
+Plug 'mhinz/vim-signify'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 Plug 'christoomey/vim-run-interactive'
 "Plug 'ctrlpvim/ctrlp.vim'
 "Plug 'szw/vim-ctrlspace'
@@ -24,7 +64,7 @@ Plug 'pbrisbin/vim-mkdir'
 Plug 'scrooloose/syntastic'
 Plug 'thoughtbot/vim-rspec'
 Plug 'morhetz/gruvbox'
-Plug 'tpope/vim-sensible'
+"Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-fireplace'
 Plug 'tpope/vim-haml'
 Plug 'tpope/vim-cucumber'
@@ -36,33 +76,33 @@ Plug 'tpope/vim-tbone'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-markdown'
-Plug 'guns/vim-clojure-static'
-Plug 'guns/vim-clojure-highlight'
-Plug 'guns/vim-sexp'
+"Plug 'guns/vim-clojure-static'
+"Plug 'guns/vim-clojure-highlight'
+"Plug 'guns/vim-sexp'
 Plug 'junegunn/vim-easy-align'
-Plug 'vim-ruby/vim-ruby'
-Plug 'yvigara/vim-puppet'
-Plug 'bling/vim-bufferline'
+"Plug 'vim-ruby/vim-ruby'
+"Plug 'bling/vim-bufferline'
+
 Plug 'tauon/vim-niji'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'majutsushi/tagbar'
+Plug 'itchyny/lightline.vim'
+Plug 'mgee/lightline-bufferline'
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
+Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 Plug 'godlygeek/tabular'
 "Plug 'ervandew/supertab'
-Plug 'Keithbsmiley/rspec.vim'
-"Plug 'vim-scripts/AutoComplPop'
+"Plug 'Keithbsmiley/rspec.vim'
 "Plug 'ciaranm/detectindent'
-Plug 'lilydjwg/colorizer'
+"Plug 'lilydjwg/colorizer'
 "Plug 'Yggdroot/indentLine'
-Plug 'mkitt/tabline.vim'
+"Plug 'mkitt/tabline.vim'
 "Plug 'vim-scripts/mru.vim'
 Plug 'elzr/vim-json'
-Plug 'fatih/vim-go'
-Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
-Plug 'Shougo/vimproc.vim',  { 'do': 'make' }
-"Plug 'Shougo/neocomplete.vim'
-Plug 'Shougo/vimfiler.vim'
-Plug 'Shougo/unite.vim'
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+"Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
+" Plug 'Shougo/vimproc.vim',  { 'do': 'make' }
+" Plug 'Shougo/vimfiler.vim'
+"Plug 'Shougo/unite.vim'
 Plug 'Shougo/unite-outline'
 Plug 'ryanoasis/vim-devicons'
 Plug 'mrk21/yaml-vim'
@@ -79,7 +119,7 @@ Plug 'hashivim/vim-terraform'
 Plug 'hashivim/vim-vagrant'
 Plug 'timakro/vim-searchant'
 
-Plug 'pearofducks/ansible-vim'
+Plug 'pearofducks/ansible-vim', { 'do': 'cd ./UltiSnips; python3 generate.py --style dictionary --sort' }
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.plugins.local

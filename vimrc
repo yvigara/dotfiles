@@ -19,38 +19,62 @@ if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
 endif
 
 "*****************************************************************************
-"" Basic Setup
-"*****************************************************************************"
-"" Encoding
-set fileencoding=utf-8
-set fileencodings=utf-8
-set termencoding=utf-8
+"" Leaders
+"*****************************************************************************
+"{{{
+let mapleader="\<space>"
 
-"" Tabs. May be overriten by autocmd rules
-set tabstop=2
-set softtabstop=0
-set shiftwidth=2
-set expandtab
+nnoremap  [Denite]   <Nop>
+nmap      ; [Denite]
 
-"" Map leader to ,
-let mapleader=' '
+nnoremap  [Files]   <Nop>
+nmap      , [Files]
+
+nnoremap  [Windows]   <Nop>
+nmap      s [Windows]
+
+nnoremap  [Terminal]   <Nop>
+nmap ! [Terminal]
+
+"}}}
 
 "" Enable hidden buffers
 set hidden
 
-"" Searching
-set hlsearch
-set ignorecase
-set smartcase
+"*****************************************************************************
+"" Basic Setup
+"*****************************************************************************
+"" Encoding {{{
+set fileencoding=utf-8
+set fileencodings=utf-8
+set termencoding=utf-8
+" }}}
+
+"" Tabs and Indents. May be overriten by autocmd rules {{{
+set tabstop=2                       " The number of spaces a tab is
+set softtabstop=2                   " While performing editing operations
+set shiftwidth=2                    " Number of spaces to use in auto(indent)
+set smarttab                        " Tab insert blanks according to 'shiftwidth'
+set autoindent                      " Use same indenting on new lines
+set smartindent                     " Smart autoindenting on new lines
+set copyindent
+set shiftround                      " Round indent to multiple of 'shiftwidth'
+set backspace=indent,eol,start      " Intuitive backspacing in insert mode
+set whichwrap+=<,>,h,l
+set expandtab                       " Expand tabs to spaces.
+" }}}
+
+"" Searching {{{
+set hlsearch                        " Highligh search
+set incsearch                       " Search as you type
+set infercase                       " Ignore case in matching
+set smartcase                       " Match capitals in search
+" }}}
 
 "" Encoding
 set bomb
 set binary
 set ttyfast
-
-"" Directories for swp files
-set nobackup
-set noswapfile
 
 " session management
 let g:session_directory = "~/.vim/session"
@@ -64,11 +88,18 @@ let g:session_command_aliases = 1
 set number
 
 let no_buffers_menu=1
+if has('nvim')
+  set inccommand=split
+endif
 
 set mousemodel=popup
-set t_Co=256
+set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors
 set cursorline
-set guioptions=egmrti
+" switch cursor to line when in insert mode, and block when not
+set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+\,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+\,sm:block-blinkwait175-blinkoff150-blinkon175
+
 set gfn=Monospace\ 10
 
 if has("gui_running")
@@ -79,18 +110,24 @@ if has("gui_running")
 else
   let g:CSApprox_loaded = 1
 
-  if $COLORTERM == 'gnome-terminal'
-    set term=gnome-256color
-  else
-    if $TERM == 'xterm'
-      set term=xterm-256color
-    endif
-  endif
 endif
 
 if &term =~ '256color'
+  " disable background color erase
   set t_ut=
 endif
+
+" enable 24 bit color support if supported
+if (has("termguicolors"))
+    if (!(has("nvim")))
+        let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+        let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    endif
+    set termguicolors
+endif
+
+" highlight conflicts
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 "" Disable the blinking cursor.
 set gcr=a:blinkon0
@@ -109,18 +146,39 @@ if exists("*fugitive#statusline")
   set statusline+=%{fugitive#statusline()}
 endif
 
-set autowrite     " Automatically :write before running commands
+" Files {{{
+set autoread                                    " Autoread file when changed outside of Vim
+set noswapfile                                  " No swapfile for buffer
+set nobackup                                    " Don't create annoying backup files
+set confirm                                     " Ask for confirmation if unsaved file
+" }}}
+
 
 " Tabs and indentation (Default to two spaces)
-set shiftround
-set smartindent
 set nojoinspaces
 set showmatch
 set matchtime=1
 set novb
-set noshowmode
 set lazyredraw
 set magic
+
+" Appearance: {{{
+set noshowmode          " Don't show mode in cmd window
+set showtabline=2       " Always show the tabs line
+set scrolloff=5        " Keep at least 2 lines above/below
+set sidescrolloff=5     " Keep at least 5 lines left/right
+set display=lastline
+
+set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:✗,space:·  " Display tabs and trailing spaces
+set listchars+=extends:»                        " show a » when a line goes off the right edge of the screen
+set listchars+=precedes:«                       " show a « when a line goes off the left edge of the screenk
+
+set shortmess+=c
+
+" Resize splits when the window is resized
+autocmd VimResized * :wincmd =
+
+" }}}
 
 set tm=500
 
@@ -139,9 +197,8 @@ set novisualbell
 
 " Gruvbox Config: {{{
 
-if !has("gui_running")
-  let g:gruvbox_italic=0
-endif
+let g:gruvbox_invert_signs=0
+let g:gruvbox_italic=1
 let g:gruvbox_contrast_dark = 'soft'
 set background=dark
 colorscheme gruvbox
@@ -149,8 +206,153 @@ colorscheme gruvbox
 " }}}
 " AirLine Config: {{{
 
+let g:lightline = {
+      \ 'colorscheme': 'gruvbox',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive' ], [ 'cwd', 'filename' ] ],
+      \   'right': [ [ 'lineinfo' ], ['percent'], ["filetype"] ]
+      \ },
+      \ 'tabline': {
+      \   'left': [ [ 'buffer-icon', 'buffers' ] ],
+      \   'right': [ [ 'close' ] ],
+      \ },
+      \ 'mode_map': {
+      \   'n' : 'N',
+      \   'i' : 'I',
+      \   'R' : 'R',
+      \   'v' : 'V',
+      \   'V' : 'V-LINE',
+      \   "\<C-v>": 'V-BLOCK',
+      \   'c' : 'C',
+      \   's' : 'S',
+      \   'S' : 'S-LINE',
+      \   "\<C-s>": 'S-BLOCK',
+      \   't': '',
+      \ },
+      \ 'component': {
+      \   'lineinfo': ' %3l:%-2v',
+      \   'cwd': '%{fnamemodify(getcwd(), ":~")}',
+      \   'close': '  ',
+      \   'buffer-icon': '  ',
+      \ },
+      \ 'component_function': {
+      \   'fugitive': 'LightlineFugitive',
+      \   'filename': 'LightlineFilename',
+      \   'fileformat': 'LightlineFileformat',
+      \   'filetype': 'LightlineFiletype',
+      \   'fileencoding': 'LightlineFileencoding',
+      \   'mode': 'LightlineMode',
+      \ },
+      \ 'component_expand': {
+      \   'buffers': 'lightline#bufferline#buffers',
+      \ },
+      \ 'component_type': {
+      \   'buffers': 'tabsel',
+      \   'trailing': 'error',
+      \ }
+      \ }
+
+
+function! LightlineFilename()
+  let fname = expand('%:t')
+  return fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item') ? g:lightline.ctrlp_item :
+	\ fname == '__Tagbar__' ? g:lightline.fname :
+	\ fname =~ '__Gundo\|NERD_tree\|defx' ? '' :
+	\ &ft == 'vimfiler' ? vimfiler#get_status_string() :
+	\ &ft == 'unite' ? unite#get_status_string() :
+	\ &ft == 'vimshell' ? vimshell#get_status_string() :
+	\ ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
+	\ ('' != fname ? fname : '[No Name]') .
+	\ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
+endfunction
+
+function! LightlineModified()
+  return &ft =~ 'help' ? '' : &modified ? '' : &modifiable ? '' : '-'
+endfunction
+
+function! LightlineReadonly()
+  return &readonly ? '' : ''
+endfunction
+
+function! LightlineFugitive()
+  try
+    if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'defx' && exists('*fugitive#head')
+      let mark = 'ᚠ '  " edit here for cool mark
+      let branch = fugitive#head()
+      return branch !=# '' ? mark.branch : ''
+    endif
+  catch
+  endtry
+  return ''
+endfunction
+
+function! LightlineFileformat()
+  return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
+endfunction
+
+function! LightlineFiletype()
+  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+endfunction
+
+function! LightlineFileencoding()
+  return winwidth(0) > 70 ? (&fenc !=# '' ? &fenc : &enc) : ''
+endfunction
+
+function! LightlineMode()
+  let fname = expand('%:t')
+  return fname == '__Tagbar__' ? 'Tagbar' :
+	\ fname == '__Gundo__' ? 'Gundo' :
+	\ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
+	\ fname =~ 'NERD_tree' ? 'NERDTree' :
+	\ &ft == 'unite' ? 'Unite' :
+	\ &ft == 'vimfiler' ? 'VimFiler' :
+	\ &ft == 'vimshell' ? 'VimShell' :
+	\ &ft == 'defx' ? '' :
+	\ &ft == 'denite' ? 'denite' :
+	\ winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
+
+let g:tagbar_status_func = 'TagbarStatusFunc'
+
+function! TagbarStatusFunc(current, sort, fname, ...) abort
+  let g:lightline.fname = a:fname
+  return lightline#statusline(0)
+endfunction
+
+
+"""" lightline-bufferline
+let g:lightline#bufferline#filename_modifier = ':~:.' " Show filename relative to current directory
+let g:lightline#bufferline#unicode_symbols = 1        " Use fancy unicode symbols for various indicators
+let g:lightline#bufferline#modified = ' '             " Default pencil is too ugly
+let g:lightline#bufferline#read_only = ' '
+let g:lightline#bufferline#unnamed = '[No Name]'      " Default name when no buffer is opened
+let g:lightline#bufferline#shorten_path = 1           " Don't compress ~/my/folder/name to ~/m/f/n
+let g:lightline#bufferline#enable_devicons = 1
+let g:lightline#bufferline#number_map = {
+\ 0: '⁰', 1: '¹', 2: '²', 3: '³', 4: '⁴',
+\ 5: '⁵', 6: '⁶', 7: '⁷', 8: '⁸', 9: '⁹'}
+let g:lightline#bufferline#show_number = 2
+
+nmap <Leader>1 <Plug>lightline#bufferline#go(1)
+nmap <Leader>2 <Plug>lightline#bufferline#go(2)
+nmap <Leader>3 <Plug>lightline#bufferline#go(3)
+nmap <Leader>4 <Plug>lightline#bufferline#go(4)
+nmap <Leader>5 <Plug>lightline#bufferline#go(5)
+nmap <Leader>6 <Plug>lightline#bufferline#go(6)
+nmap <Leader>7 <Plug>lightline#bufferline#go(7)
+nmap <Leader>8 <Plug>lightline#bufferline#go(8)
+nmap <Leader>9 <Plug>lightline#bufferline#go(9)
+nmap <Leader>0 <Plug>lightline#bufferline#go(10)
+
+set guioptions-=e  " Don't use GUI tabline
+
+"  }}}
+
+" AirLine Config: {{{
+
 " vim-airline
 let g:airline_theme = 'hybrid'
+let g:airline_skip_empty_sections = 1
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -176,7 +378,7 @@ let g:airline_mode_map = {
       \ '' : 'S',
       \ }
 
-let g:airline_section_c = airline#section#create(['%<', '%{getcwd()}', " | ", 'file', "\ua0", 'readonly'])
+"let g:airline_section_c = airline#section#create(['%<', '%{getcwd()}', " | ", 'file', "\ua0", 'readonly'])
 
 
 let g:airline_extensions = ['branch', 'tagbar', 'tabline', 'syntastic', 'whitespace']
@@ -186,11 +388,19 @@ let g:airline#extensions#ctrlspace#enabled = 1
 
 
 " Tabline config
+let g:airline#extensions#tabline#show_tab_nr = 1
+let g:airline#extensions#tabline#tab_nr_type= 2
+let g:airline#extensions#tabline#show_tab_type = 1
+let g:airline#extensions#tabline#buffers_label = 'BUFFERS'
+let g:airline#extensions#tabline#tabs_label = 'TABS'
+
 let g:airline#extensions#tabline#show_buffers = 1
 let g:airline#extensions#tabline#fnamecollapse = 3
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-let g:airline#extensions#tabline#show_tab_type = 0
+let g:airline#extensions#tabline#fnamecollapse = 1
+let g:airline#extensions#tabline#fnametruncate = 0
+"let g:airline#extensions#tabline#show_tab_type = 0
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:airline#extensions#tabline#left_sep = ''
 let g:airline#extensions#tabline#left_alt_sep = ''
@@ -198,15 +408,15 @@ let g:airline#extensions#tabline#right_sep = ''
 let g:airline#extensions#tabline#right_alt_sep = ''
 
 
-nmap <leader>1 <Plug>AirlineSelectTab1
-nmap <leader>2 <Plug>AirlineSelectTab2
-nmap <leader>3 <Plug>AirlineSelectTab3
-nmap <leader>4 <Plug>AirlineSelectTab4
-nmap <leader>5 <Plug>AirlineSelectTab5
-nmap <leader>6 <Plug>AirlineSelectTab6
-nmap <leader>7 <Plug>AirlineSelectTab7
-nmap <leader>8 <Plug>AirlineSelectTab8
-nmap <leader>9 <Plug>AirlineSelectTab9
+"nmap <leader>1 <Plug>AirlineSelectTab1
+"nmap <leader>2 <Plug>AirlineSelectTab2
+"nmap <leader>3 <Plug>AirlineSelectTab3
+"nmap <leader>4 <Plug>AirlineSelectTab4
+"nmap <leader>5 <Plug>AirlineSelectTab5
+"nmap <leader>6 <Plug>AirlineSelectTab6
+"nmap <leader>7 <Plug>AirlineSelectTab7
+"nmap <leader>8 <Plug>AirlineSelectTab8
+"nmap <leader>9 <Plug>AirlineSelectTab9
 
 let g:airline#extensions#tagbar#enabled = 1
 
@@ -252,24 +462,25 @@ nnoremap <silent> <S-t> :tabnew<CR>
 "" Set working directory
 nnoremap <leader>. :lcd %:p:h<CR>
 
-"" Opens an edit command with the path of the currently edited file filled in
-noremap <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
-
-"" Opens a tab edit command with the path of the currently edited file filled
-noremap <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
-
 "" Buffer nav
 noremap <leader>z :bp<CR>
 noremap <leader>q :bp<CR>
 noremap <leader>x :bn<CR>
 noremap <leader>w :bn<CR>
 
+if has('nvim')
+  " source init.vim
+  nnoremap <leader>sv :so ~/.config/nvim/init.vim<CR>
+else
+  " source .vimrc
+  nnoremap <leader>sv :so ~/.vimrc<CR>
+endif
+
 "" Close buffer
 noremap <leader>c :bd<CR>
 
-nmap <silent> <leader>t :TagbarToggle<cr>
-
-map <C-y> :set paste<CR>
+" Smarter pasting
+map <C-y> :set invpaste paste?<CR>
 
 " Switch between the last two files
 nnoremap <leader><leader> <c-^>
@@ -280,29 +491,22 @@ nmap <silent> <leader>/ :silent :nohlsearch<cr>
 " Run commands that require an interactive shell
 nnoremap <Leader>r :RunInInteractiveShell<space>
 
+" Show/Hide hidden chars
+nnoremap <leader>l :set list!<CR>
+
 " Quicker window movement
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
-" CtrlSpace Config: {{{
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" smart tab for navigating auto complete menu
+inoremap <expr> <silent> <Tab>  pumvisible()?"\<C-n>":"\<TAB>"
+inoremap <expr> <silent> <S-TAB> pumvisible()?"\<C-p>":"\<S-TAB>"
 
-let g:unite_source_history_yank_enable = 1
-try
-  let g:unite_source_rec_async_command='ag --nocolor --nogroup -g ""'
-  call unite#filters#matcher_default#use(['matcher_fuzzy'])
-catch
-endtry
-" search a file in the filetree
-nnoremap <C-p> :split<cr> :<C-u>Unite -start-insert file_rec/async<cr>
-" reset not it is <C-l> normally
-":nnoremap <space>r <Plug>(unite_restart)
-
-"nnoremap <C-p> :Unite file_rec/async<cr>
-" }}}
-
-" syntastic
+" Plugin: syntastic {{{
 let g:syntastic_always_populate_loc_list=1
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
@@ -312,56 +516,400 @@ let g:syntastic_auto_loc_list=1
 let g:syntastic_aggregate_errors = 1
 nmap <silent> <leader>s :SyntasticToggleMode<cr>
 
-let g:syntastic_puppet_checkers=['puppetlint']
+" }}}
 
-let g:niji_matching_filetypes = ['lisp', 'clojure', 'puppet', 'java', 'ruby', 'python', 'go']
+let g:niji_matching_filetypes = ['lisp', 'clojure', 'java', 'ruby', 'python', 'go']
 
 let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 2
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " JJM Highlight extra white space.
-highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
-match ExtraWhitespace /\s\+$/
-augroup MyAutoCmd
-  autocmd BufWinEnter * if &modifiable && &ft!='unite' | match ExtraWhitespace /\s\+$/ | endif
-  autocmd InsertEnter * if &modifiable && &ft!='unite' | match ExtraWhitespace /\s\+\%#\@<!$/ | endif
-  autocmd InsertLeave * if &modifiable && &ft!='unite' | match ExtraWhitespace /\s\+$/ | endif
-  autocmd BufWinLeave * if &modifiable && &ft!='unite' | call clearmatches() | endif
-augroup END
-
-highlight TrailingWhitespace ctermbg=red guibg=red
-highlight TabWhitespace ctermbg=darkgreen guibg=darkgreen
-highlight DoubleSpaceAfterPeriod ctermbg=red guibg=red
-autocmd Syntax * syn match TrailingWhitespace /\s\+$/
-autocmd Syntax * syn match TabWhitespace /[\t]/
-autocmd Syntax * syn match DoubleSpaceAfterPeriod /\.  /
+"let s:aqua = s:getGruvColor('GruvboxAqua')
+"highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
+"hi! link DarkBlue GruvboxAqua
+"
+"highlight ExtraWhitespace ctermbg=DarkBlue  guibg=DarkBlue
+"hi! link ExtraWhitespace GruvboxGreen
+"
+""call s:HL('ExtraWhitespace', s:aqua, s:none, s:bold)
+"match ExtraWhitespace /\s\+$/
+"augroup MyAutoCmd
+"  autocmd BufWinEnter * if &modifiable && &ft!='defx' | match ExtraWhitespace /\s\+$/ | endif
+"  autocmd InsertEnter * if &modifiable && &ft!='defx' | match ExtraWhitespace /\s\+\%#\@<!$/ | endif
+"  autocmd InsertLeave * if &modifiable && &ft!='defx' | match ExtraWhitespace /\s\+$/ | endif
+"  autocmd BufWinLeave * if &modifiable && &ft!='defx' | call clearmatches() | endif
+"augroup END
+"
+"highlight TrailingWhitespace ctermbg=red guibg=red
+"highlight TabWhitespace ctermbg=darkgreen guibg=darkgreen
+"highlight DoubleSpaceAfterPeriod ctermbg=red guibg=red
+"autocmd Syntax * syn match TrailingWhitespace /\s\+$/
+"autocmd Syntax * syn match TabWhitespace /[\t]/
+"autocmd Syntax * syn match DoubleSpaceAfterPeriod /\.  /
 " Give an indicator when we approach col 80 (>72)
 "au BufWinEnter * let w:m1=matchadd('Search', '\%<81v.\%>72v', -1)
 " Give a strong indicator when we exceed col 80(>80)
 "au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 " Give an indicator of tailing white space.
-au BufWinEnter * let w:m3=matchadd('ErrorMsg', '\s\+$', -1)
+"au BufWinEnter * let w:m3=matchadd('ErrorMsg', '\s\+$', -1)
 " Give an indicator of spaces before a tab.
-au BufWinEnter * let w:m3=matchadd('ErrorMsg', ' \+\ze\t', -1)
-au BufNewFile,BufRead *.yaml,*.yml,*.eyaml setf yaml
-autocmd StdinReadPre * let s:std_in=1
+"au BufWinEnter * let w:m3=matchadd('ErrorMsg', ' \+\ze\t', -1)
+"au BufNewFile,BufRead *.yaml,*.yml,*.eyaml setf yaml
+"autocmd StdinReadPre * let s:std_in=1
 
 
-" NERDTree: {{{
-let g:netrw_liststyle=3
-let g:netrw_banner=0
-let g:netrw_winsize   = 25
-let g:netrw_preview   = 1
-nmap <silent> <leader>e :Vexplore<cr>
+" Plugin: netrw {{{
+"let g:netrw_liststyle    = 3
+"let g:netrw_banner       = 0
+"let g:netrw_winsize      = 10
+"let g:netrw_preview      = 1
+"let g:netrw_browse_split = 4
+"let g:netrw_altv         = 1
+"let g:netrw_keepdir      = 0
+"let g:netrw_sort_options = 'i'
+
+" Disable netrw
+let g:loaded_netrw       = 1
+let g:loaded_netrwPlugin = 1
+
+"autocmd FileType netrw set nolist
+
+"nmap <leader>e :Lexplore .<CR>
+" }}}
+
+" Plugin: vim-better-whitespace {{{
+let g:better_whitespace_enabled=1
+let g:strip_whitespace_on_save=1
+let g:strip_whitespace_on_save = 1
+let g:better_whitespace_filetypes_blacklist=['defx', 'diff', 'gitcommit', 'unite', 'denite', 'qf', 'help']
+" }}}
+
+" Plugin: defx.vim {{{
+autocmd FileType defx set nolist
+
+"nmap <leader>e :Defx -split=vertical -winwidth=20 -direction=topleft -toggle<CR>
+nmap <leader>e :Defx<CR>
+nnoremap <silent><buffer><expr> <CR> defx#do_action('drop')
+"autocmd FileType defx call s:defx_my_settings()
+let g:defx_icons_enable_syntax_highlight = 1
+let g:defx_icons_column_length = 1
+let g:defx_icons_directory_icon = ''
+let g:defx_icons_mark_icon = '*'
+let g:defx_icons_parent_icon = ''
+let g:defx_icons_default_icon = ''
+let g:defx_icons_directory_symlink_icon = ''
+" Options below are applicable only when using "tree" feature
+let g:defx_icons_root_opened_tree_icon = ''
+let g:defx_icons_nested_opened_tree_icon = ''
+let g:defx_icons_nested_closed_tree_icon = ''
+
+let g:defx_git#indicators = {
+  \ 'Modified'  : '✹',
+  \ 'Staged'    : '✚',
+  \ 'Untracked' : '✭',
+  \ 'Renamed'   : '➜',
+  \ 'Unmerged'  : '═',
+  \ 'Ignored'   : '☒',
+  \ 'Deleted'   : '✖',
+  \ 'Unknown'   : '?'
+  \ }
+
+call defx#custom#option('_', {
+      \ 'winwidth': 40,
+      \ 'columns': 'mark:git:icons:filename',
+      \ 'split': 'vertical',
+      \ 'direction': 'topleft',
+      \ 'show_ignored_files': 0,
+      \ 'root_marker': '',
+      \ 'buffer_name': '',
+      \ 'toggle': 1,
+      \ 'resume': 1
+      \ })
+
+call defx#custom#column('mark', {
+      \ 'readonly_icon': '',
+      \ 'selected_icon': '',
+      \ })
+
+call defx#custom#column('filename', {
+      \ 'directory_icon': '',
+      \ 'opened_icon': '',
+      \ 'root_icon': '',
+      \ 'min_width': 35,
+      \ 'max_width': 35,
+      \ })
+
+let g:_autoclose_defx = 1
+
+augroup vfinit
+  au!
+  autocmd FileType defx call s:defx_init()
+  " auto close last defx windows
+  autocmd BufEnter * nested if
+        \ (!has('vim_starting') && winnr('$') == 1  && g:_autoclose_defx
+        \ && &filetype ==# 'defx') |
+        \ call s:close_last_vimfiler_windows() | endif
+augroup END
+
+" in this function, we should check if shell terminal still exists,
+" then close the terminal job before close vimfiler
+function! s:close_last_vimfiler_windows() abort
+	"call SpaceVim#layers#shell#close_terminal()
+  q
+endfunction
+
+function! s:defx_init()
+  setl nonumber
+  setl norelativenumber
+  setl listchars=
+  setl nofoldenable
+  setl foldmethod=manual
+
+  silent! nunmap <buffer> <Space>
+  silent! nunmap <buffer> <C-l>
+  silent! nunmap <buffer> <C-j>
+  silent! nunmap <buffer> E
+  silent! nunmap <buffer> gr
+  silent! nunmap <buffer> gf
+  silent! nunmap <buffer> -
+  silent! nunmap <buffer> s
+
+  nnoremap <silent><buffer><expr> '
+        \ defx#do_action('toggle_select') . 'j'
+  " TODO: we need an action to clear all selections
+  nnoremap <silent><buffer><expr> V
+        \ defx#do_action('toggle_select_all')
+
+  " Define mappings
+  nnoremap <silent><buffer><expr> gx
+        \ defx#do_action('execute_system')
+  nnoremap <silent><buffer><expr> c
+        \ defx#do_action('copy')
+  nnoremap <silent><buffer><expr> q
+        \ defx#do_action('quit')
+  nnoremap <silent><buffer><expr> m
+        \ defx#do_action('move')
+  nnoremap <silent><buffer><expr> P
+        \ defx#do_action('paste')
+  nnoremap <silent><buffer><expr> h defx#do_action('call', 'DefxSmartH')
+  nnoremap <silent><buffer><expr> <Left> defx#do_action('call', 'DefxSmartH')
+  nnoremap <silent><buffer><expr> l
+        \ defx#is_directory() ?
+        \ defx#do_action('open_tree') . 'j' : defx#do_action('drop')
+  nnoremap <silent><buffer><expr> <Right>
+        \ defx#is_directory() ?
+        \ defx#do_action('open_tree') . 'j' : defx#do_action('drop')
+  nnoremap <silent><buffer><expr> <Cr>
+        \ defx#is_directory() ?
+        \ defx#do_action('open_directory') : defx#do_action('drop')
+  nnoremap <silent><buffer><expr> <2-LeftMouse>
+        \ defx#is_directory() ?
+        \ defx#do_action('open_tree') : defx#do_action('drop')
+  nnoremap <silent><buffer><expr> sg
+        \ defx#do_action('drop', 'vsplit')
+  nnoremap <silent><buffer><expr> sv
+        \ defx#do_action('drop', 'split')
+  nnoremap <silent><buffer><expr> st
+        \ defx#do_action('drop', 'tabedit')
+  nnoremap <silent><buffer><expr> p
+        \ defx#do_action('open', 'pedit')
+  nnoremap <silent><buffer><expr> N
+        \ defx#do_action('new_file')
+  nnoremap <silent><buffer><expr> d
+        \ defx#do_action('remove')
+  nnoremap <silent><buffer><expr> r
+        \ defx#do_action('rename')
+  nnoremap <silent><buffer><expr> yy defx#do_action('call', 'DefxYarkPath')
+  nnoremap <silent><buffer><expr> .
+        \ defx#do_action('toggle_ignored_files')
+  nnoremap <silent><buffer><expr> ~
+        \ defx#do_action('cd')
+  nnoremap <silent><buffer><expr> j
+        \ line('.') == line('$') ? 'gg' : 'j'
+  nnoremap <silent><buffer><expr> k
+        \ line('.') == 1 ? 'G' : 'k'
+  nnoremap <silent><buffer><expr> <C-r>
+        \ defx#do_action('redraw')
+  nnoremap <silent><buffer><expr> <C-g>
+        \ defx#do_action('print')
+  nnoremap <silent><buffer><expr> cd
+        \ defx#do_action('change_vim_cwd')
+endf
+
+function! DefxSmartH(_)
+  " candidate is opend tree?
+  if defx#is_opened_tree()
+    return defx#call_action('close_tree')
+  endif
+
+  " parent is root?
+  let s:candidate = defx#get_candidate()
+  let s:parent = fnamemodify(s:candidate['action__path'], s:candidate['is_directory'] ? ':p:h:h' : ':p:h')
+  let sep = '/' " s:SYS.isWindows ? '\\' :  '/'
+  if s:trim_right(s:parent, sep) == s:trim_right(b:defx.paths[0], sep)
+    return defx#call_action('cd', ['..'])
+  endif
+
+  " move to parent.
+  call defx#call_action('search', s:parent)
+
+  " if you want close_tree immediately, enable below line.
+  call defx#call_action('close_tree')
+endfunction
+
+function! DefxYarkPath(_) abort
+  let candidate = defx#get_candidate()
+  let @+ = candidate['action__path']
+  echo 'yarked: ' . @+
+endfunction
+
+function! s:trim_right(str, trim)
+  return substitute(a:str, printf('%s$', a:trim), '', 'g')
+endfunction
+
+" }}}
+
+" Plugin: tagbar {{{
+nmap <silent> <leader>t :TagbarToggle<cr>
+nnoremap <f2> :TagbarToggle<cr>
+
+let g:tagbar_width     = 40
+let g:tagbar_autoclose = 0
+let g:tagbar_autofocus = 1
+let g:tagbar_compact = 1
+" }}}
+
+" Plugin: Deinte {{{
+nnoremap <silent> [Denite]b :Denite buffer file/old -default-action=switch<cr>
+nnoremap <silent> [Denite]f :Denite file/rec<cr>
+nnoremap <silent> [Denite]g :Denite grep<cr>
+nnoremap <silent> [Denite]l :Denite line<cr>
+nnoremap <silent> [Denite]o :Denite outline<cr>
+nnoremap <silent> [Denite]m :Denite file_mru<cr>
+nnoremap <silent> [Denite]c :Denite command<cr>
+nnoremap <silent> [Denite]r :Denite register -buffer-name=register<cr>
+xnoremap <silent> [Denite]r :Denite register -buffer-name=register -default-action=replace<cr>
+nnoremap <silent> [Denite]d :Denite directory_rec -default-action=cd<cr>
+nnoremap <silent> [Denite]* :DeniteCursorWord line<cr>
+nnoremap <silent> [Denite]w :DeniteCursorWord grep<cr>
+nnoremap <silent> [Denite]ch :Denite command_history<cr>
+
+" denite option
+let s:denite_options = {
+      \ 'default' : {
+      \ 'winheight' : 15,
+      \ 'mode' : 'insert',
+      \ 'quit' : 1,
+      \ 'direction': 'botright',
+      \ 'prompt' : '❯',
+      \ }}
+
+function! s:profile(opts) abort
+  for fname in keys(a:opts)
+    for dopt in keys(a:opts[fname])
+      call denite#custom#option(fname, dopt, a:opts[fname][dopt])
+    endfor
+  endfor
+endfunction
+
+call s:profile(s:denite_options)
+
+call denite#custom#var(
+      \ 'buffer',
+      \ 'date_format', '%m-%d-%Y %H:%M:%S')
+" Use RipGrep or The Silver Searcher
+if executable('rg')
+  " For ripgrep
+  " Note: It is slower than ag
+  call denite#custom#var('file/rec', 'command', ['rg', '--hidden', '--files', '--glob', '!.git', '--glob', ''])
+elseif executable('ag')
+  " Change file/rec command.
+  call denite#custom#var('file/rec', 'command', ['ag' , '--nocolor', '--nogroup', '-g', ''])
+endif
+
+call denite#custom#alias('source', 'file/rec/git', 'file/rec')
+call denite#custom#var('file/rec/git', 'command',
+      \ ['git', 'ls-files', '-co', '--exclude-standard'])
+
+" FIND and GREP COMMANDS
+if executable('rg')
+  " Ripgrep command on grep source
+  call denite#custom#var('grep', 'command', ['rg'])
+  call denite#custom#var('grep', 'default_opts',
+        \ ['--vimgrep', '--no-heading'])
+  call denite#custom#var('grep', 'recursive_opts', [])
+  call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
+  call denite#custom#var('grep', 'separator', ['--'])
+  call denite#custom#var('grep', 'final_opts', [])
+
+elseif executable('ag')
+  call denite#custom#var('grep', 'command', ['ag'])
+  call denite#custom#var('grep', 'recursive_opts', [])
+  call denite#custom#var('grep', 'pattern_opt', [])
+  call denite#custom#var('grep', 'separator', ['--'])
+  call denite#custom#var('grep', 'final_opts', [])
+  call denite#custom#var('grep', 'default_opts',
+        \ [ '--vimgrep', '--smart-case' ])
+elseif executable('ack')
+  " Ack command
+  call denite#custom#var('grep', 'command', ['ack'])
+  call denite#custom#var('grep', 'recursive_opts', [])
+  call denite#custom#var('grep', 'pattern_opt', ['--match'])
+  call denite#custom#var('grep', 'separator', ['--'])
+  call denite#custom#var('grep', 'final_opts', [])
+  call denite#custom#var('grep', 'default_opts',
+        \ ['--ackrc', $HOME.'/.config/ackrc', '-H',
+        \ '--nopager', '--nocolor', '--nogroup', '--column'])
+endif
+
+" enable unite menu compatibility
+call denite#custom#var('menu', 'unite_source_menu_compatibility', 1)
+
+" KEY MAPPINGS
+let s:insert_mode_mappings = [
+      \ ['jk', '<denite:enter_mode:normal>', 'noremap'],
+      \ ['<Tab>', '<denite:move_to_next_line>', 'noremap'],
+      \ ['<Down>', '<denite:move_to_next_line>', 'noremap'],
+      \ ['<S-tab>', '<denite:move_to_previous_line>', 'noremap'],
+      \ ['<Up>', '<denite:move_to_previous_line>', 'noremap'],
+      \ ['<C-t>', '<denite:do_action:tabopen>', 'noremap'],
+      \ ['<C-v>', '<denite:do_action:vsplit>', 'noremap'],
+      \ ['<C-s>', '<denite:do_action:split>', 'noremap'],
+      \ ['<Esc>', '<denite:enter_mode:normal>', 'noremap'],
+      \ ['<C-N>', '<denite:assign_next_matched_text>', 'noremap'],
+      \ ['<C-P>', '<denite:assign_previous_matched_text>', 'noremap'],
+      \ ['<C-k>', '<denite:assign_previous_text>', 'noremap'],
+      \ ['<C-j>', '<denite:assign_next_text>', 'noremap'],
+      \ ['<C-Y>', '<denite:redraw>', 'noremap'],
+      \ ]
+
+let s:normal_mode_mappings = [
+      \ ["'", '<denite:toggle_select_down>', 'noremap'],
+      \ ['<C-n>', '<denite:jump_to_next_source>', 'noremap'],
+      \ ['<C-p>', '<denite:jump_to_previous_source>', 'noremap'],
+      \ ['<Tab>', '<denite:move_to_next_line>', 'noremap'],
+      \ ['<C-j>', '<denite:move_to_next_line>', 'noremap'],
+      \ ['<S-tab>', '<denite:move_to_previous_line>', 'noremap'],
+      \ ['<C-k>', '<denite:move_to_previous_line>', 'noremap'],
+      \ ['gg', '<denite:move_to_first_line>', 'noremap'],
+      \ ['<C-t>', '<denite:do_action:tabopen>', 'noremap'],
+      \ ['<C-v>', '<denite:do_action:vsplit>', 'noremap'],
+      \ ['<C-s>', '<denite:do_action:split>', 'noremap'],
+      \ ['q', '<denite:quit>', 'noremap'],
+      \ ['<Esc>', '<denite:quit>', 'noremap'],
+      \ ['r', '<denite:redraw>', 'noremap'],
+      \ ]
+
+for s:m in s:insert_mode_mappings
+  call denite#custom#map('insert', s:m[0], s:m[1], s:m[2])
+endfor
+for s:m in s:normal_mode_mappings
+  call denite#custom#map('normal', s:m[0], s:m[1], s:m[2])
+endfor
+
+unlet s:m s:insert_mode_mappings s:normal_mode_mappings
+
+let g:webdevicons_enable = 1
+let g:webdevicons_enable_denite = 1
 " }}}
 
 " Vim-go: {{{
@@ -415,16 +963,130 @@ augroup FileType go
 
 	au Filetype go setlocal ts=4 sts=4 sw=4 noexpandtab
 	au Filetype go hi clear TabWhitespace
+
+  let g:go_def_mode='gopls'
 augroup END
+
+autocmd BufWritePre *.go :call LanguageClient#textDocument_formatting_sync()
 
 " }}}
 
 
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
 			\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-			\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+      \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
-autocmd BufRead,BufNewFile playbooks/* set ft=ansible
+" Plugin: vim-ansible {{{
+autocmd BufRead,BufNewFile */playbooks/*.yml set filetype=yaml.ansible
+"autocmd FileType yaml.ansible setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
+let g:ansible_attribute_highlight = "ob"
+let g:ansible_name_highlight = 'd'
+let g:ansible_extra_keywords_highlight = 1
+let g:ansible_unindent_after_newline = 1
+"let g:ansible_yamlKeyName = 'yamlKey'
+
+" }}}
+
+" Language-Specific Configuration {{{{{{
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+let g:LanguageClient_loggingLevel = 'DEBUG'
+let g:LanguageClient_loggingFile =  expand('~/.local/share/nvim/LanguageClient.log')
+let g:LanguageClient_serverStderr = expand('~/.local/share/nvim/LanguageServer.log')
+
+let g:LanguageClient_serverCommands = {
+			\ 'yaml': ['yaml-language-server', '--stdio'],
+			\ 'yaml.ansible': ['yaml-language-server', '--stdio'],
+      \ 'python': ['pyls'],
+      \ 'go': ['gopls'],
+      \ }
+
+let g:LanguageClient_loadSettings = 1
+let g:LanguageClient_autoStart = 1
+
+function LC_maps()
+  if has_key(g:LanguageClient_serverCommands, &filetype)
+    nnoremap <buffer> <silent> K :call LanguageClient#textDocument_hover()<cr>
+    nnoremap <buffer> <silent> gd :call LanguageClient#textDocument_definition()<CR>
+    nnoremap <buffer> <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+  endif
+endfunction
+
+autocmd FileType * call LC_maps()
+" Or map each action separately
+"nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+"nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+"nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+
+" }}}}}}
+
+" Plugin: Deoplete {{{
+let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option({
+      \ 'auto_complete_delay' :  50,
+      \ 'ignore_case'         :  1,
+      \ 'smart_case'          :  1,
+      \ 'camel_case'          :  1,
+      \ 'refresh_always'      :  1,
+      \ })
+
+" LanguageClient
+call deoplete#custom#source('LanguageClient', 'min_pattern_length', 2)
+
+" sh
+call deoplete#custom#option('ignore_sources', {'sh': ['around', 'member', 'tag', 'syntax']})
+
+" go
+call deoplete#custom#option('ignore_sources', {'go': ['omni']})
+call deoplete#custom#source('go', 'mark', '')
+call deoplete#custom#source('go', 'rank', 9999)
+
+" markdown
+call deoplete#custom#option('ignore_sources', {'markdown': ['tag']})
+
+" vim
+call deoplete#custom#option('ignore_sources', {'vim': ['tag']})
+
+" public settings
+call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
+call deoplete#custom#source('file/include', 'matchers', ['matcher_head'])
+
+" autocmd! User deoplete call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
+" autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+" set completeopt-=preview
+
+" inoremap <expr><C-h> deoplete#mappings#smart_close_popup()."\<C-h>"
+" inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
+" set isfname-==
+
+" }}}
+
+" Plugin: UltiSnips {{{
+let g:UltiSnipsUsePythonVersion=3
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsEditSplit="vertical"
+
+" }}}
+
+" Plugin: Signify {{{
+let g:signify_vcs_list = [ 'git' ]
+let g:signify_cursorhold_insert     = 1
+let g:signify_cursorhold_normal     = 1
+let g:signify_update_on_bufenter    = 0
+let g:signify_update_on_focusgained = 1
+nnoremap <leader>gt :SignifyToggle<CR>
+nnoremap <leader>gh :SignifyToggleHighlight<CR>
+nnoremap <leader>gr :SignifyRefresh<CR>
+nnoremap <leader>gd :SignifyDebug<CR>
+
+" }}}
+
+let g:python3_host_prog = expand("$HOME/.pyenv/versions/neovim3/bin/python3")
+let g:python_host_prog = expand("$HOME/.pyenv/versions/neovim2/bin/python2")
+let g:loaded_ruby_provider = 1
 
 "" Include user's local vim config
 if filereadable(expand("~/.vimrc.local"))
