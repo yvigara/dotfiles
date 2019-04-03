@@ -32,8 +32,3 @@ export SCM_GIT_SHOW_MINIMAL_INFO=true
 # Load Bash It
 source $BASH_IT/bash_it.sh
 
-HISTTIMEFORMAT="%y-%m-%d %H:%M:%S "
-HISTCONTROL=ignoredups
-shopt -s histappend
-HISTSIZE=10000
-HISTFILESIZE=50000
