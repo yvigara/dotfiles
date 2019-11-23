@@ -24,70 +24,11 @@ else
 fi
 
 fancy_echo "Updating Homebrew formulas ..."
+brew tap Homebrew/bundle
 brew update
-
-brew_install_or_upgrade 'git'
-brew_install_or_upgrade 'jq'
-brew_install_or_upgrade 'openssl'
-brew_install_or_upgrade 'wget'
-brew_install_or_upgrade 'fasd'
-brew_install_or_upgrade 'httpie'
-brew_install_or_upgrade 'sysdig'
-brew_install_or_upgrade 'lua'
-brew_install_or_upgrade 'bash'
-brew_install_or_upgrade 'rg'
-brew_install_or_upgrade 'gnu-sed' '--with-default-names'
-brew_install_or_upgrade 'the_silver_searcher'
-brew_install_or_upgrade 'neovim'
-brew_install_or_upgrade 'fzf'
-brew_install_or_upgrade 'vim' '--with-lua'
-brew_install_or_upgrade 'ctags'
-brew_install_or_upgrade 'tmux'
-brew_install_or_upgrade 'reattach-to-user-namespace'
-brew_install_or_upgrade 'diff-so-fancy'
-brew_install_or_upgrade 'bash-completion'
-
-brew_install_or_upgrade 'python'
-brew_install_or_upgrade 'python@2'
-brew_install_or_upgrade 'npm'
-brew_install_or_upgrade 'pyenv'
-brew_install_or_upgrade 'pyenv-virtualenv'
-brew_install_or_upgrade 'pyenv-virtualenvwrapper'
-brew_install_or_upgrade 'go'
-brew_install_or_upgrade 'glide'
-brew_install_or_upgrade 'direnv'
-
-brew_install_or_upgrade 'ssh-copy-id'
-brew_install_or_upgrade 'pwgen'
-brew_install_or_upgrade 'docker'
-brew_install_or_upgrade 'ansible'
-brew_install_or_upgrade 'kubernetes-cli'
-brew_install_or_upgrade 'stern'
-brew_install_or_upgrade 'packer'
-brew_install_or_upgrade 'terraform'
-brew_install_or_upgrade 'vault'
-brew_install_or_upgrade 'awscli'
-brew_install_or_upgrade 'ant'
-brew_install_or_upgrade 'maven'
-
-brew_install_or_upgrade 'rsync'
-brew_install_or_upgrade 'mas'
-
-brew_tap 'caskroom/cask'
-brew_cask_install 'iterm2'
-brew_cask_install 'java'
-brew_cask_install 'virtualbox'
-brew_cask_install 'vagrant'
-brew_cask_install 'powershell'
-brew_cask_install 'firefox'
-brew_cask_install 'google-chrome'
-brew_cask_install 'visual-studio-code'
-brew_cask_install 'docker'
-brew_cask_install 'eclipse-jee'
-brew_cask_install 'aws-vault'
-brew_tap 'caskroom/fonts'
-brew_cask_install 'font-sourcecodepro-nerd-font-mono'
-brew_cask_install 'font-sourcecodepro-nerd-font'
+brew bundle
+brew cleanup -s
+brew cask cleanup
 
 if ! command -v rcup >/dev/null; then
   brew_tap 'thoughtbot/formulae'

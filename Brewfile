@@ -1,0 +1,78 @@
+tap "homebrew/bundle"
+tap "homebrew/cask"
+tap "homebrew/cask-fonts"
+
+brew "bash"
+brew "bash-completion"
+
+brew "zsh-completion"
+
+brew "curl"
+brew "wget"
+brew "httpie"
+brew "rsync"
+
+brew "direnv"
+
+brew "stow"
+brew "fzf"
+brew "git"
+brew "jq"
+brew "openssl"
+brew "lua"
+brew "rg"
+brew "gnu-sed", args: ["--with-default-names"]
+brew "ctags"
+brew "diff-so-fancy"
+
+brew "neovim"
+brew "vim", args: ["--with-lua"]
+
+brew "go"
+brew "node"
+brew "python"
+brew "python@2"
+
+brew "npm"
+brew "yarn"
+brew "pyenv"
+brew "pyenv-virtualenv"
+brew "pyenv-virtualenvwrapper"
+brew "glide"
+brew "ant"
+brew "maven"
+
+brew "ssh-copy-id"
+brew "pwgen"
+brew "ansible"
+brew "kubectl"
+brew "kubectx"
+brew "stern"
+brew "packer"
+brew "terraform"
+brew "vault"
+brew "awscli"
+
+brew "mas"
+
+cask "font-sourcecodepro-nerd-font-mono"
+cask "font-sourcecodepro-nerd-font"
+
+cask "iterm2"
+
+cask "firefox"
+cask "google-chrome"
+
+cask "docker"
+cask "java"
+cask "virtualbox"
+cask "vagrant"
+cask "powershell"
+cask "aws-vault"
+
+cask "visual-studio-code"
+cask "pycharm-ce"
+
+mas "Slack", id: 803453959
+mas "MindNode", id: 1289197285
+mas "Kindle", id: 405399194
