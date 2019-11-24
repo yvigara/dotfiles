@@ -30,11 +30,6 @@ brew bundle
 brew cleanup -s
 brew cask cleanup
 
-if ! command -v rcup >/dev/null; then
-  brew_tap 'thoughtbot/formulae'
-  brew_install_or_upgrade 'rcm'
-fi
-
 if [ -f "$HOME/.install.local" ]; then
   . "$HOME/.install.local"
 fi
@@ -65,9 +60,9 @@ npm install -g neovim
 
 # Create Neovim Virtual Env
 xcode-select --install
-CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv install 3.7.2
+CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv install 3.7.5
 pyenv virtualenv system neovim2
-pyenv virtualenv 3.7.2 neovim3
+pyenv virtualenv 3.7.5 neovim3
 
 pyenv activate neovim2
 pip install --upgrade pip
@@ -88,7 +83,7 @@ defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/dotfiles
 # Tell iTerm2 to use the custom preferences in the directory
 defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 
-env RCRC=$HOME/dotfiles/rcrc rcup
+stow -R vim git bash
 
 bash-it enable plugin direnv go pyenv
 bash-it enable alias ag general git osx

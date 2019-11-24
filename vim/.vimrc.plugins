@@ -119,7 +119,11 @@ Plug 'hashivim/vim-terraform'
 Plug 'hashivim/vim-vagrant'
 Plug 'timakro/vim-searchant'
 
+Plug 'davidhalter/jedi-vim'
 Plug 'pearofducks/ansible-vim', { 'do': 'cd ./UltiSnips; python3 generate.py --style dictionary --sort' }
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.plugins.local

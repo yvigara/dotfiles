@@ -186,9 +186,32 @@ set tm=500
 set splitbelow
 set splitright
 
+" Completion setting.
+"set completeopt=menuone
+" Set popup menu max height.
+set pumheight=20
+
+" Set minimal width for current window.
+set winwidth=30
+" Set minimal height for current window.
+" set winheight=20
+set winheight=1
+" Set maximam maximam command line window.
+set cmdwinheight=5
+" No equal window size.
+set noequalalways
+
+" Adjust window size of preview and help.
+set previewheight=8
+set helpheight=12
+
+" For conceal.
+set conceallevel=2 concealcursor=niv
+
 " JJM Enable line numbers, useful for discussion when on a projector
 set number
 set numberwidth=5
+set signcolumn=yes
 
 " Disable visualbell
 set visualbell t_vb=
@@ -263,7 +286,7 @@ function! LightlineFilename()
 	\ &ft == 'unite' ? unite#get_status_string() :
 	\ &ft == 'vimshell' ? vimshell#get_status_string() :
 	\ ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
-	\ ('' != fname ? fname : '[No Name]') .
+	\ ('' != fname ? expand('%') : '[No Name]') .
 	\ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
 endfunction
 
@@ -492,14 +515,18 @@ let g:defx_git#indicators = {
 
 call defx#custom#option('_', {
       \ 'winwidth': 40,
-      \ 'columns': 'mark:git:icons:filename',
+      \ 'columns': 'mark:git:indent:icons:filename',
       \ 'split': 'vertical',
       \ 'direction': 'topleft',
       \ 'show_ignored_files': 0,
-      \ 'root_marker': '',
       \ 'buffer_name': '',
       \ 'toggle': 1,
-      \ 'resume': 1
+      \ 'resume': 1,
+      \ 'listed': 1,
+      \ 'root_marker': '≡ ',
+      \ 'ignored_files':
+      \     '.mypy_cache,.pytest_cache,.git,.hg,.svn,.stversions'
+      \   . ',__pycache__,.sass-cache,*.egg-info,.DS_Store,*.pyc'
       \ })
 
 call defx#custom#column('mark', {
@@ -507,10 +534,13 @@ call defx#custom#column('mark', {
       \ 'selected_icon': '',
       \ })
 
-call defx#custom#column('filename', {
+call defx#custom#column('icon', {
       \ 'directory_icon': '',
       \ 'opened_icon': '',
       \ 'root_icon': '',
+      \ })
+
+call defx#custom#column('filename', {
       \ 'min_width': 35,
       \ 'max_width': 35,
       \ })
@@ -868,7 +898,7 @@ let g:ansible_unindent_after_newline = 1
 
 " Language-Specific Configuration {{{
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-let g:LanguageClient_loggingLevel = 'DEBUG'
+let g:LanguageClient_loggingLevel = 'WARN'
 let g:LanguageClient_loggingFile =  expand('~/.local/share/nvim/LanguageClient.log')
 let g:LanguageClient_serverStderr = expand('~/.local/share/nvim/LanguageServer.log')
 
@@ -887,6 +917,7 @@ function LC_maps()
     nnoremap <buffer> <silent> K :call LanguageClient#textDocument_hover()<cr>
     nnoremap <buffer> <silent> gd :call LanguageClient#textDocument_definition()<CR>
     nnoremap <buffer> <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+    nnoremap <buffer> <silent> <F3> :call LanguageClient#textDocument_formatting()<CR>
   endif
 endfunction
 
