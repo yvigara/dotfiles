@@ -13,6 +13,16 @@ trap 'ret=$?; test $ret -ne 0 && printf "failed\n\n" >&2; exit $ret' EXIT
 set -e
 
 
+if pkgutil --pkg-info=com.apple.pkg.CLTools_Executables > /dev/null 2>&1; then
+  fancy_echo "macOS Command-Line Tools are installed."
+else
+  fancy_echo "Installing Command-Line Tools"
+  xcode-select --install
+  sudo xcodebuild -license accept
+fi
+
+softwareupdate -i -a
+
 if ! command -v brew >/dev/null; then
   fancy_echo "Installing Homebrew ..."
     curl -fsS \
@@ -26,15 +36,15 @@ fi
 fancy_echo "Updating Homebrew formulas ..."
 brew tap Homebrew/bundle
 brew update
-brew bundle
-brew cleanup -s
-brew cask cleanup
+#brew bundle
+#brew cleanup -s
 
 if [ -f "$HOME/.install.local" ]; then
   . "$HOME/.install.local"
 fi
 
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+git_clone_or_update $HOME/.oh-my-zsh https://github.com/ohmyzsh/ohmyzsh.git
+git_clone_or_update $HOME/.oh-my-zsh/custom/themes/powerlevel10k https://github.com/romkatv/powerlevel10k.git
 git_clone_or_update $HOME/.bash_it https://github.com/Bash-it/bash-it.git
 git_clone_or_update $HOME/dotfiles https://github.com/yvigara/dotfiles.git
 
@@ -53,13 +63,13 @@ go get -u github.com/frairon/go-outline-parser
 go get -u github.com/uw-labs/strongbox
 
 go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
-go get -u golang.org/x/tools/cmd/gopls
+go get -u golang.org/x/tools/gopls
 
+npm install -g npm
 npm install -g yaml-language-server
 npm install -g neovim
 
 # Create Neovim Virtual Env
-xcode-select --install
 CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv install 3.7.5
 pyenv virtualenv system neovim2
 pyenv virtualenv 3.7.5 neovim3
@@ -83,7 +93,7 @@ defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/dotfiles
 # Tell iTerm2 to use the custom preferences in the directory
 defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 
-stow -R vim git bash
+stow -R vim git bash zsh
 
 bash-it enable plugin direnv go pyenv
 bash-it enable alias ag general git osx
