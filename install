@@ -34,9 +34,9 @@ if [ -f "$HOME/.install.local" ]; then
   . "$HOME/.install.local"
 fi
 
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git_clone_or_update $HOME/.bash_it https://github.com/Bash-it/bash-it.git
 git_clone_or_update $HOME/dotfiles https://github.com/yvigara/dotfiles.git
-git_clone_or_update $HOME/gruvbox-generalized https://github.com/morhetz/gruvbox-generalized.git
 
 mkdir -p $HOME/golang
 go get -u github.com/nsf/gocode
