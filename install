@@ -43,6 +43,7 @@ if [ -f "$HOME/.install.local" ]; then
   . "$HOME/.install.local"
 fi
 
+fancy_echo "Setup shells"
 git_clone_or_update $HOME/.oh-my-zsh https://github.com/ohmyzsh/ohmyzsh.git
 git_clone_or_update $HOME/.oh-my-zsh/custom/themes/powerlevel10k https://github.com/romkatv/powerlevel10k.git
 git_clone_or_update $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions https://github.com/zsh-users/zsh-autosuggestions
@@ -51,6 +52,7 @@ git_clone_or_update $HOME/.oh-my-zsh/custom/plugins/alias-tips https://github.co
 git_clone_or_update $HOME/.bash_it https://github.com/Bash-it/bash-it.git
 git_clone_or_update $HOME/dotfiles https://github.com/yvigara/dotfiles.git
 
+fancy_echo "Setup Golang"
 mkdir -p $HOME/golang
 go get -u github.com/nsf/gocode
 go get -u github.com/jstemmer/gotags
@@ -68,40 +70,29 @@ go get -u github.com/uw-labs/strongbox
 go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
 go get -u golang.org/x/tools/gopls
 
-npm install -g yaml-language-server
-npm install -g neovim
+export PYTHON2_VERSION=2.7.17
+export PYTHON3_VERSION=3.8.0
 
-# Create Neovim Virtual Env
-CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv install 3.8.0
-pyenv virtualenv system neovim2
-pyenv virtualenv -f 3.8.0 neovim3
+fancy_echo "Install Python $PYTHON2_VERSION & $PYTHON3_VERSION"
+CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv install -s $PYTHON2_VERSION
+CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv install -s $PYTHON3_VERSION
 
-pyenv activate neovim2
-pip install --upgrade pip
-pip install --upgrade pynvim
-pip install --upgrade 'python-language-server[all]'
+fancy_echo "Setup Neovim"
+lib/neovim.sh
 
-pyenv activate neovim3
-pip install --upgrade pip
-pip install --upgrade pynvim
-pip install --upgrade 'python-language-server[all]'
-pip install --upgrade ansible
-pip install --upgrade flake8
-
-pyenv deactivate
-
+fancy_echo "Setup iTerm2"
 # Specify the preferences directory
 defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/dotfiles/iterm2_profile/"
 # Tell iTerm2 to use the custom preferences in the directory
 defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 
+fancy_echo "Link dotfiles"
 stow -R vim git bash zsh
 
-bash-it enable plugin direnv go pyenv
-bash-it enable alias ag general git osx
-bash-it enable completion bash-it brew defaults docker git go kubectl packer ssh system terraform vagrant vault virtualbox
-
-mkdir $HOME/projects
+fancy_echo "Setup ~/projects directory"
+if [ ! -d "$HOME/projects" ]; then
+  mkdir -p $HOME/projects
+fi
 #/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/DeveloperFolderIcon.icns
 cp /System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/DeveloperFolderIcon.icns /tmp
 echo "read 'icns' (-16455) \"DeveloperFolderIcon.icns\";" > /tmp/projects.rsrc
@@ -111,5 +102,6 @@ SetFile -a C $HOME/projects
 SetFile -a V $HOME/projects/Icon$'\r'
 
 # Add favourites
+fancy_echo "Add Favourites to Finder"
 mysides add `whoami` file://$HOME
 mysides add Projects file://$HOME/projects
