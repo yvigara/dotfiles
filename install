@@ -74,7 +74,7 @@ npm install -g neovim
 # Create Neovim Virtual Env
 CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv install 3.8.0
 pyenv virtualenv system neovim2
-pyenv virtualenv 3.8.0 neovim3
+pyenv virtualenv -f 3.8.0 neovim3
 
 pyenv activate neovim2
 pip install --upgrade pip
@@ -100,3 +100,16 @@ stow -R vim git bash zsh
 bash-it enable plugin direnv go pyenv
 bash-it enable alias ag general git osx
 bash-it enable completion bash-it brew defaults docker git go kubectl packer ssh system terraform vagrant vault virtualbox
+
+mkdir $HOME/projects
+#/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/DeveloperFolderIcon.icns
+cp /System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/DeveloperFolderIcon.icns /tmp
+echo "read 'icns' (-16455) \"DeveloperFolderIcon.icns\";" > /tmp/projects.rsrc
+rm -f $HOME/projects/Icon$'\r'
+Rez -a /tmp/projects.rsrc -o $HOME/projects/Icon$'\r'
+SetFile -a C $HOME/projects
+SetFile -a V $HOME/projects/Icon$'\r'
+
+# Add favourites
+mysides add `whoami` file://$HOME
+mysides add Projects file://$HOME/projects
