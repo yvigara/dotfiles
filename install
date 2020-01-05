@@ -36,8 +36,8 @@ fi
 fancy_echo "Updating Homebrew formulas ..."
 brew tap Homebrew/bundle
 brew update
-#brew bundle
-#brew cleanup -s
+brew bundle
+brew cleanup -s
 
 if [ -f "$HOME/.install.local" ]; then
   . "$HOME/.install.local"
@@ -45,6 +45,9 @@ fi
 
 git_clone_or_update $HOME/.oh-my-zsh https://github.com/ohmyzsh/ohmyzsh.git
 git_clone_or_update $HOME/.oh-my-zsh/custom/themes/powerlevel10k https://github.com/romkatv/powerlevel10k.git
+git_clone_or_update $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions https://github.com/zsh-users/zsh-autosuggestions
+git_clone_or_update $HOME/.oh-my-zsh/custom/plugins/fast-syntax-highlighting https://github.com/zdharma/fast-syntax-highlighting.git
+git_clone_or_update $HOME/.oh-my-zsh/custom/plugins/alias-tips https://github.com/djui/alias-tips.git
 git_clone_or_update $HOME/.bash_it https://github.com/Bash-it/bash-it.git
 git_clone_or_update $HOME/dotfiles https://github.com/yvigara/dotfiles.git
 
@@ -65,14 +68,13 @@ go get -u github.com/uw-labs/strongbox
 go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
 go get -u golang.org/x/tools/gopls
 
-npm install -g npm
 npm install -g yaml-language-server
 npm install -g neovim
 
 # Create Neovim Virtual Env
-CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv install 3.7.5
+CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv install 3.8.0
 pyenv virtualenv system neovim2
-pyenv virtualenv 3.7.5 neovim3
+pyenv virtualenv 3.8.0 neovim3
 
 pyenv activate neovim2
 pip install --upgrade pip
