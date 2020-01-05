@@ -59,6 +59,7 @@ cask "font-sourcecodepro-nerd-font-mono"
 cask "font-sourcecodepro-nerd-font"
 
 cask "iterm2"
+cask "mysides"
 
 cask "firefox"
 cask "google-chrome"
