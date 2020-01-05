@@ -12,16 +12,20 @@ trap 'ret=$?; test $ret -ne 0 && printf "failed\n\n" >&2; exit $ret' EXIT
 
 set -e
 
+fancy_echo "Sync dotfiles repo"
+git_clone_or_update $HOME/dotfiles https://github.com/yvigara/dotfiles.git
 
 if pkgutil --pkg-info=com.apple.pkg.CLTools_Executables > /dev/null 2>&1; then
-  fancy_echo "macOS Command-Line Tools are installed."
+  msg_done "macOS Command-Line Tools are installed."
 else
-  fancy_echo "Installing Command-Line Tools"
-  xcode-select --install
-  sudo xcodebuild -license accept
+  msg_run "Installing Command-Line Tools"
+  xcode-select --install > /dev/null 2>&1
+  sudo xcodebuild -license accept > /dev/null 2>&1
+  msg_ok
 fi
 
-softwareupdate -i -a
+msg_run "Updating software"
+softwareupdate -i -a > /dev/null 2>&1; msg_ok
 
 if ! command -v brew >/dev/null; then
   fancy_echo "Installing Homebrew ..."
@@ -30,14 +34,14 @@ if ! command -v brew >/dev/null; then
 
     export PATH="/usr/local/bin:$PATH"
 else
-  fancy_echo "Homebrew already installed. Skipping ..."
+  msg_done "Homebrew already installed"
 fi
 
-fancy_echo "Updating Homebrew formulas ..."
+fancy_echo "Updating Homebrew formulas"
 brew tap Homebrew/bundle
 brew update
 brew bundle
-brew cleanup -s
+brew cleanup -s > /dev/null 2>&1
 
 if [ -f "$HOME/.install.local" ]; then
   . "$HOME/.install.local"
@@ -50,13 +54,12 @@ git_clone_or_update $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions https://
 git_clone_or_update $HOME/.oh-my-zsh/custom/plugins/fast-syntax-highlighting https://github.com/zdharma/fast-syntax-highlighting.git
 git_clone_or_update $HOME/.oh-my-zsh/custom/plugins/alias-tips https://github.com/djui/alias-tips.git
 git_clone_or_update $HOME/.bash_it https://github.com/Bash-it/bash-it.git
-git_clone_or_update $HOME/dotfiles https://github.com/yvigara/dotfiles.git
 
-fancy_echo "Setup Golang"
-mkdir -p $HOME/golang
-go get -u github.com/nsf/gocode
+msg_run "Setup Golang"
+if [ ! -d "$HOME/golang" ]; then
+  mkdir $HOME/golang
+fi
 go get -u github.com/jstemmer/gotags
-
 go get -u golang.org/x/tools/cmd/goimports
 go get -u github.com/rogpeppe/godef
 go get -u golang.org/x/tools/cmd/guru
@@ -64,11 +67,12 @@ go get -u golang.org/x/tools/cmd/gorename
 go get -u golang.org/x/lint/golint
 go get -u github.com/kisielk/errcheck
 go get -u github.com/frairon/go-outline-parser
-
-go get -u github.com/uw-labs/strongbox
-
-go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
 go get -u golang.org/x/tools/gopls
+msg_ok
+
+msg_run "Install Strongbox"
+go get -u github.com/uw-labs/strongbox
+msg_ok
 
 export PYTHON2_VERSION=2.7.17
 export PYTHON3_VERSION=3.8.0
@@ -80,18 +84,20 @@ CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv install -s $PYTHON3_VERSIO
 fancy_echo "Setup Neovim"
 lib/neovim.sh
 
-fancy_echo "Setup iTerm2"
+msg_run "Setup iTerm2"
 # Specify the preferences directory
 defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/dotfiles/iterm2_profile/"
 # Tell iTerm2 to use the custom preferences in the directory
 defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
+msg_ok
 
-fancy_echo "Link dotfiles"
+msg_run "Link dotfiles"
 stow -R vim git bash zsh
+msg_ok
 
-fancy_echo "Setup ~/projects directory"
+msg_run "Setup ~/projects directory"
 if [ ! -d "$HOME/projects" ]; then
-  mkdir -p $HOME/projects
+  mkdir $HOME/projects
 fi
 #/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/DeveloperFolderIcon.icns
 cp /System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/DeveloperFolderIcon.icns /tmp
@@ -100,8 +106,9 @@ rm -f $HOME/projects/Icon$'\r'
 Rez -a /tmp/projects.rsrc -o $HOME/projects/Icon$'\r'
 SetFile -a C $HOME/projects
 SetFile -a V $HOME/projects/Icon$'\r'
+msg_ok
 
 # Add favourites
-fancy_echo "Add Favourites to Finder"
+msg_run "Add Favourites to Finder"
 mysides add `whoami` file://$HOME
 mysides add Projects file://$HOME/projects

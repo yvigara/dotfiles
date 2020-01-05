@@ -1,54 +1,56 @@
 #!/bin/bash
 
+end="\033[0m"
+black="\033[0;30m"
+blackb="\033[1;30m"
+white="\033[0;37m"
+whiteb="\033[1;37m"
+red="\033[0;31m"
+redb="\033[1;31m"
+green="\033[0;32m"
+greenb="\033[1;32m"
+yellow="\033[0;33m"
+yellowb="\033[1;33m"
+blue="\033[0;34m"
+blueb="\033[1;34m"
+purple="\033[0;35m"
+purpleb="\033[1;35m"
+lightblue="\033[0;36m"
+lightblueb="\033[1;36m"
+
 fancy_echo() {
   local fmt="$1"; shift
 
   # shellcheck disable=SC2059
-  printf "\n$fmt\n" "$@"
+  printf "${blueb}*** ${whiteb}$fmt${blueb} ***${end}\n" "$@"
 }
 
-brew_install_or_upgrade() {
-  if brew_is_installed "$1"; then
-    if brew_is_upgradable "$1"; then
-      fancy_echo "Upgrading %s ..." "$1"
-      brew upgrade "$@"
-    else
-      fancy_echo "Already using the latest version of %s. Skipping ..." "$1"
-    fi
-  else
-    fancy_echo "Installing %s ..." "$1"
-    brew install "$@"
-  fi
+function msg_run() {
+  printf "${purpleb}➜${end} %b " "${1}"
 }
 
-brew_is_installed() {
-  local name="$(brew_expand_alias "$1")"
-
-  brew list -1 | grep -Fqx "$name"
+function msg_done() {
+  printf "${yellow}➜${end} %b ${greenb}✔${end}\n" "${1}"
 }
 
-brew_is_upgradable() {
-  local name="$(brew_expand_alias "$1")"
-
-  ! brew outdated --quiet "$name" >/dev/null
+function msg_nested_run() {
+  printf "${purpleb}➜${end} %b " "${1}"
 }
 
-brew_cask_install() {
-  if brew_cask_is_installed "$1"; then
-    fancy_echo "%s Already installed..." "$1"
-    #brew install "Caskroom/cask/$1"
-  else
-    fancy_echo "Installing %s ..." "$1"
-    brew cask install "$@"
-  fi
+function msg_nested_done() {
+  printf "${yellow}➜${end} %b ${greenb}✔${end}\n" "${1}"
+}
+
+function msg_ok() {
+  printf "\b${greenb}✔${end}\n"
+}
+
+function msg_fail() {
+  printf "${redb}✘${end}\n"
 }
 
 brew_cask_is_installed() {
   brew cask list -1 | grep -Fqx "$1"
-}
-
-brew_tap() {
-  brew tap "$1" 2> /dev/null
 }
 
 brew_expand_alias() {
@@ -96,22 +98,22 @@ git_clone_or_update() {
   #look up the remote using 'git_remote'
   if [ -d $repo_path ] && [ -d $repo_path/.git ]; then
     pushd $repo_path >/dev/null
-    fancy_echo "Updating: %s"  "${repo_path}"
+    msg_run "Updating: ${repo_path}"
     #Force the fetch of all references.
     #This is to handle people recreating repos, and moving tags, etc.
     git fetch --force --all 2>&1 > /dev/null
     if [ $? != 0 ]; then
-      fancy_echo "ERROR updating: %s"  "${repo_path}"
+      msg_fail
       popd >/dev/null
       return
     fi
     popd >/dev/null
   else
-    fancy_echo "Cloning: %s from %s" "${repo_path}" "${repo_url}"
+    msg_run "Cloning: ${repo_path} from ${repo_url}"
     rm -fr $repo_path 2>&1
     git clone $repo_url $repo_path 2>&1 > /dev/null
     if [ $? != 0 ]; then
-      fancy_echo "ERROR cloning: %s from %s" "${repo_path}" "${repo_url}"
+      msg_fail
       return
     fi
   fi
@@ -120,19 +122,9 @@ git_clone_or_update() {
     # Force a reset here, instead of performing a checkout.
     git reset $repo_revision --hard 2>&1 > /dev/null
     if [ $? != 0 ]; then
-      fancy_echo "ERROR updating: %s to %s" "${repo_path}" "${repo_revision}"
+      msg_fail
     fi
     popd >/dev/null
   fi
-}
-
-gem_install_or_update() {
-  if gem list "$1" --installed > /dev/null; then
-    fancy_echo "Updating %s ..." "$1"
-    gem update "$@"
-  else
-    fancy_echo "Installing %s ..." "$1"
-    gem install "$@"
-    rbenv rehash
-  fi
+  msg_ok
 }
