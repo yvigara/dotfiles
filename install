@@ -81,8 +81,14 @@ fancy_echo "Install Python $PYTHON2_VERSION & $PYTHON3_VERSION"
 CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv install -s $PYTHON2_VERSION
 CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv install -s $PYTHON3_VERSION
 
+fancy_echo "Setup macOS"
+sh lib/macos.sh
+
 fancy_echo "Setup Neovim"
-lib/neovim.sh
+sh lib/neovim.sh
+
+fancy_echo "Setup VSCode"
+sh lib/vscode.sh
 
 msg_run "Setup iTerm2"
 # Specify the preferences directory
