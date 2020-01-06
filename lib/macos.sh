@@ -150,7 +150,7 @@ defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
 defaults write com.apple.dock mouse-over-hilite-stack -bool true
 
 # Set the icon size of Dock items to 36 pixels
-defaults write com.apple.dock tilesize -int 24
+defaults write com.apple.dock tilesize -int 32
 
 # Change minimize/maximize window effect
 defaults write com.apple.dock mineffect -string "scale"
