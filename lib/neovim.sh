@@ -6,6 +6,9 @@ source $LIB_FUNCTIONS
 
 trap 'ret=$?; test $ret -ne 0 && printf "failed\n\n" >&2; exit $ret' EXIT
 
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+export PYTHONWARNINGS=ignore:DEPRECATION
+
 setup_neoivm_pyenv() {
   (( $# < 2 )) && {
     printf >&2 'wrong # args: should be: setup_neoivm_pyenv virtualenv_name python_version\n'
@@ -15,23 +18,30 @@ setup_neoivm_pyenv() {
   local python_version=$2
   neovim_versions=$(pyenv versions | grep ${virtualenv_name})
   if [ ! -z "${neovim_versions}" ]; then
-    fancy_echo "Cleanup old $virtualenv_name virtualenv"
+    msg_run "Cleanup old $virtualenv_name virtualenv"
     for v in $neovim_versions; do
-      if ! [[ $v =~ ^($virtualenv_name|$PYTHON2_VERSION) ]]; then
+      if ! [[ $v =~ ^($virtualenv_name|$python_version) ]]; then
         pyenv uninstall -f $v
       fi
     done
+    msg_ok
   fi
-  fancy_echo "Create $virtualenv_name virtualenv with python $python_version"
-  pyenv virtualenv -f $python_version $virtualenv_name
-  fancy_echo "Install dependencies in $virtualenv_name"
+  neovim_versions=$(pyenv versions | grep ${virtualenv_name} | grep ${python_version})
+  if [ ! -z "${neovim_versions}" ]; then
+    msg_done "$virtualenv_name virtualenv with python $python_version already installed"
+  else
+    fancy_echo "Create $virtualenv_name virtualenv with python $python_version"
+    pyenv virtualenv -q -f $python_version $virtualenv_name
+  fi
+  msg_run "Install dependencies in $virtualenv_name"
   pyenv activate $virtualenv_name
-  pip install --quiet --upgrade pip pynvim 'python-language-server[all]' yapf jedi flake8 pylint
+  pip install -qq --upgrade pip pynvim 'python-language-server[all]' yapf jedi flake8 pylint
   pyenv deactivate
+  msg_ok
 }
 
 fancy_echo "Setup Neovim NPM dependencies"
-npm install --silent -g yaml-language-server neovim
+npm install --silent --no-progress -g yaml-language-server neovim
 
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
