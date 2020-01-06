@@ -42,7 +42,7 @@ function msg_nested_done() {
 }
 
 function msg_ok() {
-  printf "\b${greenb}✔${end}\n"
+  printf "${greenb}✔${end}\n"
 }
 
 function msg_fail() {
