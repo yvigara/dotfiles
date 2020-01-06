@@ -75,7 +75,7 @@ go get -u github.com/uw-labs/strongbox
 msg_ok
 
 export PYTHON2_VERSION=2.7.17
-export PYTHON3_VERSION=3.8.0
+export PYTHON3_VERSION=3.8.1
 
 fancy_echo "Install Python $PYTHON2_VERSION & $PYTHON3_VERSION"
 CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv install -s $PYTHON2_VERSION
