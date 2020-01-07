@@ -98,7 +98,7 @@ defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 msg_ok
 
 msg_run "Link dotfiles"
-stow -R vim git bash zsh
+stow -R vim git bash zsh vscode
 msg_ok
 
 msg_run "Setup ~/projects directory"
