@@ -11,7 +11,7 @@
     "editor.snippetSuggestions": "top",
 
     // Workbench
-    "workbench.colorTheme": "Gruvbox Dark (Medium)",
+    "workbench.colorTheme": "Gruvbox Dark (Soft)",
     "workbench.iconTheme": "material-icon-theme",
     "workbench.editor.highlightModifiedTabs": true,
     "workbench.colorCustomizations": {
@@ -30,6 +30,7 @@
     // Material Icon
     "material-icon-theme.hidesExplorerArrows": false,
     "material-icon-theme.showWelcomeMessage": false,
+    "material-icon-theme.hidesExplorerArrows": true,
 
     "beautify.language": { "js": [] },
     // Files
@@ -57,8 +58,26 @@
         "**/playbooks/**/*.yml": "ansible",
         "**/ansible/**/hosts": "ini",
         "**/ansible/**/inventory": "ini",
-        "ansible.cfg": "ini",
+        "ansible.cfg": "ini"
     },
+
+    // Golang
+    "go.lintTool": "golangci-lint",
+    "go.lintFlags": [
+        "--disable-all",
+        "--enable=vet",
+        "--enable=vetshadow",
+        "--enable=golint",
+        "--enable=ineffassign",
+        "--enable=goconst",
+        "--enable=gofmt",
+        "--enable=goimports",
+        "--deadline=2m",
+        "--enable=bodyclose",
+        "--enable=gosimple",
+        "--enable=whitespace"
+    ],
+    "go.useLanguageServer": true,
 
     // Integrated terminal
     "terminal.external.osxExec": "iterm2",
@@ -105,5 +124,4 @@
         "enabled": true,
         "args": []
     },
-    "material-icon-theme.hidesExplorerArrows": true,
 }
