@@ -78,6 +78,8 @@
         "--enable=whitespace"
     ],
     "go.useLanguageServer": true,
+    "go.languageServerFlags": [],
+    "go.useCodeSnippetsOnFunctionSuggest": true,
 
     // Integrated terminal
     "terminal.external.osxExec": "iterm2",
@@ -124,4 +126,7 @@
         "enabled": true,
         "args": []
     },
+    "editor.fontSize": 13,
+    "editor.fontFamily": "JetBrainsMono Nerd Font",
+    "editor.fontLigatures": true,
 }
