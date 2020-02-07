@@ -1,5 +1,6 @@
 tap "homebrew/bundle"
 tap "homebrew/cask"
+tap "github/gh"
 tap "homebrew/cask-fonts"
 
 brew "bash"
@@ -17,6 +18,7 @@ brew "direnv"
 brew "stow"
 brew "fzf"
 brew "git"
+brew "gh"
 brew "jq"
 brew "openssl"
 brew "lua"
@@ -57,6 +59,8 @@ brew "mas"
 
 cask "font-sourcecodepro-nerd-font-mono"
 cask "font-sourcecodepro-nerd-font"
+cask "font-jetbrainsmono-nerd-font-mono"
+cask "font-jetbrainsmono-nerd-font"
 
 cask "iterm2"
 cask "mysides"
