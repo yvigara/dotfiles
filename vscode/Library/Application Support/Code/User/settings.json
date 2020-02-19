@@ -96,10 +96,13 @@
 
     // Vim
     "vim.leader": "<space>",
-    "vim.statusBarColorControl": true,
     "vim.incsearch": true,
     "vim.useCtrlKeys": true,
     "vim.hlsearch": true,
+    "vim.surround": false,
+    "vim.useSystemClipboard": true,
+    "vim.neovimPath": "/usr/local/bin/nvim",
+    "vim.enableNeovim": true,
 
     // Explorer
     "explorer.confirmDragAndDrop": false,
@@ -129,4 +132,5 @@
     "editor.fontSize": 13,
     "editor.fontFamily": "JetBrainsMono Nerd Font",
     "editor.fontLigatures": true,
+    "telemetry.enableTelemetry": false,
 }
