@@ -41,7 +41,7 @@ setup_neoivm_pyenv() {
 }
 
 fancy_echo "Setup Neovim NPM dependencies"
-npm install --silent --no-progress -g yaml-language-server neovim
+npm install --silent --no-progress -g yaml-language-server neovim msgpack
 
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
