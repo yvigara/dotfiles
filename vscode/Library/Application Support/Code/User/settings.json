@@ -12,6 +12,8 @@
 
     // Workbench
     "workbench.colorTheme": "Gruvbox Dark (Soft)",
+    "workbench.preferredDarkColorTheme": "Gruvbox Dark (Medium)",
+    "workbench.preferredLightColorTheme": "Gruvbox Light (Medium)",
     "workbench.iconTheme": "material-icon-theme",
     "workbench.editor.highlightModifiedTabs": true,
     "workbench.colorCustomizations": {
@@ -21,6 +23,8 @@
     },
     "workbench.sideBar.location": "left",
     "workbench.settings.useSplitJSON": true,
+    "workbench.settings.enableNaturalLanguageSearch": false,
+    "workbench.statusBar.feedback.visible": false,
 
     // Window
     "window.newWindowDimensions": "maximized",
@@ -106,7 +110,7 @@
     // Explorer
     "explorer.confirmDragAndDrop": false,
     "explorer.decorations.badges": false,
-    "explorer.openEditors.visible": 10,
+    "explorer.openEditors.visible": 0,
     "explorer.confirmDelete": false,
 
     "yaml.format.enable": true,
@@ -128,17 +132,34 @@
         "enabled": true,
         "args": []
     },
+
+    // Editor
     "editor.fontSize": 13,
     "editor.fontFamily": "JetBrainsMono Nerd Font",
     "editor.fontLigatures": true,
-    "workbench.preferredDarkColorTheme": "Gruvbox Dark (Medium)",
-    "workbench.preferredLightColorTheme": "Gruvbox Light (Medium)",
-    "vscode-neovim.neovimPath": "/usr/local/bin/nvim",
+    "editor.cursorStyle": "block",
     "editor.scrollBeyondLastLine": false,
+    "editor.formatOnPaste": true,
+    "editor.renderWhitespace": "all",
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
     },
+    "vscode-neovim.neovimPath": "/usr/local/bin/nvim",
+    "colorize.languages": [
+        "css",
+        "sass",
+        "scss",
+        "less",
+        "postcss",
+        "sss",
+        "stylus",
+        "xml",
+        "svg",
+        "javascript",
+        "typescript"
+    ],
     "tsimporter.doubleQuotes": true,
+    "telemetry.enableCrashReporter": false,
     "telemetry.enableTelemetry": false,
     "typescript.surveys.enabled": false
 }
