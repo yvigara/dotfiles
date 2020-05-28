@@ -131,9 +131,14 @@
     "editor.fontSize": 13,
     "editor.fontFamily": "JetBrainsMono Nerd Font",
     "editor.fontLigatures": true,
-    "telemetry.enableTelemetry": false,
     "workbench.preferredDarkColorTheme": "Gruvbox Dark (Medium)",
     "workbench.preferredLightColorTheme": "Gruvbox Light (Medium)",
     "vscode-neovim.neovimPath": "/usr/local/bin/nvim",
     "editor.scrollBeyondLastLine": false,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "tsimporter.doubleQuotes": true,
+    "telemetry.enableTelemetry": false,
+    "typescript.surveys.enabled": false
 }
