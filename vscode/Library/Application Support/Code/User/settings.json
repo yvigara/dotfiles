@@ -100,7 +100,6 @@
     "vim.useCtrlKeys": true,
     "vim.hlsearch": true,
     "vim.surround": false,
-    "vim.useSystemClipboard": true,
     "vim.neovimPath": "/usr/local/bin/nvim",
     "vim.enableNeovim": true,
 
@@ -133,4 +132,8 @@
     "editor.fontFamily": "JetBrainsMono Nerd Font",
     "editor.fontLigatures": true,
     "telemetry.enableTelemetry": false,
+    "workbench.preferredDarkColorTheme": "Gruvbox Dark (Medium)",
+    "workbench.preferredLightColorTheme": "Gruvbox Light (Medium)",
+    "vscode-neovim.neovimPath": "/usr/local/bin/nvim",
+    "editor.scrollBeyondLastLine": false,
 }
