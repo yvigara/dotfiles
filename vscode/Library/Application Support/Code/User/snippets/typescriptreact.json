@@ -23,15 +23,18 @@
   },
 
   "React - Component functional": {
-    "prefix": "react-componentfunctional",
+    "prefix": "react-fc",
     "body": [
       "import React from \"react\";",
+      "import { useDispatch, useSelector } from \"react-redux\";",
       "",
-      "interface I${1:ComponentName}Props {}",
+      "interface ${1:ComponentName}Props {",
+      "  prop?: string;",
+      "}",
       "",
-      "const ${1:ComponentName}: React.SFC<I${1:ComponentName}Props> = () => (",
-      "  ",
-      ");",
+      "export const ${1:ComponentName}: React.FC<${1:ComponentName}Props> = (props) => {",
+      "  return <React.Fragment></React.Fragment>;",
+      "};",
       "",
       "export default ${1:ComponentName};",
       ""
