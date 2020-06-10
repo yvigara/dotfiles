@@ -88,7 +88,7 @@
     // Integrated terminal
     "terminal.external.osxExec": "iterm2",
     "terminal.integrated.shell.osx": "/bin/zsh",
-    "terminal.integrated.fontFamily": "'SauceCodePro Nerd Font'",
+    "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font",
     "terminal.integrated.fontSize": 13,
     "terminal.integrated.fontWeight": "600",
 
@@ -139,7 +139,7 @@
     "editor.fontLigatures": true,
     "editor.cursorStyle": "block",
     "editor.scrollBeyondLastLine": false,
-    "editor.formatOnPaste": true,
+    "editor.formatOnPaste": false,
     "editor.renderWhitespace": "all",
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
@@ -161,5 +161,7 @@
     "tsimporter.doubleQuotes": true,
     "telemetry.enableCrashReporter": false,
     "telemetry.enableTelemetry": false,
-    "typescript.surveys.enabled": false
+    "typescript.surveys.enabled": false,
+    "sqltools.useNodeRuntime": true,
+    "extensions.ignoreRecommendations": true
 }
