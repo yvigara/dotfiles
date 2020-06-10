@@ -988,6 +988,7 @@ call deoplete#custom#option('ignore_sources', {'sh': ['around', 'member', 'tag',
 call deoplete#custom#option('ignore_sources', {'go': ['omni']})
 call deoplete#custom#source('go', 'mark', '')
 call deoplete#custom#source('go', 'rank', 9999)
+call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
 
 " markdown
 call deoplete#custom#option('ignore_sources', {'markdown': ['tag']})
