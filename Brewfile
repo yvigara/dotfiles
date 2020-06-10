@@ -25,10 +25,11 @@ brew "lua"
 brew "rg"
 brew "gnu-sed", args: ["--with-default-names"]
 brew "ctags"
-brew "diff-so-fancy"
+brew "git-delta"
 
 brew "neovim"
 brew "vim", args: ["--with-lua"]
+brew "bat"
 
 brew "go"
 brew "node"
@@ -36,6 +37,7 @@ brew "python"
 brew "python@2"
 
 brew "npm"
+brew "poetry"
 brew "yarn"
 brew "pyenv"
 brew "pyenv-virtualenv"
