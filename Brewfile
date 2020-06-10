@@ -59,9 +59,7 @@ brew "awscli"
 
 brew "mas"
 
-cask "font-sourcecodepro-nerd-font-mono"
-cask "font-sourcecodepro-nerd-font"
-cask "font-jetbrainsmono-nerd-font-mono"
+cask "font-saucecodepro-nerd-font"
 cask "font-jetbrainsmono-nerd-font"
 
 cask "iterm2"
