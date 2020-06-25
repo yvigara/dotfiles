@@ -3,7 +3,6 @@
 export GOPATH=$HOME/golang
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin:$GOROOT/bin
-source "$HOME/.vim/plugged/gruvbox/gruvbox_256palette_osx.sh"
 VISUAL=vim
 EDITOR=vim
 PAGER="less -R"
