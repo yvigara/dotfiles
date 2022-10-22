@@ -6,6 +6,9 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 fpath+=("$(/usr/local/bin/brew --prefix)/share/zsh/site-functions")
 eval "$(/usr/local/bin/brew shellenv)"
 {{   end -}}
+{{ else if eq .chezmoi.os "linux" -}}
+fpath+=("$(/home/linuxbrew/.linuxbrew/bin/brew --prefix)/share/zsh/site-functions")
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 {{ end -}}
 
 export PYENV_ROOT="$HOME/.pyenv"
