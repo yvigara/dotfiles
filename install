@@ -1,0 +1,35 @@
+#!/bin/bash
+
+set -e
+OS="$(uname)"
+
+if [[ "${OS}" == "Darwin" ]]
+then
+  # Close any open System Preferences panes, to prevent them from overriding
+  # settings we’re about to change
+  osascript -e 'tell application "System Preferences" to quit'
+  if !( pkgutil --pkg-info=com.apple.pkg.CLTools_Executables > /dev/null 2>&1 )
+  then
+    xcode-select --install > /dev/null 2>&1
+    sudo xcodebuild -license accept > /dev/null 2>&1
+  fi
+  softwareupdate -i -a > /dev/null 2>&1
+fi
+
+if !( command -v brew >/dev/null 2>&1 )
+then
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+fi
+
+if [[ "${OS}" == "Linux" ]]
+then
+  export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+elif [[ "${OS}" == "Darwin" ]]
+then
+  export PATH="/usr/local/bin:$PATH"
+fi
+
+eval "$(brew shellenv)"
+brew install chezmoi
+chezmoi init --apply --verbose https://github.com/yvigara/dotfiles.git
+
