@@ -1,0 +1,99 @@
+set hidden
+filetype off
+if &compatible
+  set nocompatible
+end
+
+call plug#begin('~/.vim/plugged')
+
+if !has('nvim')
+  Plug 'roxma/vim-hug-neovim-rpc'
+  Plug 'roxma/nvim-yarp'
+endif
+
+" Plug 'roxma/nvim-completion-manager'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+
+" -----------------------------------------------------------------------------
+" Fuzzy finder
+" -----------------------------------------------------------------------------
+"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+"Plug 'junegunn/fzf.vim'
+
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'Shougo/defx.nvim'
+  Plug 'Shougo/denite.nvim'
+endif
+Plug 'kristijanhusak/defx-git'
+Plug 'kristijanhusak/defx-icons'
+Plug 'Shougo/neco-syntax'
+Plug 'Shougo/neoyank.vim'
+Plug 'Shougo/neomru.vim'
+
+Plug 'andrewstuart/vim-kubernetes'
+Plug 'ntpeters/vim-better-whitespace'
+
+" insert or delete brackets, parens, quotes in pair
+Plug 'jiangmiao/auto-pairs'
+
+" .editorconfig support
+Plug 'editorconfig/editorconfig-vim'
+
+Plug 'ekalinin/Dockerfile.vim'
+
+Plug 'mhinz/vim-signify'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'christoomey/vim-run-interactive'
+Plug 'pbrisbin/vim-mkdir'
+Plug 'scrooloose/syntastic'
+Plug 'thoughtbot/vim-rspec'
+Plug 'lifepillar/vim-gruvbox8'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-git'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-markdown'
+Plug 'junegunn/vim-easy-align'
+
+Plug 'itchyny/lightline.vim'
+Plug 'mgee/lightline-bufferline'
+Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
+" Plug 'godlygeek/tabular'
+
+Plug 'elzr/vim-json'
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+
+Plug 'ryanoasis/vim-devicons'
+Plug 'mrk21/yaml-vim'
+" Plug 'xolox/vim-misc'
+" Plug 'xolox/vim-session'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'hashivim/vim-consul'
+Plug 'hashivim/vim-vaultproject'
+Plug 'hashivim/vim-packer'
+Plug 'hashivim/vim-terraform'
+"Plug 'hashivim/vim-vagrant'
+Plug 'timakro/vim-searchant'
+
+Plug 'davidhalter/jedi-vim'
+"Plug 'pearofducks/ansible-vim', { 'do': 'cd ./UltiSnips; python3 generate.py --style dictionary --sort' }
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+
+if filereadable(expand("~/.vimrc.bundles.local"))
+  source ~/.vimrc.plugins.local
+endif
+
+call plug#end()

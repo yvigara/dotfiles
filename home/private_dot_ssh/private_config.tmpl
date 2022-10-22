@@ -1,0 +1,15 @@
+HashKnownHosts no
+
+Host *
+  Compression yes
+  ForwardAgent yes
+  ForwardX11 no
+  TCPKeepAlive yes
+  ServerAliveInterval 15
+{{- if eq .chezmoi.os "darwin" }}
+  AddKeysToAgent yes
+  UseKeychain yes
+{{- end }}
+
+Host github.com
+  User git
