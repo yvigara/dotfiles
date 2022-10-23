@@ -14,10 +14,6 @@
     type="git-repo"
     url ="https://github.com/zsh-users/zsh-autosuggestions"
     refreshPeriod = "168h"
-[".oh-my-zsh-custom/plugins/alias-tips"]
-    type="git-repo"
-    url="https://github.com/djui/alias-tips.git"
-    refreshPeriod = "168h"
 [".local/share/nvim/site/pack/packer/start/packer.nvim"]
   type = "git-repo"
   url = "https://github.com/wbthomason/packer.nvim"
