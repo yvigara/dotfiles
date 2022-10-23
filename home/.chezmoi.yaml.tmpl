@@ -1,30 +1,42 @@
-{{- /* Checks if running interactively, which is not the case for GitHub Codespaces */ -}}
-{{- $interactive := stdinIsATTY -}}
-
-{{- /* Initializes the name variable with a default value */ -}}
-{{- $name := "Your Name" -}}
-{{- /* If name was previously set, reuses it */ -}}
-{{- if hasKey . "name" -}}
-{{-   $name = .name -}}
-{{- /* Otherwise, if running interactively, prompts for a name */ -}}
-{{- else if $interactive -}}
-{{-   $name = promptString "name" $name -}}
-{{- end -}}
-
-{{- /* Does the same for the email */ -}}
+{{- $headless := false -}}
+{{- $ephemeral := false -}}
+{{- $personal := true -}}
+{{- $restricted := false -}}
+{{- $name := "Yann Vigara" -}}
 {{- $email := "your@email.com" -}}
-{{- if hasKey . "email" -}}
-{{-   $email = .email -}}
-{{- else if $interactive -}}
-{{-   $email = promptString "email" $email -}}
+
+{{/* detect GitHub codespaces, VSCode remote containers, Docker containers, Multipass VMs, and Vagrant boxes */}}
+{{- $ephemeralEnvOrUsername := or (env "CODESPACES") (env "REMOTE_CONTAINERS_IPC") (eq .chezmoi.username "root" "ubuntu" "vagrant" "vscode" "devcontainer") -}}
+{{- $ephemeralCgroup := and (stat "/proc/1/cgroup") (output "cat" "/proc/1/cgroup" | regexMatch "(docker|lxc)") -}}
+{{- if or $ephemeralEnvOrUsername $ephemeralCgroup -}}
+{{-   $headless = true -}}
+{{-   $ephemeral = true -}}
+{{-   writeToStdout "Chezmoi is running in a container.\n" -}}
 {{- end -}}
 
-{{- if $interactive -}}
-{{-   writeToStdout "💡 Tip: you can re-enter your name and email with `chezmoi init --data=false`.\n" -}}
+{{- if stdinIsATTY -}}
+
+{{- $personal = promptBoolOnce . "personal" "Personal Environment" $personal -}}
+{{- $restricted = promptBoolOnce . "restricted" "Restricted Environment (no sudo access)" $restricted -}}
+{{- $name = promptStringOnce . "name" "Your Name" $name -}}
+{{- $email = promptStringOnce . "email" "Your Email" $email -}}
+
+{{- writeToStdout "💡 Tip: you can re-enter your name and email with `chezmoi init --data=false`.\n" -}}
+
+{{- else -}}
+{{-   $headless = true -}}
+{{-   writeToStdout "Chezmoi is running in headless environment.\n" -}}
 {{- end -}}
 
 sourceDir: "{{ .chezmoi.sourceDir }}"
 
+diff:
+  pager: "delta"
+
 data:
-  name: "{{ $name }}"
-  email: "{{ $email }}"
+    email: "{{ $email }}"
+    name: "{{ $name }}"
+    personal: {{ $personal }}
+    restricted: {{ $restricted }}
+    headless: {{ $headless }}
+    ephemeral: {{ $ephemeral }}

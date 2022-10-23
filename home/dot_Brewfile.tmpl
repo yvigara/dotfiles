@@ -115,16 +115,16 @@ tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 
 brew "mas"
+cask "mysides"
 
 cask "font-sauce-code-pro-nerd-font"
 cask "font-jetbrains-mono-nerd-font"
 
 cask "iterm2"
-cask "mysides"
 
+{{ if .personal -}}
 cask "rancher"
 cask "authy"
-cask "cloudflare-warp"
 cask "disk-inventory-x"
 cask "gimp"
 cask "inkscape"
@@ -132,6 +132,7 @@ cask "figma"
 cask "skype"
 cask "virtualbox"
 cask "libreoffice"
+{{ end }}
 
 cask "obsidian"
 cask "firefox"
@@ -139,10 +140,14 @@ cask "google-chrome"
 
 cask "visual-studio-code"
 
+{{ if not .restricted -}}
+cask "cloudflare-warp"
+mas "WireGuard", id: 1451685025
+{{ end }}
+
 mas "Bitwarden", id: 1352778147
 mas "Kindle", id: 405399194
 mas "MindNode", id: 1289197285
 mas "Slack", id: 803453959
-mas "WireGuard", id: 1451685025
 mas "Xcode", id: 497799835
 # {{ end }}
