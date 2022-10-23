@@ -1,0 +1,4 @@
+--glob=!vendor
+--hidden
+--line-number
+--sort=path

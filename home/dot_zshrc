@@ -1,4 +1,4 @@
-# vim: ft=sh
+# vim: ft=zsh
 
 # Starship init
 eval "$(starship init zsh)"
@@ -129,6 +129,8 @@ fi
 alias vi="nvim"
 alias vim="nvim"
 alias vimdiff="nvim -d"
+
+export RIPGREP_CONFIG_PATH=~/.config/ripgrep/config
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
