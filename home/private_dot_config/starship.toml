@@ -1,17 +1,17 @@
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
-#[](bg:blue fg:245)\
 format = """
-[](blue)\
+[](purple)\
 $username\
+$hostname\
+[ ](fg:purple bg:blue)\
 $directory\
 [ ](fg:blue bg:yellow)\
 $git_branch\
 $git_status\
 [ ](fg:yellow bg:green)\
 $golang\
-$java\
 $nodejs\
 $python\
 $terraform\
@@ -25,19 +25,32 @@ $kubernetes\
 [\ue0b4](fg:purple )\
 """
 # Disable the blank line at the start of the prompt
-# add_newline = false
+add_newline = false
+continuation_prompt = "[ ](fg:green)"
 
 # You can also replace your username with a neat symbol like  to save some space
 [username]
 show_always = false
-style_user = "bold bg:blue"
-style_root = "bold bg:blue fg:88"
-format = '[$user:]($style)'
+style_user = "bg:purple fg:bright-white"
+style_root = "bold bg:purple"
+format = '[ $user]($style)'
+
+[hostname]
+ssh_only = true
+format = "[@$hostname ](bg:purple)"
+disabled = false
+
+
+[character] # The name of the module we are configuring is "character"
+success_symbol = "[➜](bold green)"
+error_symbol = "[](bold red) "
+#success_symbol = "[](green) "
 
 [directory]
 style = "bg:blue fg:230"
 format = "[$path ]($style)[$read_only]($read_only_style)"
-read_only = " "
+read_only = " "
+read_only_style = "bg:blue fg:bright-yellow"
 truncation_length = 5
 truncation_symbol = "…/"
 
@@ -57,11 +70,23 @@ truncation_symbol = "…/"
 [git_branch]
 symbol = ""
 style = "bg:yellow"
-format = '[ $symbol $branch ]($style)'
+format = '[$symbol $branch ]($style)'
 
 [git_status]
 style = "bg:yellow"
-format = '[$all_status$ahead_behind ]($style)'
+diverged = "⇕⇡${ahead_count} ⇣${behind_count}"
+format = '[$ahead_behind$modified$staged$untracked$conflicted$stashed ]($style)'
+
+conflicted ="=${count}"
+ahead=	"⇡${count}"
+behind ="⇣${count}"
+up_to_date =""
+untracked=	"?${count}"
+stashed=	"$"
+modified=	"!${count}"
+staged ="+${count}"
+renamed ="»"
+deleted ="✘"
 
 [golang]
 symbol = " "
