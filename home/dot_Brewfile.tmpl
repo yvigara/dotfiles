@@ -9,9 +9,6 @@ tap "datreeio/datree"
 tap "fluxcd/tap"
 tap "github/gh"
 tap "helm/tap"
-tap "homebrew/bundle"
-tap "homebrew/cask"
-tap "homebrew/cask-fonts"
 tap "homebrew/core"
 tap "hashicorp/tap"
 tap "johanhaleby/kubetail"
@@ -114,6 +111,9 @@ brew "openjdk"
 brew "cloudflare/cloudflare/cloudflared"
 
 # {{- if eq .chezmoi.os "darwin" }}
+tap "homebrew/cask"
+tap "homebrew/cask-fonts"
+
 brew "mas"
 
 cask "font-sauce-code-pro-nerd-font"
