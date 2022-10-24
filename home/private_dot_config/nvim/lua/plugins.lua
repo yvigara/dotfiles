@@ -30,6 +30,8 @@ packer.reset()
 -- actual plugins list
 use "wbthomason/packer.nvim"
 
+use {"lewis6991/impatient.nvim", config = get_config("impatient")}
+
 -- Boost startup time
 use {"nathom/filetype.nvim"}
 
@@ -203,7 +205,7 @@ use {"voldikss/vim-floaterm"}
 --     config = get_config("lf")
 -- }
 
-use { "ellisonleao/gruvbox.nvim" }
+use { "ellisonleao/gruvbox.nvim", config = get_config("gruvbox") }
 
 -- use {
 --     "ThePrimeagen/harpoon",
@@ -238,7 +240,6 @@ use {"echasnovski/mini.nvim", branch = "stable", config = get_config("mini")}
 -- IAC and Config Mgmt Plugins
 use {"hashivim/vim-terraform"}
 
-use {"lewis6991/impatient.nvim"}
 -- TODO: ????
 -- https://github.com/glepnir/lspsaga.nvim
 -- use 'glepnir/lspsaga.nvim'

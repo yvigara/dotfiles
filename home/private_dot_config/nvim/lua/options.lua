@@ -67,7 +67,6 @@ o.titleold = "Terminal"
 o.hidden = true
 wo.signcolumn = "yes:1"
 -- o.titlestring = "%F"
-vim.cmd "colorscheme gruvbox"
 
 g.did_load_filetypes       = 1
 g.loaded_netrw             = 1
