@@ -108,7 +108,6 @@ brew "gatsby-cli"
 brew "hasura-cli"
 
 brew "openjdk"
-brew "cloudflare/cloudflare/cloudflared"
 
 # {{- if eq .chezmoi.os "darwin" }}
 tap "homebrew/cask"
@@ -134,13 +133,14 @@ cask "virtualbox"
 cask "libreoffice"
 {{ end }}
 
-cask "obsidian"
 cask "firefox"
-cask "google-chrome"
 
 cask "visual-studio-code"
 
 {{ if not .restricted -}}
+cask "obsidian"
+cask "google-chrome"
+brew "cloudflare/cloudflare/cloudflared"
 cask "cloudflare-warp"
 mas "WireGuard", id: 1451685025
 {{ end }}
