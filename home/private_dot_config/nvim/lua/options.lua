@@ -46,7 +46,7 @@ wo.colorcolumn = "99999"
 o.wildmode = "full"
 o.lazyredraw = true -- do not redraw screen while running macros
 o.grepprg = "rg --hidden --vimgrep --smart-case --" -- use rg instead of grep
-o.completeopt = {"menu", "menuone", "noselect", "noinsert"} -- A comma separated list of options for Insert mode completion
+o.completeopt = { "menu", "menuone", "noselect", "noinsert" } -- A comma separated list of options for Insert mode completion
 o.wildignorecase = true -- When set case is ignored when completing file names and directories
 o.wildignore = [[
 .git,.hg,.svn
@@ -65,6 +65,7 @@ o.background = "dark" -- or "light" for light mode
 o.title = true
 o.titleold = "Terminal"
 o.hidden = true
+o.mouse = ""
 wo.signcolumn = "yes:1"
 -- o.titlestring = "%F"
 
@@ -73,4 +74,3 @@ g.loaded_netrw             = 1
 g.loaded_netrwPlugin       = 1
 g.loaded_netrwSettings     = 1
 g.loaded_netrwFileHandlers = 1
-
