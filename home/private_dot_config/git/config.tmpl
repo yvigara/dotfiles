@@ -2,6 +2,7 @@
 [user]
   name = {{ .name }}
   email = {{ .email }}
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEAW4osmMLIah4cR3CvOBdGu61olG+Czfs+2zRLximVU {{ .email }}
 [init]
   templatedir = ~/.config/git/template
   defaultBranch = main
@@ -57,6 +58,7 @@
   colorMoved = default
 [commit]
   template = ~/.gitmessage
+  gpgsign = true
 [fetch]
   prune = true
 [rebase]
@@ -98,3 +100,7 @@
 [credential]
   helper = osxkeychain
 {{ end -}}
+[gpg]
+  format = ssh
+[gpg "ssh"]
+  allowedSignersFile = ~/.ssh/allowed_signers
