@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-set -Eeuo pipefail
-
-# .Brewfile hash: {{ include "private_dot_config/nvim/lua/plugins.lua" | sha256sum }}
-nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
