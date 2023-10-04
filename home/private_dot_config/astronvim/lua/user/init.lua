@@ -25,6 +25,11 @@ return {
     virtual_text = true,
     underline = true,
   },
+  highlights = {
+    gruvbox = {
+      StatusLine = { fg = "#ebdbb2", bg = "#504945" },
+    },
+  },
   lsp = {
     -- customize lsp formatting options
     formatting = {

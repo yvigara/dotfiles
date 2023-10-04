@@ -57,6 +57,10 @@ brew "go"
 brew "grpcurl"
 brew "protobuf"
 brew "sqlc"
+brew "goreleaser"
+
+brew "cosign"
+brew "anchore/syft/syft"
 
 brew "node"
 brew "yarn"
@@ -72,7 +76,6 @@ brew "docker-credential-helper"
 
 brew "kubernetes-cli"
 brew "krew"
-brew "kubectx"
 brew "kustomize"
 brew "helm"
 brew "johanhaleby/kubetail/kubetail"
@@ -82,6 +85,8 @@ brew "datreeio/datree/datree"
 brew "fluxcd/tap/flux"
 brew "helm/tap/chart-releaser"
 brew "k0sproject/tap/k0sctl"
+brew "derailed/k9s/k9s"
+brew "int128/kubelogin/kubelogin"
 brew "k2tf"
 
 brew "terraform"
@@ -89,6 +94,8 @@ brew "terraform-docs"
 brew "terragrunt"
 brew "hashicorp/tap/terraform-ls"
 brew "tflint"
+
+brew "prometheus"
 
 brew "awscli"
 brew "azure-cli"
@@ -98,6 +105,7 @@ brew "bash-language-server"
 brew "yaml-language-server"
 brew "yamllint"
 
+brew "act"
 brew "age"
 brew "bitwarden-cli"
 brew "libfido2"
@@ -142,13 +150,14 @@ cask "visual-studio-code"
 {{ if not .restricted -}}
 cask "obsidian"
 cask "google-chrome"
+cask "lulu"
 brew "cloudflare/cloudflare/cloudflared"
 cask "cloudflare-warp"
 mas "WireGuard", id: 1451685025
 {{ end }}
 
 mas "Bitwarden", id: 1352778147
-mas "Kindle", id: 405399194
+mas "Kindle", id: 302584613
 mas "MindNode", id: 1289197285
 mas "Slack", id: 803453959
 mas "Xcode", id: 497799835

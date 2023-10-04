@@ -139,3 +139,13 @@ export RIPGREP_CONFIG_PATH=~/.config/ripgrep/config
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+{{ if eq .chezmoi.os "darwin" }}
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/yvigara/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+
+{{ end -}}
+# Enable Kubeswitch
+source <(switcher init zsh)
+source <(switch completion zsh)
+alias s=switch
