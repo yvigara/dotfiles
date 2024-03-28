@@ -120,7 +120,6 @@ brew "hasura-cli"
 brew "openjdk"
 
 # {{- if eq .chezmoi.os "darwin" }}
-tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 
 brew "mas"
@@ -139,7 +138,6 @@ cask "gimp"
 cask "inkscape"
 cask "figma"
 cask "skype"
-cask "virtualbox"
 cask "libreoffice"
 {{ end }}
 
@@ -150,7 +148,6 @@ cask "visual-studio-code"
 {{ if not .restricted -}}
 cask "obsidian"
 cask "google-chrome"
-cask "lulu"
 brew "cloudflare/cloudflare/cloudflared"
 cask "cloudflare-warp"
 mas "WireGuard", id: 1451685025
