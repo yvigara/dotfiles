@@ -4,12 +4,12 @@ return {
     "ray-x/guihua.lua",
   },
   config = function()
-    require("go").setup({
+    require("go").setup {
       go = "go", -- go command, can be go[default] or go1.18beta1
-      goimport = "gopls", -- goimport command, can be gopls[default] or goimport
+      goimports = "gopls", -- goimport command, can be gopls[default] or goimport
+      gofmt = "gopls", -- gofmt cmd,
       fillstruct = "gopls", -- can be nil (use fillstruct, slower) and gopls
-      gofmt = "gofumpt", -- gofmt cmd,
-      max_line_len = 120, -- max line length in goline format
+      max_line_len = 0, -- max line length in goline format
       tag_transform = false, -- tag_transfer  check gomodifytags for details
       test_template = "", -- default to testify if not set; g:go_nvim_tests_template  check gotests for details
       test_template_dir = "", -- default to nil if not set; g:go_nvim_tests_template_dir  check gotests for details
@@ -33,7 +33,7 @@ return {
       -- false if you want to use other formatter tool(e.g. efm, nulls)
       gopls_cmd = nil, -- if you need to specify gopls path and cmd, e.g {"/home/user/lsp/gopls", "-logfile","/var/log/gopls.log" }
       gopls_remote_auto = true, -- add -remote=auto to gopls
-      dap_debug = false, -- set to false to disable dap
+      dap_debug = true, -- set to false to disable dap
       dap_debug_keymap = true, -- true: use keymap for debugger defined in go/dap.lua
       -- false: do not use keymap in go/dap.lua.  you must define your own.
       dap_debug_gui = true, -- set to true to enable dap gui, highly recommand
@@ -43,7 +43,7 @@ return {
       test_runner = "go", -- richgo, go test, richgo, dlv, ginkgo
       run_in_floaterm = false, -- set to true to run in float window.
       -- float term recommand if you use richgo/ginkgo with terminal color
-    })
+    }
   end,
   -- event = { "CmdlineEnter" },
   event = "BufRead *.go",
