@@ -1,7 +1,10 @@
 # vim: ft=zsh
 
 # Starship init
-eval "$(starship init zsh)"
+
+zstyle ':omz:update' mode auto
+zstyle ':omz:update' verbose minimal
+zstyle ':omz:update' frequency 7
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -36,7 +39,7 @@ CASE_SENSITIVE="true"
 # DISABLE_UPDATE_PROMPT="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
-export UPDATE_ZSH_DAYS=7
+# export UPDATE_ZSH_DAYS=7
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS=true
@@ -79,15 +82,16 @@ plugins=(
   direnv
   docker
   docker-compose
+  fluxcd
   fzf
   git
-  httpie
   iterm2
   kubectl
   pyenv
   poetry
-  terraform
   ripgrep
+  starship
+  terraform
   zsh-autosuggestions
   last-working-dir
   defaults
@@ -124,6 +128,7 @@ fi
 alias vi="nvim"
 alias vim="nvim"
 alias vimdiff="nvim -d"
+alias pn="pnpm"
 
 export RIPGREP_CONFIG_PATH=~/.config/ripgrep/config
 
