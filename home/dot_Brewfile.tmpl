@@ -1,6 +1,7 @@
 brew "chezmoi"
 brew "starship"
 brew "zsh-completions"
+brew "romkatv/gitstatus/gitstatus"
 
 tap "bufbuild/buf"
 tap "cloudflare/cloudflare"
@@ -12,7 +13,6 @@ tap "helm/tap"
 tap "hashicorp/tap"
 tap "johanhaleby/kubetail"
 tap "k0sproject/tap"
-tap "sl1pm4t/k2tf", "https://github.com/sl1pm4t/k2tf.git"
 
 # {{- if eq .chezmoi.os "darwin" }}
 ## Macos-specific formulae
@@ -86,11 +86,9 @@ brew "helm/tap/chart-releaser"
 brew "k0sproject/tap/k0sctl"
 brew "derailed/k9s/k9s"
 brew "int128/kubelogin/kubelogin"
-brew "k2tf"
 
-brew "terraform"
+brew "hashicorp/tap/terraform"
 brew "terraform-docs"
-brew "terragrunt"
 brew "hashicorp/tap/terraform-ls"
 brew "tflint"
 
@@ -128,9 +126,9 @@ cask "font-sauce-code-pro-nerd-font"
 cask "font-jetbrains-mono-nerd-font"
 
 cask "iterm2"
+cask "rancher"
 
 {{ if .personal -}}
-cask "rancher"
 cask "authy"
 cask "disk-inventory-x"
 cask "gimp"
@@ -147,7 +145,6 @@ cask "visual-studio-code"
 {{ if not .restricted -}}
 cask "obsidian"
 cask "google-chrome"
-brew "cloudflare/cloudflare/cloudflared"
 cask "cloudflare-warp"
 mas "WireGuard", id: 1451685025
 {{ end }}
