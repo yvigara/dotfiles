@@ -111,19 +111,15 @@ source $ZSH/oh-my-zsh.sh
 export EDITOR='nvim'
 export VISUAL="${EDITOR}"
 
-if (( $+commands[exa] )) ; then
-    alias ls="exa --group-directories-first --color=auto --color-scale"
-    alias ll="ls -lg --git"
-
-    alias l='ls -lbF --git'                                                # list, size, type, git
-    alias llm='ls -lbGd --git --sort=modified'                            # long list, modified date sort
-    alias la='ls -lbhHigUmuSa --time-style=long-iso --git '  # all list
-    alias lx='ls -lbhHigUmuSa@ --time-style=long-iso --git ' # all + extended list
-
-else
-    alias ls='ls -F --color=auto'
-    alias ll='ls -lh'
+if (( $+commands[lsd] )) ; then
+  alias ls="lsd"
 fi
+
+alias l='ls -l'
+alias ll='ls -lg'
+alias la='ls -a'
+alias lla='ls -la'
+alias lt='ls --tree'
 
 alias vi="nvim"
 alias vim="nvim"
