@@ -13,6 +13,7 @@ tap "helm/tap"
 tap "hashicorp/tap"
 tap "johanhaleby/kubetail"
 tap "k0sproject/tap"
+tap "goreleaser/tap"
 
 # {{- if eq .chezmoi.os "darwin" }}
 ## Macos-specific formulae
@@ -58,7 +59,7 @@ brew "grpcui"
 brew "protobuf"
 brew "buf"
 brew "sqlc"
-brew "goreleaser-pro"
+brew "goreleaser/tap/goreleaser-pro"
 
 brew "cosign"
 brew "syft"
