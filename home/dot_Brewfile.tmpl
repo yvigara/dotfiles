@@ -122,7 +122,6 @@ brew "hasura-cli"
 brew "openjdk"
 
 # {{- if eq .chezmoi.os "darwin" }}
-tap "homebrew/cask-fonts"
 
 brew "mas"
 cask "mysides"
@@ -143,20 +142,20 @@ cask "skype"
 cask "libreoffice"
 {{ end }}
 
-cask "firefox"
 
 cask "visual-studio-code"
 
 {{ if not .restricted -}}
 cask "obsidian"
+cask "firefox"
 cask "google-chrome"
 cask "cloudflare-warp"
 mas "WireGuard", id: 1451685025
+mas "Slack", id: 803453959
 {{ end }}
 
 mas "Bitwarden", id: 1352778147
 mas "Kindle", id: 302584613
 mas "MindNode", id: 1289197285
-mas "Slack", id: 803453959
 mas "Xcode", id: 497799835
 # {{ end }}
