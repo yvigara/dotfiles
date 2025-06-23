@@ -14,6 +14,7 @@ tap "hashicorp/tap"
 tap "johanhaleby/kubetail"
 tap "k0sproject/tap"
 tap "goreleaser/tap"
+tap "nats-io/nats-tools"
 
 # {{- if eq .chezmoi.os "darwin" }}
 ## Macos-specific formulae
@@ -52,14 +53,13 @@ brew "lua"
 brew "neovim"
 brew "vim"
 
-brew "mage"
 brew "go"
 brew "grpcurl"
 brew "grpcui"
 brew "protobuf"
 brew "buf"
 brew "sqlc"
-brew "goreleaser/tap/goreleaser-pro"
+cask "goreleaser/tap/goreleaser-pro"
 
 brew "cosign"
 brew "syft"
@@ -116,8 +116,7 @@ brew "gnupg"
 brew "step"
 brew "pwgen"
 
-brew "gatsby-cli"
-brew "hasura-cli"
+brew "nats-io/nats-tools/nsc"
 
 brew "openjdk"
 
@@ -138,7 +137,6 @@ cask "disk-inventory-x"
 cask "gimp"
 cask "inkscape"
 cask "figma"
-cask "skype"
 cask "libreoffice"
 {{ end }}
 
