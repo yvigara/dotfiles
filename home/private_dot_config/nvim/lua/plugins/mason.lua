@@ -11,7 +11,6 @@ return {
       opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, {
         "ansiblels",
         "bashls",
-        "bufls",
         "cssls",
         "dockerls",
         "eslint",
@@ -27,7 +26,6 @@ return {
         "tailwindcss",
         "terraformls",
         "tflint",
-        "tsserver",
         "yamlls",
       })
     end,
