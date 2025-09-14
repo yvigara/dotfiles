@@ -1,0 +1,10 @@
+theme = GruvboxDark
+font-family = "JetBrains Mono"
+keybind = cmd+left=previous_tab
+keybind = cmd+right=next_tab
+macos-titlebar-style = tabs
+window-save-state = always
+window-colorspace = display-p3
+cursor-style = block
+macos-icon = retro
+copy-on-select = clipboard
