@@ -3,6 +3,7 @@ font-family = "JetBrains Mono"
 keybind = cmd+left=previous_tab
 keybind = cmd+right=next_tab
 macos-titlebar-style = tabs
+shell-integration-features = no-cursor,sudo,title
 window-save-state = always
 window-colorspace = display-p3
 cursor-style = block
