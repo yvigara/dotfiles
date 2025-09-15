@@ -1,11 +1,19 @@
 theme = GruvboxDark
 font-family = "JetBrains Mono"
-keybind = cmd+left=previous_tab
-keybind = cmd+right=next_tab
-macos-titlebar-style = tabs
 shell-integration-features = no-cursor,sudo,title
+macos-titlebar-style = tabs
 window-save-state = always
 window-colorspace = display-p3
 cursor-style = block
 macos-icon = retro
 copy-on-select = clipboard
+
+#### Keys ####
+macos-option-as-alt = true
+
+keybind = cmd+left=previous_tab
+keybind = cmd+right=next_tab
+keybind = cmd+shift+left=move_tab:-1
+keybind = cmd+shift+right=move_tab:1
+keybind = global:cmd+shift+space=toggle_quick_terminal
+keybind = shift+enter=text:\n

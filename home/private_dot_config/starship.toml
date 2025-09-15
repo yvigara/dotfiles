@@ -12,7 +12,6 @@ $git_branch\
 $git_status\
 [ ](fg:color_aqua bg:color_blue)\
 $golang\
-$terraform\
 [](fg:color_blue bg:color_bg3)\
 $kubernetes\
 [ ](fg:color_bg3 bg:color_bg1)\
@@ -23,7 +22,6 @@ $status\
 add_newline = false
 continuation_prompt = "[ ](fg:green)"
 command_timeout = 750
-
 
 palette = 'gruvbox_dark'
 
@@ -119,6 +117,7 @@ style = "fg:color_fg0 bg:color_aqua"
 diverged = "⇕⇡${ahead_count}⇣${behind_count}"
 format = '[$ahead_behind$modified$staged$untracked$conflicted ]($style)'
 ignore_submodules = true
+use_git_executable = false
 
 conflicted ="=${count}"
 ahead = "⇡${count}"
@@ -140,6 +139,7 @@ format = '[ $symbol ($version) ]($style)'
 symbol = " "
 style = "fg:color_fg0 bg:color_blue"
 format = '[ $symbol ($version) ]($style)'
+disabled = true
 
 [kubernetes]
 symbol = "☸"
