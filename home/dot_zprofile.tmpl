@@ -1,7 +1,7 @@
 # vim: ft=zsh
 # set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
+if [ -d "$HOME/.local/bin" ]; then
+  PATH="$HOME/.local/bin:$PATH"
 fi
 
 if [ -d "$HOME/bin" ]; then
@@ -9,24 +9,24 @@ if [ -d "$HOME/bin" ]; then
 fi
 
 {{ if eq .chezmoi.os "darwin" -}}
-{{   if stat "/opt/homebrew/bin/brew" -}}
+{{ if stat "/opt/homebrew/bin/brew" -}}
 fpath+=("$(/opt/homebrew/bin/brew --prefix)/share/zsh/site-functions")
 eval "$(/opt/homebrew/bin/brew shellenv)"
-{{   else if stat "/usr/local/bin/brew" -}}
+{{ else if stat "/usr/local/bin/brew" -}}
 fpath+=("$(/usr/local/bin/brew --prefix)/share/zsh/site-functions")
 eval "$(/usr/local/bin/brew shellenv)"
-{{   end -}}
+{{ end -}}
 {{ else if eq .chezmoi.os "linux" -}}
 fpath+=("$(/home/linuxbrew/.linuxbrew/bin/brew --prefix)/share/zsh/site-functions")
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 {{ end -}}
 
 # zsh-completions
-if (( $+commands[brew] )) ; then
-    fpath+=("$(brew --prefix)/share/zsh-completions/")
+if command -v brew &>/dev/null; then
+  fpath+=("$(brew --prefix)/share/zsh-completions/")
 
-    autoload -Uz compinit
-    compinit
+  autoload -Uz compinit
+  compinit
 fi
 
 # zsh-autosuggestions
@@ -34,7 +34,7 @@ fi
 
 # set path so it includes pyenv
 export PYENV_ROOT="$HOME/.pyenv"
-if [ -d "$PYENV_ROOT" ] ; then
+if [ -d "$PYENV_ROOT" ]; then
   export PATH="$PYENV_ROOT/bin:$PATH"
   eval "$(pyenv init --path)"
 fi
