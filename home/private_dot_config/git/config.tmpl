@@ -49,11 +49,6 @@
   whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
   fsmonitor = true
   untrackedCache = true
-[pager]
-  diff = delta
-  log = delta
-  reflog = delta
-  show = delta
 [filter "lfs"]
   clean = git-lfs clean %f
   smudge = git-lfs smudge %f
@@ -65,6 +60,7 @@
   support = support-
   versiontag = v
 [diff]
+  external = difft
   compactionHeuristic = true
   colorMoved = default
 [commit]
