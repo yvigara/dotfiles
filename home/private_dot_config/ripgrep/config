@@ -1,4 +1,22 @@
 --glob=!vendor
---hidden
+--glob=!.git/*
 --line-number
 --sort=path
+
+# Don't let ripgrep vomit really long lines to my terminal, and show a preview.
+--max-columns=150
+--max-columns-preview
+
+# Add my 'web' type.
+--type-add
+web:*.{html,css,js}*
+
+# Search hidden files / directories (e.g. dotfiles) by default
+--hidden
+
+# Set the colors.
+--colors=line:none
+--colors=line:style:bold
+
+# Because who cares about case!?
+--smart-case
