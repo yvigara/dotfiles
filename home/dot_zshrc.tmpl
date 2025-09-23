@@ -58,9 +58,14 @@ source <(switcher init zsh)
 source <(switch completion zsh)
 alias s=switch
 
-source "$HOME/.cargo/env"
+[[ ! -f "${HOME}/.cargo/env" ]] || source "${HOME}/.cargo/env"
 
 # Local customizations - create this file for machine-specific settings
-[[ ! -f ${HOME}/.zshrc.local ]] || source ${HOME}/.zshrc.local
+[[ ! -f "${HOME}/.zshrc.local" ]] || source "${HOME}/.zshrc.local"
 
-eval "$(starship init zsh)"
+if [[ -n "$CURSOR_AGENT" ]]; then
+  export GIT_PAGER=cat
+  # Skip theme initialization for better compatibility
+else
+  eval "$(starship init zsh)"
+fi
