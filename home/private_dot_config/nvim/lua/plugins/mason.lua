@@ -1,69 +1,66 @@
--- Customize Mason plugins
+-- Customize Mason
 
 ---@type LazySpec
 return {
-  -- use mason-lspconfig to configure LSP installations
+  -- use mason-tool-installer for automatically installing Mason packages
   {
-    "williamboman/mason-lspconfig.nvim",
-    -- overrides `require("mason-lspconfig").setup(...)`
-    opts = function(_, opts)
-      -- add more things to the ensure_installed table protecting against community packs modifying it
-      opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, {
-        "ansiblels",
-        "bashls",
-        "cssls",
-        "dockerls",
-        "eslint",
-        "gopls",
-        "graphql",
-        "helm_ls",
-        "html",
-        "jqls",
-        "jsonls",
-        "lua_ls",
-        "pylsp",
-        "sqlls",
-        "tailwindcss",
-        "terraformls",
-        "tflint",
-        "yamlls",
-      })
-    end,
-  },
-  -- use mason-null-ls to configure Formatters/Linter installation for null-ls sources
-  {
-    "jay-babu/mason-null-ls.nvim",
-    -- overrides `require("mason-null-ls").setup(...)`
-    opts = function(_, opts)
-      -- add more things to the ensure_installed table protecting against community packs modifying it
-      opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, {
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    -- overrides `require("mason-tool-installer").setup(...)`
+    opts = {
+      -- Make sure to use the names found in `:Mason`
+      -- Registry: https://mason-registry.dev/registry/list
+      ensure_installed = {
+        "actionlint",
         "ansible-lint",
+        "ansible-language-server",
+        "astro-language-server",
+        "basedpyright",
+        "bash-language-server",
+        "biome",
         "buf",
+        "cmake-language-server",
         "cmakelint",
         "commitlint",
+        "copilot-language-server",
+        "css-lsp",
+        "css-variables-language-server",
+        "debugpy",
+        "delve",
+        "docker-language-server",
+        "dotenv-linter",
+        "eslint-lsp",
         "eslint_d",
-        "gitlint",
+        "gh-actions-language-server",
+        "go-debug-adapter",
+        "golangci-lint-langserver",
         "golangci-lint",
+        "gopls",
+        "grammarly-languageserver",
+        "helm-ls",
+        "html-lsp",
+        "jq-lsp",
+        "js-debug-adapter",
+        "json-lsp",
         "jsonlint",
+        "kube-linter",
+        "lua-language-server",
         "markdownlint",
+        "oxlint",
         "prettier",
         "protolint",
+        -- "protols",
+        "sqls",
         "stylua",
+        "tailwindcss-language-server",
+        "terraform-ls",
+        "tflint",
+        "tree-sitter-cli",
+        "typescript-language-server",
+        "vim-language-server",
+        "yaml-language-server",
+        "yamlfmt",
         "yamllint",
-      })
-    end,
-  },
-  {
-    "jay-babu/mason-nvim-dap.nvim",
-    -- overrides `require("mason-nvim-dap").setup(...)`
-    opts = function(_, opts)
-      -- add more things to the ensure_installed table protecting against community packs modifying it
-      opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, {
-        "go-debug-adapter",
-        "js-debug-adapter",
-        "python",
-        -- add more arguments for adding more debuggers
-      })
-    end,
+      },
+    },
   },
 }

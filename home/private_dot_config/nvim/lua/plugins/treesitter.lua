@@ -3,38 +3,46 @@
 ---@type LazySpec
 return {
   "nvim-treesitter/nvim-treesitter",
-  opts = function(_, opts)
-    -- add more things to the ensure_installed table protecting against community packs modifying it
-    opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, {
+  opts = {
+    ensure_installed = {
+      "astro",
       "bash",
       "cmake",
       "css",
       "dockerfile",
+      "editorconfig",
+      "git_config",
       "gitattributes",
       "gitignore",
       "go",
       "gomod",
+      "gotmpl",
       "gowork",
       "graphql",
       "hcl",
+      "helm",
       "html",
       "java",
       "javascript",
       "jq",
       "json",
       "json5",
+      "kcl",
       "lua",
       "make",
       "markdown",
+      "promql",
       "proto",
       "python",
       "regex",
       "sql",
+      "ssh_config",
       "terraform",
       "toml",
       "typescript",
       "vim",
+      "xml",
       "yaml",
-    })
-  end,
+    },
+  },
 }

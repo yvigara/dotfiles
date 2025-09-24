@@ -6,20 +6,21 @@
 ---@type LazySpec
 return {
   "AstroNvim/astrocore",
-  ---@type AstroCoreOpts
+  ---@type AstroCoreConfig
   opts = {
     -- Configure core features of AstroNvim
     features = {
-      large_buf = { size = 1024 * 500, lines = 10000 }, -- set global limits for large files for disabling features like treesitter
+      large_buf = { size = 1024 * 256, lines = 10000 }, -- set global limits for large files for disabling features like treesitter
       autopairs = true, -- enable autopairs at start
       cmp = true, -- enable completion at start
-      diagnostics_mode = 3, -- diagnostic mode on start (0 = off, 1 = no signs/virtual text, 2 = no virtual text, 3 = on)
+      diagnostics = { virtual_text = true, virtual_lines = true }, -- enable or disable diagnostics features on start
       highlighturl = true, -- highlight URLs at start
       notifications = true, -- enable notifications at start
     },
     -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
     diagnostics = {
       virtual_text = true,
+      virtual_lines = true,
       underline = true,
     },
     -- vim options can be configured here
@@ -32,6 +33,11 @@ return {
         wrap = false, -- sets vim.opt.wrap
         clipboard = "",
         mouse = "",
+        shiftwidth = 2,
+        tabstop = 2,
+        softtabstop = 2,
+        expandtab = false,
+        scrolloff = 10,
       },
       g = { -- vim.g.<key>
         -- configure global vim variables (vim.g)
@@ -47,8 +53,14 @@ return {
         -- second key is the lefthand side of the map
 
         -- navigate buffer tabs with `H` and `L`
-        L = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
-        H = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
+        L = {
+          function() require("astrocore.buffer").nav(vim.v.count1) end,
+          desc = "Next buffer",
+        },
+        H = {
+          function() require("astrocore.buffer").nav(-vim.v.count1) end,
+          desc = "Previous buffer",
+        },
 
         ["<C-/>"] = {
           "<gcc>",
@@ -62,15 +74,42 @@ return {
           function() require("astrocore.buffer").nav(-(vim.v.count > 0 and vim.v.count or 1)) end,
           desc = "Previous buffer",
         },
-        ["<leader>1"] = { function() require("astrocore.buffer").nav_to(1) end, desc = "Jump to Buffer 1" },
-        ["<leader>2"] = { function() require("astrocore.buffer").nav_to(2) end, desc = "Jump to Buffer 2" },
-        ["<leader>3"] = { function() require("astrocore.buffer").nav_to(3) end, desc = "Jump to Buffer 3" },
-        ["<leader>4"] = { function() require("astrocore.buffer").nav_to(4) end, desc = "Jump to Buffer 4" },
-        ["<leader>5"] = { function() require("astrocore.buffer").nav_to(5) end, desc = "Jump to Buffer 5" },
-        ["<leader>6"] = { function() require("astrocore.buffer").nav_to(6) end, desc = "Jump to Buffer 6" },
-        ["<leader>7"] = { function() require("astrocore.buffer").nav_to(7) end, desc = "Jump to Buffer 7" },
-        ["<leader>8"] = { function() require("astrocore.buffer").nav_to(8) end, desc = "Jump to Buffer 8" },
-        ["<leader>9"] = { function() require("astrocore.buffer").nav_to(9) end, desc = "Jump to Buffer 9" },
+        ["<leader>1"] = {
+          function() require("astrocore.buffer").nav_to(1) end,
+          desc = "Jump to Buffer 1",
+        },
+        ["<leader>2"] = {
+          function() require("astrocore.buffer").nav_to(2) end,
+          desc = "Jump to Buffer 2",
+        },
+        ["<leader>3"] = {
+          function() require("astrocore.buffer").nav_to(3) end,
+          desc = "Jump to Buffer 3",
+        },
+        ["<leader>4"] = {
+          function() require("astrocore.buffer").nav_to(4) end,
+          desc = "Jump to Buffer 4",
+        },
+        ["<leader>5"] = {
+          function() require("astrocore.buffer").nav_to(5) end,
+          desc = "Jump to Buffer 5",
+        },
+        ["<leader>6"] = {
+          function() require("astrocore.buffer").nav_to(6) end,
+          desc = "Jump to Buffer 6",
+        },
+        ["<leader>7"] = {
+          function() require("astrocore.buffer").nav_to(7) end,
+          desc = "Jump to Buffer 7",
+        },
+        ["<leader>8"] = {
+          function() require("astrocore.buffer").nav_to(8) end,
+          desc = "Jump to Buffer 8",
+        },
+        ["<leader>9"] = {
+          function() require("astrocore.buffer").nav_to(9) end,
+          desc = "Jump to Buffer 9",
+        },
         -- Cancel search highlighting with ESC
         ["<Esc>"] = { ":nohlsearch<Bar>:echo<cr>" },
         ["<leader><leader>"] = { "<c-^>" }, -- options = { noremap = true } },

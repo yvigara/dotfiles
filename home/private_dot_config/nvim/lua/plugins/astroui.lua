@@ -18,38 +18,9 @@ return {
       astrotheme = { -- a table of overrides/changes when applying the astrotheme theme
         -- Normal = { bg = "#000000" },
       },
-      gruvbox = {
-        StatusLine = { fg = "#ebdbb2", bg = "#504945" },
-      },
     },
-    -- Configuration options for the AstroNvim lines and bars built with the `status` API.
-    status = {
-
-      icon_highlights = {
-        file_icon = {
-          statusline = false,
-        },
-      },
-      separators = {
-        left = { "", " " }, -- separator for the left side of the statusline
-        right = { " ", "" }, -- separator for the right side of the statusline
-        -- tab = { "", "" },
-
-        tab_left = { "", "" },
-        tab = { "", "" },
-        right_accent = { "", " " }, -- accent separator for the right side of the statusline
-        space_right = { "", " " },
-        space_left = { " ", "" },
-      },
-    },
-    -- Icons can be configured throughout the interface
+    -- A table of icons in the UI using NERD fonts
     icons = {
-      VimIcon = "",
-      ScrollText = "",
-      GitBranch = "",
-      GitAdd = "",
-      GitChange = "",
-      GitDelete = "",
       -- configure the loading of the lsp in the status line
       LSPLoading1 = "⠋",
       LSPLoading2 = "⠙",
@@ -61,6 +32,12 @@ return {
       LSPLoading8 = "⠧",
       LSPLoading9 = "⠇",
       LSPLoading10 = "⠏",
+    },
+    -- Configuration options for the AstroNvim lines and bars built with the `status` API.
+    status = {
+      separators = {
+        tab = { "", "" },
+      },
     },
   },
 }
