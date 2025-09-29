@@ -4,7 +4,6 @@
 --       as this provides autocomplete and documentation while editing
 
 ---@type LazySpec
-local lspkind = require "lspkind"
 return {
   "AstroNvim/astrolsp",
   ---@type AstroLSPOpts
@@ -165,27 +164,6 @@ return {
           end,
         },
       },
-      lsp_document_highlight = {
-        -- Optional condition to create/delete auto command group
-        -- can either be a string of a client capability or a function of `fun(client, bufnr): boolean`
-        -- condition will be resolved for each client on each execution and if it ever fails for all clients,
-        -- the auto commands will be deleted for that buffer
-        cond = "textDocument/documentHighlight",
-        -- cond = function(client, bufnr) return client.name == "lua_ls" end,
-        -- list of auto commands to set
-        {
-          -- events to trigger
-          event = { "CursorHold", "CursorHoldI" },
-          -- the rest of the autocmd options (:h nvim_create_autocmd)
-          desc = "Document Highlighting",
-          callback = function() vim.lsp.buf.document_highlight() end,
-        },
-        {
-          event = { "CursorMoved", "CursorMovedI", "BufLeave" },
-          desc = "Document Highlighting Clear",
-          callback = function() vim.lsp.buf.clear_references() end,
-        },
-      },
     },
     -- mappings to be set up on attaching of a language server
     mappings = {
@@ -203,7 +181,9 @@ return {
         ["<Leader>uY"] = {
           function() require("astrolsp.toggles").buffer_semantic_tokens() end,
           desc = "Toggle LSP semantic highlight (buffer)",
-          cond = function(client) return client.server_capabilities.semanticTokensProvider and vim.lsp.semantic_tokens end,
+          cond = function(client)
+            return client.supports_method "textDocument/semanticTokens/full" and vim.lsp.semantic_tokens ~= nil
+          end,
         },
       },
     },
