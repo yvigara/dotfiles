@@ -1,2 +1,3 @@
 settings.json
 iterm2
+.config/nvim/lazy-lock.json

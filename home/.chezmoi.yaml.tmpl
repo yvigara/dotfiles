@@ -28,10 +28,20 @@
 {{-   writeToStdout "Chezmoi is running in headless environment.\n" -}}
 {{- end -}}
 
+bitwarden.unlock: true
 sourceDir: "{{ .chezmoi.sourceDir }}"
+hooks.read-source-state.pre:
+  command: ".local/share/chezmoi/.install-prerequisites.sh"
 
 diff:
-  pager: "delta"
+  command: "difft"
+  args:
+    - "--color"
+    - "always"
+    - "--skip-unchanged"
+  pager: "bat"
+  exclude:
+    - "scripts"
 
 data:
     email: "{{ $email }}"

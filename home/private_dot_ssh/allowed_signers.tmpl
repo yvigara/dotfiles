@@ -1,1 +1,2 @@
 {{ .email }} ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEAW4osmMLIah4cR3CvOBdGu61olG+Czfs+2zRLximVU
+{{ .email }} {{ (bitwarden "item" "github-ssh-key").sshKey.publicKey }}

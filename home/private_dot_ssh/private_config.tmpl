@@ -1,21 +1,5 @@
 HashKnownHosts no
 
-Host ovh-dev-syd1-adm1.dev.angarium.io
-  HostName ovh-dev-syd1-adm1.dev.angarium.io
-  User yvigara
-
-Host ovh-dev-uk1-adm1.dev.angarium.io
-  HostName ovh-dev-uk1-adm1.dev.angarium.io
-  User yvigara
-
-Host ovh-dev-uk1-adm2.dev.angarium.io
-  HostName ovh-dev-uk1-adm2.dev.angarium.io
-  User yvigara
-
-Host ovh-dev-uk1-adm3.dev.angarium.io
-  HostName ovh-dev-uk1-adm3.dev.angarium.io
-  User yvigara
-
 Host *
   IgnoreUnknown UseKeychain
   Compression yes
@@ -29,4 +13,10 @@ Host *
 {{- end }}
 
 Host github.com
+  IgnoreUnknown UseKeychain
   User git
+{{- if eq .chezmoi.os "darwin" }}
+  AddKeysToAgent yes
+  UseKeychain yes
+{{- end }}
+  IdentityFile ~/.ssh/id_ed25519.github
