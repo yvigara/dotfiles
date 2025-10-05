@@ -1,0 +1,355 @@
+{
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "editor.minimap.enabled": false,
+  "editor.renderControlCharacters": true,
+  "editor.renderLineHighlight": "all",
+  "editor.renderWhitespace": "all",
+  "editor.suggestSelection": "first",
+  "editor.snippetSuggestions": "top",
+  "editor.fontSize": 13,
+  "editor.fontFamily": "JetBrainsMono Nerd Font Mono",
+  "editor.fontLigatures": true,
+  "editor.scrollBeyondLastLine": false,
+  "editor.formatOnPaste": false,
+  "editor.defaultFormatter": "biomejs.biome",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.biome": "explicit",
+    "source.action.useSortedProperties.biome": "explicit",
+    "source.organizeImports.biome": "explicit",
+    "source.addMissingImports.ts": "explicit",
+    "source.organizeImports": "explicit",
+    "source.fixAll": "explicit"
+  },
+  // Workbench
+  "workbench.colorTheme": "Gruvbox Dark Medium",
+  "workbench.preferredDarkColorTheme": "Gruvbox Dark Medium",
+  "workbench.preferredLightColorTheme": "Gruvbox Light Medium",
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.editor.highlightModifiedTabs": true,
+  "workbench.settings.useSplitJSON": true,
+  "workbench.settings.enableNaturalLanguageSearch": false,
+  // Window
+  "window.newWindowDimensions": "maximized",
+  "window.title": "${activeEditorMedium} ${dirty}",
+  "window.zoomLevel": 0,
+  // Material Icon
+  "material-icon-theme.hidesExplorerArrows": true,
+  "material-icon-theme.activeIconPack": "react_redux",
+  // Files
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/.DS_Store": true,
+    "**/bower_components": true,
+    "**/.sass-cache": true,
+    ".nyc_output": true
+  },
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.associations": {
+    // Ansible
+    "**/defaults/**/*.yml": "jinja-yaml",
+    "**/group_vars/**/*": "jinja-yaml",
+    "**/host_vars/**/*": "jinja-yaml",
+    "**/vars/**/*.yml": "jinja-yaml",
+    "**/tasks/**/*.yml": "ansible",
+    "**/handlers/*.yml": "ansible",
+    "**/meta/*.yml": "ansible",
+    "**/roles/**/*.yml": "ansible",
+    "**/playbooks/**/*.yml": "ansible",
+    "**/ansible/**/hosts": "ini",
+    "**/ansible/**/inventory": "ini",
+    "ansible.cfg": "ini",
+    "*.css": "tailwindcss"
+  },
+  // Golang
+  "go.lintTool": "golangci-lint-v2",
+  "go.lintFlags": ["--path-mode=abs", "--fast-only"],
+  "go.formatTool": "custom",
+  "go.formatFlags": ["fmt", "--stdin"],
+  "go.alternateTools": {
+    "customFormatter": "golangci-lint-v2"
+  },
+  "go.testFlags": ["-v"],
+  "go.toolsManagement.autoUpdate": true,
+  "go.useLanguageServer": true,
+  "go.languageServerFlags": [],
+  "gopls": {
+    "formatting.gofumpt": true,
+    "usePlaceholders": true, // add parameter placeholders when completing a function
+    // Experimental settings
+    "completeUnimported": true, // autocomplete unimported packages
+    "ui.semanticTokens": true,
+    "deepCompletion": true // enable deep completion
+  },
+  "[go]": {
+    "editor.snippetSuggestions": "none",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit",
+      "source.sortImports": "explicit"
+    },
+    "editor.defaultFormatter": "golang.go"
+  },
+  // Integrated terminal
+  "terminal.external.osxExec": "iterm2",
+  "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font",
+  "terminal.integrated.fontSize": 13,
+  "terminal.integrated.fontWeight": "600",
+  // Breadcrumbs
+  "breadcrumbs.enabled": false,
+  // SCM
+  "scm.defaultViewMode": "tree",
+  // Vim
+  "vim.leader": "<space>",
+  "vim.incsearch": true,
+  "vim.useCtrlKeys": true,
+  "vim.hlsearch": true,
+  "vim.surround": false,
+  "vim.neovimPath": "/usr/local/bin/nvim",
+  "vim.enableNeovim": true,
+  // Explorer
+  "explorer.confirmDragAndDrop": false,
+  "explorer.openEditors.visible": 1,
+  "explorer.confirmDelete": false,
+  "yaml.format.enable": true,
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "typescript.surveys.enabled": false,
+  "extensions.ignoreRecommendations": true,
+  // Python
+  "python.jediEnabled": false,
+  "python.languageServer": "Pylance",
+  "python.linting.pylintEnabled": true,
+  "python.formatting.provider": "yapf",
+  "python.showStartPage": false,
+  "[astro]": {
+    "editor.defaultFormatter": "astro-build.astro-vscode"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[proto3]": {
+    "editor.defaultFormatter": "bufbuild.vscode-buf"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "editor.semanticHighlighting.enabled": true,
+  "editor.semanticTokenColorCustomizations": {
+    "[Gruvbox Dark Medium]": {
+      "enabled": true,
+      "rules": {
+        "parameter": {
+          "foreground": "#83a598",
+          "fontStyle": "italic"
+        },
+        "type": {
+          "fontStyle": "underline"
+        },
+        "interface": {
+          "foreground": "#d79921"
+        },
+        "storage.type": {
+          "foreground": "#0FF000",
+          "fontStyle": "italic"
+        },
+        "variable.other.readwrite.alias": {
+          "foreground": "#a89984"
+        },
+        "meta.import": {
+          "foreground": "#a89984"
+        },
+        "namespace": {
+          "foreground": "#8EC07C"
+        },
+        "string": {
+          "foreground": "#90A4AE"
+        },
+        "function": {
+          "foreground": "#babb26"
+          // "fontStyle": "bold"
+        },
+        "keyword": "#b16286",
+        "struct": "#d79921",
+        "class": "#f07178",
+        "class.readonly": {
+          "foreground": "#ffd580",
+          "fontStyle": ""
+        },
+        "class.defaultLibrary": {
+          "foreground": "#d79921",
+          "fontStyle": "italic"
+        },
+        "class.declaration": {
+          "foreground": "#83a598",
+          "fontStyle": ""
+        },
+        "enum": "#9dd2bb",
+        "macro": "#ffd580",
+        "variable": "#83A598",
+        "variable.declaration": {
+          "foreground": "#83A598",
+          "fontStyle": ""
+        },
+        "variable.declaration.readonly": {
+          "foreground": "#d3869b",
+          "fontStyle": "italic"
+        },
+        "variable.readonly": {
+          "foreground": "#d3869b",
+          "fontStyle": "italic"
+        },
+        "variable.defaultLibrary": "#458588",
+        "typeParameter": "#83a598",
+        "property": "#ebdbb2",
+        "property.declaration": "#ebdbb2",
+        "property.readonly": "#d3869b",
+        "property.defaultLibrary": {
+          "foreground": "#ebdbb2",
+          "fontStyle": ""
+        },
+        "enumMember": "#9dd2bb",
+        "event": "#83a598",
+        "label": "#b3b1ad",
+        "comment": "#928374",
+        "number": "#9dd2bb",
+        "regexp": "#95e6cb",
+        "operator": "#fb4934",
+        "0": "#282828",
+        "1": "#cc241d",
+        "2": "#98971a",
+        "3": "#d79921",
+        "4": "#458588",
+        "5": "#b16286",
+        "6": "#689d6a",
+        "7": "#a89984",
+        "8": "#928374",
+        "9": "#fb4934",
+        "10": "#b8bb26",
+        "11": "#fabd2f",
+        "12": "#83a598",
+        "13": "#d3869b",
+        "15": "#8ec07c",
+        "x": "#ebdbb2"
+      }
+    }
+  },
+  "editor.tokenColorCustomizations": {
+    "[Gruvbox Dark Medium]": {
+      "textMateRules": [
+        {
+          "scope": ["string"],
+          "settings": {
+            "foreground": "#98971a"
+          }
+        },
+        {
+          "scope": ["storage.type"],
+          "settings": {
+            "foreground": "#fb4934",
+            "fontStyle": "italic"
+          }
+        }
+      ]
+    }
+  },
+  "workbench.editorAssociations": {
+    "*.ipynb": "jupyter.notebook.ipynb"
+  },
+
+  "redhat.telemetry.enabled": false,
+  "editor.insertSpaces": false,
+  "editor.lineNumbers": "on",
+  "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
+  "editor.wordWrap": "off",
+  "docker.showStartPage": false,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": true,
+  "telemetry.telemetryLevel": "off",
+  "workbench.startupEditor": "none",
+
+  "editor.quickSuggestions": {
+    "strings": true // forces VS Code to trigger completions when editing "string" content
+  },
+  "tailwindCSS.experimental.classRegex": [
+    ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
+    // ["tv\\((([^()]*|\\([^()]*\\))*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
+    ["([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]"]
+  ],
+  "editor.stickyScroll.enabled": true,
+  "editor.inlineSuggest.enabled": true,
+  "terminal.integrated.persistentSessionScrollback": 10000,
+  "terminal.integrated.scrollback": 10000,
+  "workbench.activityBar.location": "top",
+  "editor.multiDocumentOccurrencesHighlight": true,
+  "application.shellEnvironmentResolutionTimeout": 30,
+  "prettier.enableDebugLogs": true,
+  "github.copilot.chat.welcomeMessage": "never",
+  "explorer.confirmUndo": "verbose",
+  "explorer.enableUndo": false,
+  "eslint.packageManager": "pnpm",
+  "eslint.useFlatConfig": true,
+  "eslint.debug": true,
+  "tailwindcss-intellisense.trace.server": "verbose",
+  "diffEditor.ignoreTrimWhitespace": true,
+  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+  "eslint.codeActionsOnSave.rules": null,
+  "eslint.useESLintClass": true,
+  "javascript.experimental.updateImportsOnPaste": true,
+  "typescript.experimental.updateImportsOnPaste": true,
+  "git.openRepositoryInParentFolders": "never",
+  "github.copilot.chat.completionContext.typescript.mode": "sidecar",
+  "[xml]": {
+    "editor.autoClosingBrackets": "never",
+    "files.trimFinalNewlines": true
+  },
+  "editor.inlineSuggest.edits.showCollapsed": true,
+  "chat.experimental.statusIndicator.enabled": true,
+  "docker.extension.enableComposeLanguageServer": false,
+  "github.copilot.selectedCompletionModel": "",
+  "oxc.flags": {},
+  "amp.url": "https://ampcode.com/",
+  "amp.guidanceFiles.specs": true,
+  "amp.tab.enabled": true,
+  "amp.tab.experimental.unobtrusiveDiffs": true,
+  "chat.disableAIFeatures": true,
+  "[dockercompose]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.autoIndent": "advanced",
+    "editor.quickSuggestions": {
+      "other": true,
+      "comments": false,
+      "strings": true
+    },
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "[github-actions-workflow]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  }
+}
