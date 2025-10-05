@@ -30,8 +30,10 @@
 
 bitwarden.unlock: true
 sourceDir: "{{ .chezmoi.sourceDir }}"
-hooks.read-source-state.pre:
-  command: ".local/share/chezmoi/.install-prerequisites.sh"
+hooks:
+  read-source-state:
+    pre:
+      command: ".local/share/chezmoi/.install-prerequisites.sh"
 
 diff:
   command: "difft"
