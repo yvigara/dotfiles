@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# packages hash: {{ include "private_dot_config/mise/config.toml" | sha256sum }}
+
+set -Eeuo pipefail
+
+
+mise trust {{ .chezmoi.homeDir }}/.config/mise/config.toml
+mise install

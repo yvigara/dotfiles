@@ -1,0 +1,11 @@
+[settings]
+experimental = true
+idiomatic_version_file_enable_tools = ["node"]
+pin = true
+trusted_config_paths = ["{{ env.XDG_PROJECTS_DIR }}"]
+go_set_gobin = false
+go_set_goroot = true
+
+[tools]
+uv = "latest"
+"npm:@sourcegraph/amp" = "latest"
