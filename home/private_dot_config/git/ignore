@@ -11,3 +11,5 @@ tags
 !tags/
 tmp/**/*
 !tmp/cache/.keep
+
+**/.claude/settings.local.json

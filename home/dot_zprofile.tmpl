@@ -25,10 +25,3 @@ fi
 
 # zsh-completions
 fpath+=("${HOMEBREW_PREFIX}/share/zsh-completions/")
-
-# set path so it includes pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-if [ -d "$PYENV_ROOT" ]; then
-  export PATH="$PYENV_ROOT/bin:$PATH"
-  eval "$(pyenv init --path)"
-fi

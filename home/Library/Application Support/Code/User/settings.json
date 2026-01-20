@@ -12,13 +12,13 @@
   "editor.fontLigatures": true,
   "editor.scrollBeyondLastLine": false,
   "editor.formatOnPaste": false,
-  "editor.defaultFormatter": "biomejs.biome",
+  "editor.defaultFormatter": "oxc.oxc-vscode",
   "editor.codeActionsOnSave": {
-    "source.fixAll.biome": "explicit",
-    "source.action.useSortedProperties.biome": "explicit",
-    "source.organizeImports.biome": "explicit",
+    // "source.fixAll.biome": "explicit",
+    // "source.action.useSortedProperties.biome": "explicit",
+    "source.organizeImports.oxc": "explicit",
     "source.addMissingImports.ts": "explicit",
-    "source.organizeImports": "explicit",
+    // "source.organizeImports": "explicit",
     "source.fixAll": "explicit"
   },
   // Workbench
@@ -66,18 +66,26 @@
   },
   // Golang
   "go.lintTool": "golangci-lint-v2",
-  "go.lintFlags": ["--path-mode=abs", "--fast-only"],
+  "go.lintFlags": [
+    "--path-mode=abs",
+    "--fast-only"
+  ],
   "go.formatTool": "custom",
-  "go.formatFlags": ["fmt", "--stdin"],
+  "go.formatFlags": [
+    "fmt",
+    "--stdin"
+  ],
   "go.alternateTools": {
     "customFormatter": "golangci-lint-v2"
   },
-  "go.testFlags": ["-v"],
+  "go.testFlags": [
+    "-v"
+  ],
   "go.toolsManagement.autoUpdate": true,
   "go.useLanguageServer": true,
   "go.languageServerFlags": [],
   "gopls": {
-    "formatting.gofumpt": true,
+    "formatting.gofumpt": false,
     "usePlaceholders": true, // add parameter placeholders when completing a function
     // Experimental settings
     "completeUnimported": true, // autocomplete unimported packages
@@ -136,7 +144,7 @@
     "editor.defaultFormatter": "biomejs.biome"
   },
   "[javascript]": {
-    "editor.defaultFormatter": "biomejs.biome"
+    "editor.defaultFormatter": "oxc.oxc-vscode"
   },
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -148,13 +156,13 @@
     "editor.defaultFormatter": "bufbuild.vscode-buf"
   },
   "[typescript]": {
-    "editor.defaultFormatter": "biomejs.biome"
+    "editor.defaultFormatter": "oxc.oxc-vscode"
   },
   "[typescriptreact]": {
-    "editor.defaultFormatter": "biomejs.biome"
+    "editor.defaultFormatter": "oxc.oxc-vscode"
   },
   "[javascriptreact]": {
-    "editor.defaultFormatter": "biomejs.biome"
+    "editor.defaultFormatter": "oxc.oxc-vscode"
   },
   "[yaml]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
@@ -263,13 +271,17 @@
     "[Gruvbox Dark Medium]": {
       "textMateRules": [
         {
-          "scope": ["string"],
+          "scope": [
+            "string"
+          ],
           "settings": {
             "foreground": "#98971a"
           }
         },
         {
-          "scope": ["storage.type"],
+          "scope": [
+            "storage.type"
+          ],
           "settings": {
             "foreground": "#fb4934",
             "fontStyle": "italic"
@@ -281,7 +293,6 @@
   "workbench.editorAssociations": {
     "*.ipynb": "jupyter.notebook.ipynb"
   },
-
   "redhat.telemetry.enabled": false,
   "editor.insertSpaces": false,
   "editor.lineNumbers": "on",
@@ -292,14 +303,19 @@
   "editor.guides.bracketPairs": true,
   "telemetry.telemetryLevel": "off",
   "workbench.startupEditor": "none",
-
   "editor.quickSuggestions": {
     "strings": true // forces VS Code to trigger completions when editing "string" content
   },
   "tailwindCSS.experimental.classRegex": [
-    ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
+    [
+      "clsx\\(([^)]*)\\)",
+      "(?:'|\"|`)([^']*)(?:'|\"|`)"
+    ],
     // ["tv\\((([^()]*|\\([^()]*\\))*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
-    ["([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]"]
+    [
+      "([\"'`][^\"'`]*.*?[\"'`])",
+      "[\"'`]([^\"'`]*).*?[\"'`]"
+    ]
   ],
   "editor.stickyScroll.enabled": true,
   "editor.inlineSuggest.enabled": true,
@@ -332,11 +348,6 @@
   "chat.experimental.statusIndicator.enabled": true,
   "docker.extension.enableComposeLanguageServer": false,
   "github.copilot.selectedCompletionModel": "",
-  "oxc.flags": {},
-  "amp.url": "https://ampcode.com/",
-  "amp.guidanceFiles.specs": true,
-  "amp.tab.enabled": true,
-  "amp.tab.experimental.unobtrusiveDiffs": true,
   "chat.disableAIFeatures": true,
   "[dockercompose]": {
     "editor.insertSpaces": true,
@@ -351,5 +362,9 @@
   },
   "[github-actions-workflow]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
-  }
+  },
+  "oxc.flags": {},
+  "oxc.requireConfig": true,
+  "oxc.fmt.experimental": true,
+  "oxc.typeAware": true
 }

@@ -9,4 +9,3 @@ go_set_goroot = true
 [tools]
 node = "24"
 uv = "latest"
-"npm:@sourcegraph/amp" = "latest"
