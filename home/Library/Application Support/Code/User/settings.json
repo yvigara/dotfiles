@@ -66,21 +66,13 @@
   },
   // Golang
   "go.lintTool": "golangci-lint-v2",
-  "go.lintFlags": [
-    "--path-mode=abs",
-    "--fast-only"
-  ],
+  "go.lintFlags": ["--path-mode=abs", "--fast-only"],
   "go.formatTool": "custom",
-  "go.formatFlags": [
-    "fmt",
-    "--stdin"
-  ],
+  "go.formatFlags": ["fmt", "--stdin"],
   "go.alternateTools": {
     "customFormatter": "golangci-lint-v2"
   },
-  "go.testFlags": [
-    "-v"
-  ],
+  "go.testFlags": ["-v"],
   "go.toolsManagement.autoUpdate": true,
   "go.useLanguageServer": true,
   "go.languageServerFlags": [],
@@ -271,17 +263,13 @@
     "[Gruvbox Dark Medium]": {
       "textMateRules": [
         {
-          "scope": [
-            "string"
-          ],
+          "scope": ["string"],
           "settings": {
             "foreground": "#98971a"
           }
         },
         {
-          "scope": [
-            "storage.type"
-          ],
+          "scope": ["storage.type"],
           "settings": {
             "foreground": "#fb4934",
             "fontStyle": "italic"
@@ -307,15 +295,9 @@
     "strings": true // forces VS Code to trigger completions when editing "string" content
   },
   "tailwindCSS.experimental.classRegex": [
-    [
-      "clsx\\(([^)]*)\\)",
-      "(?:'|\"|`)([^']*)(?:'|\"|`)"
-    ],
+    ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
     // ["tv\\((([^()]*|\\([^()]*\\))*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
-    [
-      "([\"'`][^\"'`]*.*?[\"'`])",
-      "[\"'`]([^\"'`]*).*?[\"'`]"
-    ]
+    ["([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]"]
   ],
   "editor.stickyScroll.enabled": true,
   "editor.inlineSuggest.enabled": true,
@@ -366,5 +348,35 @@
   "oxc.flags": {},
   "oxc.requireConfig": true,
   "oxc.fmt.experimental": true,
-  "oxc.typeAware": true
+  "oxc.typeAware": true,
+  "yaml.customTags": [
+    "!Base64 scalar",
+    "!Cidr scalar",
+    "!And sequence",
+    "!Equals sequence",
+    "!If sequence",
+    "!Not sequence",
+    "!Or sequence",
+    "!Condition scalar",
+    "!FindInMap sequence",
+    "!GetAtt sequence",
+    "!GetAZs scalar",
+    "!ImportValue scalar",
+    "!Join sequence",
+    "!Select sequence",
+    "!Split sequence",
+    "!Sub scalar",
+    "!Transform mapping",
+    "!Ref scalar",
+    "!GetAtt scalar"
+  ],
+  "aws.telemetry": false,
+  "[markdown]": {
+    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint",
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true
+  },
+  "pkl.lsp.java.path": "/opt/homebrew/opt/openjdk/bin/java",
+  "docker.extension.dockerEngineAvailabilityPrompt": false,
+  "githubPullRequests.pullBranch": "never"
 }
