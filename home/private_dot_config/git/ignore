@@ -13,3 +13,6 @@ tmp/**/*
 !tmp/cache/.keep
 
 **/.claude/settings.local.json
+mise.local.*
+.gitnexus
+
