@@ -2,3 +2,4 @@
 run = "qmd mcp --http --port 8181"
 boot_start = true
 mise = true
+ready_http = "http://localhost:8181/health"
