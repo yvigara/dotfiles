@@ -7,5 +7,9 @@ go_set_gobin = false
 go_set_goroot = true
 
 [tools]
-node = "24"
+node = "25"
+"npm:defuddle" = "0.15.0"
+"npm:@cometix/ccline" = "1.1.1"
 uv = "latest"
+"npm:@tobilu/qmd" = "2.1.0"
+pitchfork = { version = "1.2.0", postinstall = "pitchfork boot enable" }

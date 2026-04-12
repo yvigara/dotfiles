@@ -1,0 +1,11 @@
+collections:
+  wiki:
+    path: /Users/yvigara/Library/Mobile Documents/iCloud~md~obsidian/Documents/notes/04-Resources
+    pattern: "**/*.md"
+    ignore:
+      - log.md
+      - index.md
+      - wiki-schema.md
+      - graph/context.md
+    context:
+      "": Obsidian Wiki notes

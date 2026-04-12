@@ -1,0 +1,3 @@
+[daemons.qmd]
+run = "qmd mcp --http --port 8181"
+boot_start = true
