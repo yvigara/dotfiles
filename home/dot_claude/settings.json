@@ -5,18 +5,20 @@
       "mcp__qmd__*"
     ]
   },
-  "effortLevel": "medium",
   "model": "sonnet",
   "statusLine": {
+    "type": "command",
     "command": "ccline",
-    "padding": 0,
-    "type": "command"
+    "padding": 0
   },
   "enabledPlugins": {
     "beads@beads-marketplace": true,
     "gopls-lsp@claude-plugins-official": true,
     "code-review@claude-plugins-official": true,
-    "code-simplifier@claude-plugins-official": true
+    "code-simplifier@claude-plugins-official": true,
+    "claude-md-management@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "plugin-dev@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "beads-marketplace": {
@@ -25,5 +27,6 @@
         "repo": "gastownhall/beads"
       }
     }
-  }
+  },
+  "effortLevel": "medium"
 }
