@@ -17,6 +17,7 @@ tap "hashicorp/tap"
 tap "johanhaleby/kubetail"
 tap "k0sproject/tap"
 tap "goreleaser/tap"
+tap "oven-sh/bun"
 
 # {{- if eq .chezmoi.os "darwin" }}
 ## Macos-specific formulae
@@ -70,10 +71,6 @@ brew "node"
 brew "yarn"
 brew "pnpm"
 brew "oven-sh/bun/bun"
-
-brew "pyenv"
-brew "pyenv-virtualenv"
-brew "pyenv-virtualenvwrapper"
 
 brew "docker"
 brew "docker-compose"
