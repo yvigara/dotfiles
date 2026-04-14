@@ -13,4 +13,4 @@ node = "25"
 uv = "latest"
 "npm:@tobilu/qmd" = "2.1.0"
 pitchfork = { version = "2.6.0", postinstall = "pitchfork boot enable" }
-"npm:gitnexus" = "1.6.0"
+"npm:gitnexus" = "1.6.1"
