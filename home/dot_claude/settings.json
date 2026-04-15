@@ -5,6 +5,9 @@
       "mcp__qmd__*"
     ]
   },
+  "env": {
+    "ENABLE_LSP_TOOL": "1"
+  },
   "model": "sonnet",
   "statusLine": {
     "type": "command",
