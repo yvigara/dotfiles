@@ -63,10 +63,5 @@ alias s=switch
 # Local customizations - create this file for machine-specific settings
 [[ ! -f "${HOME}/.zshrc.local" ]] || source "${HOME}/.zshrc.local"
 
-if [[ -n "$CURSOR_AGENT" ]]; then
-  export GIT_PAGER=cat
-  # Skip theme initialization for better compatibility
-else
-  eval "$(starship init zsh)"
-fi
+eval "$(starship init zsh)"
 export CLAUDE_CODE_NO_FLICKER=1
