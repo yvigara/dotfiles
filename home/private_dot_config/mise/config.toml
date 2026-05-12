@@ -7,10 +7,11 @@ go_set_gobin = false
 go_set_goroot = true
 
 [tools]
-node = "25"
-"npm:defuddle" = "0.17.0"
+node = "26"
+"npm:defuddle" = "0.18.1"
 "npm:@cometix/ccline" = "1.1.2"
 uv = "latest"
 "npm:@tobilu/qmd" = "2.1.0"
-pitchfork = { version = "2.6.0", postinstall = "pitchfork boot enable" }
-"npm:gitnexus" = "1.6.2"
+"npm:@rivolink/leaf" = "1.21.0"
+pitchfork = { version = "2.10.0", postinstall = "pitchfork boot enable" }
+"npm:gitnexus" = "1.6.4"
