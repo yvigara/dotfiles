@@ -1,8 +1,13 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "autoMemoryEnabled": true,
+  "alwaysThinkingEnabled": true,
+  "showThinkingSummaries": true,
+  "editorMode": "vim",
   "permissions": {
     "allow": [
-      "mcp__qmd__*""Skill(office-hours)",
+      "mcp__qmd__*",
+      "Skill(office-hours)",
       "Skill(plan-ceo-review)",
       "Skill(plan-eng-review)",
       "Skill(plan-design-review)",
@@ -25,7 +30,11 @@
     ]
   },
   "env": {
-    "ENABLE_LSP_TOOL": "1"
+    "ENABLE_LSP_TOOL": "1",
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+    "CLAUDE_CODE_AUTO_CONNECT_IDE": "true",
+    "DISABLE_ERROR_REPORTING": "1",
+    "CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY": "1"
   },
   "model": "sonnet",
   "statusLine": {
@@ -57,5 +66,34 @@
       }
     }
   },
-  "effortLevel": "medium"
+  "sandbox": {
+    "enabled": true,
+    "enableWeakerNetworkIsolation": true,
+    "excludedCommands": [
+      "git",
+      "docker",
+      "gh",
+      "kubectl"
+    ],
+    "filesystem": {
+      "denyRead": [
+        "~/.ssh",
+        "~/.gnupg",
+        "~/.authinfo.gpg",
+        "~/.aws/credentials"
+      ],
+      "denyWrite": [
+        "~/.aws",
+        "~/.config",
+        "~/Library/Keychains"
+      ]
+    },
+    "network": {
+      "allowUnixSockets": [
+        "~/.ssh/agent-socket"
+      ]
+    }
+  },
+  "preferredNotifChannel": "ghostty",
+  "tui": "fullscreen"
 }
