@@ -6,12 +6,15 @@ trusted_config_paths = ["{{ env.XDG_PROJECTS_DIR }}"]
 go_set_gobin = false
 go_set_goroot = true
 
+[settings.github]
+oauth_client_id = "Iv23liX49yGQdh8FIgC4"
+
 [tools]
 node = "26"
 "npm:defuddle" = "0.18.1"
 "npm:@cometix/ccline" = "1.1.2"
 uv = "latest"
 "npm:@tobilu/qmd" = "2.1.0"
-"npm:@rivolink/leaf" = "1.21.0"
+"npm:@rivolink/leaf" = "1.22.1"
 pitchfork = { version = "2.10.0", postinstall = "pitchfork boot enable" }
-"npm:gitnexus" = "1.6.4"
+"npm:gitnexus" = "1.6.5"
