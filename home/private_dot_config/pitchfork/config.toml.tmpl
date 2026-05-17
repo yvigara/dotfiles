@@ -1,0 +1,19 @@
+#:schema https://pitchfork.en.dev/schema.json
+[supervisor]
+user = "{{ .chezmoi.username }}"
+
+[settings.general]
+mise = true
+
+[daemons.qmd]
+run = "qmd mcp --http --port 8181"
+boot_start = true
+ready_http = "http://localhost:8181/health"
+
+{{ if .llmenv -}}
+[daemons.llmenv]
+run = "scripts/update.sh"
+dir = "$HOME/.config/llmenv"
+cron = "0 0 6 * * *"
+
+{{ end -}}
