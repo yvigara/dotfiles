@@ -1,0 +1,8 @@
+{{- if lookPath "eza" -}}
+{{- $git := output "eza" "--version" | contains "+git" -}}
+status is-interactive; or exit
+
+function ls -w eza --description 'eza with sensible defaults'
+    command eza --classify {{ if $git }}--git {{ end }}--group --icons $argv
+end
+{{- end }}

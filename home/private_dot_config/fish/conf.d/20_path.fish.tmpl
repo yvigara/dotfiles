@@ -1,0 +1,36 @@
+{{- $hash := include .chezmoi.sourceFile | sha256sum -}}
+
+function fish_repath
+    set -U -e fish_user_paths fish_path_hash
+    source (status current-filename)
+end
+
+if not set -q fish_path_hash; or test $fish_path_hash != {{ $hash }}
+    status is-interactive; and echo 'Setting PATH...' >&2
+
+    {{- if eq .chezmoi.os "darwin" }}
+    # homebrew
+    fish_add_path -m $HOMEBREW_PREFIX/bin $HOMEBREW_PREFIX/sbin
+    # rancher desktop
+    fish_add_path -m $HOME/.rd/bin
+    {{- end }}
+
+    # local
+    fish_add_path -m $HOME/.local/bin $XDG_BIN_HOME $HOME/bin
+
+    # go
+    fish_add_path -m $HOME/go/bin
+
+    # rust
+    fish_add_path -m $XDG_DATA_HOME/cargo/bin
+
+    # bun
+    fish_add_path -m $HOME/.cache/.bun/bin
+
+    # obsidian cli (macOS app bundle)
+    {{- if eq .chezmoi.os "darwin" }}
+    fish_add_path -m /Applications/Obsidian.app/Contents/MacOS
+    {{- end }}
+
+    set -U fish_path_hash {{ $hash }}
+end

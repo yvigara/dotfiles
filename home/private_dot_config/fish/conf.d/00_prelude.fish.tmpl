@@ -1,0 +1,22 @@
+# pick up functions.d subdirectories (aliases, binds, platform, utils)
+set -p fish_function_path (builtin realpath (status dirname)/..)/functions.d/*
+
+# ensure TMPDIR is set
+set -q TMPDIR; or set -x TMPDIR /tmp
+
+# XDG Base Directory — set unconditionally (needed by scripts, not just interactive shells)
+set -q XDG_CONFIG_HOME;  or set -x XDG_CONFIG_HOME $HOME/.config
+set -q XDG_DATA_HOME;    or set -x XDG_DATA_HOME $HOME/.local/share
+set -q XDG_CACHE_HOME;   or set -x XDG_CACHE_HOME $HOME/.cache
+set -q XDG_STATE_HOME;   or set -x XDG_STATE_HOME $HOME/.local/state
+set -q XDG_BIN_HOME;     or set -x XDG_BIN_HOME $HOME/.local/bin
+set -q XDG_PROJECTS_DIR; or set -x XDG_PROJECTS_DIR $HOME/projects
+
+{{- if eq .chezmoi.os "darwin" }}
+# Homebrew — paths baked in at chezmoi apply time (zero subprocess at shell start)
+set -x HOMEBREW_PREFIX    {{ quote (output "brew" "--prefix" | trim) }}
+set -x HOMEBREW_CELLAR    {{ quote (output "brew" "--cellar" | trim) }}
+set -x HOMEBREW_REPOSITORY {{ quote (output "brew" "--repo" | trim) }}
+set -q MANPATH;  or set -x MANPATH ''
+set -q INFOPATH; or set -x INFOPATH ''
+{{- end }}

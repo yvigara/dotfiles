@@ -1,0 +1,76 @@
+{{- $hash := include .chezmoi.sourceFile | sha256sum -}}
+
+function fish_reset_prefs
+    for pref in $fish_prefs
+        set -U -e $pref
+    end
+    set -U -e fish_prefs fish_prefs_hash
+    source (status current-filename)
+end
+
+if not set -q fish_prefs_hash; or test $fish_prefs_hash != {{ $hash }}
+    function def
+        set -f options (fish_opt --short=x --long=export)
+        argparse --min-args 2 --stop-nonopt $options -- $argv; or return
+        set -f flags
+        set -q _flag_x; and set -a flags -x
+
+        set -Ua fish_prefs $argv[1]
+        if not set -q $argv[1]
+            set -U $flags $argv
+        end
+    end
+
+    status is-interactive; and echo 'Setting preferences...' >&2
+
+    # ── editor ────────────────────────────────────────────────────────────────
+    def -x EDITOR nvim
+    def -x VISUAL nvim
+    def -x MANPAGER "nvim +Man!"
+    def -x PAGER less
+    def -x LESS '--mouse --tabs=2 --RAW-CONTROL-CHARS'
+    def -x LESSHISTFILE $XDG_DATA_HOME/less/history
+
+    # ── go ────────────────────────────────────────────────────────────────────
+    def -x GOPATH $HOME/go
+    {{- if eq .chezmoi.os "darwin" }}
+    def -x GOROOT {{ quote (printf "%s/opt/go/libexec" (output "brew" "--prefix" | trim)) }}
+    {{- end }}
+
+    # ── rust ──────────────────────────────────────────────────────────────────
+    def -x CARGO_HOME $XDG_DATA_HOME/cargo
+    def -x RUSTUP_HOME $XDG_DATA_HOME/rustup
+
+    # ── node/bun ──────────────────────────────────────────────────────────────
+    def -x BUN_INSTALL $HOME/.cache/.bun
+
+    # ── tools ─────────────────────────────────────────────────────────────────
+    def -x RIPGREP_CONFIG_PATH $XDG_CONFIG_HOME/ripgrep/config
+    def -x CLICOLOR 1
+
+    # ── homebrew ──────────────────────────────────────────────────────────────
+    {{- if eq .chezmoi.os "darwin" }}
+    def -x HOMEBREW_NO_AUTO_UPDATE 1
+    def -x HOMEBREW_NO_ENV_HINTS 1
+    def -x HOMEBREW_BAT 1
+    def -x HOMEBREW_CLEANUP_MAX_AGE_DAYS 30
+    def -x HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS 7
+    def -x HOMEBREW_NO_INSECURE_REDIRECT 1
+    {{- end }}
+
+    # ── fish ──────────────────────────────────────────────────────────────────
+    def fish_greeting ''
+    def fish_key_bindings fish_default_key_bindings
+    def fish_features qmark-noglob stderr-nocaret regex-easyesc ampersand-nobg-in-token
+
+    # ── fzf ───────────────────────────────────────────────────────────────────
+    def -x FZF_DEFAULT_COMMAND 'fd --type=f --type=d --hidden --strip-cwd-prefix'
+    def fzf_fd_opts --hidden
+    def fzf_preview_dir_cmd 'eza --all --classify --color=always'
+    def fzf_directory_opts --scheme=path "--bind 'ctrl-v:execute(command nvim {} >/dev/tty)'"
+    def fzf_git_log_opts "--bind 'ctrl-o:execute-silent(git switch -d {})'"
+
+    # cleanup
+    functions -e def
+    set -U fish_prefs_hash {{ $hash }}
+end

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Change default shell to fish
+
+set -Eeuo pipefail
+
+FISH={{ quote (output "brew" "--prefix" | trim) }}/bin/fish
+
+if ! grep -qF "$FISH" /etc/shells; then
+    echo "Adding $FISH to /etc/shells..."
+    echo "$FISH" | sudo tee -a /etc/shells
+fi
+
+if [ "$SHELL" != "$FISH" ]; then
+    echo "Changing shell to fish..."
+    chsh -s "$FISH"
+fi

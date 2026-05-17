@@ -1,0 +1,9 @@
+{{- if lookPath "switcher" -}}
+status is-interactive; or exit
+
+switcher init fish | source
+
+function s --wraps switcher
+    kubeswitch $argv;
+end
+{{- end }}

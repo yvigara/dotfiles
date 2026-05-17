@@ -1,0 +1,126 @@
+{{- $hash := include .chezmoi.sourceFile | sha256sum -}}
+
+# Gruvbox Dark color palette
+{{- $bg0    := "#282828" -}}
+{{- $bg1    := "#3c3836" -}}
+{{- $bg2    := "#504945" -}}
+{{- $bg3    := "#665c54" -}}
+{{- $bg4    := "#7c6f64" -}}
+{{- $fg0    := "#fbf1c7" -}}
+{{- $fg1    := "#ebdbb2" -}}
+{{- $fg4    := "#a89984" -}}
+{{- $gray   := "#928374" -}}
+{{- $red    := "#cc241d" -}} {{- $red_b    := "#fb4934" -}}
+{{- $green  := "#98971a" -}} {{- $green_b  := "#b8bb26" -}}
+{{- $yellow := "#d79921" -}} {{- $yellow_b := "#fabd2f" -}}
+{{- $blue   := "#458588" -}} {{- $blue_b   := "#83a598" -}}
+{{- $purple := "#b16286" -}} {{- $purple_b := "#d3869b" -}}
+{{- $aqua   := "#689d6a" -}} {{- $aqua_b   := "#8ec07c" -}}
+{{- $orange := "#d65d0e" -}} {{- $orange_b := "#fe8019" }}
+
+if not set -q fish_colors_hash; or test $fish_colors_hash != {{ $hash }}
+    set -U -e $fish_colors
+
+    function fish_color -a color
+        set -U $argv
+        set -Ua fish_colors $color
+    end
+
+    # syntax highlighting
+    fish_color fish_color_normal         '{{ $fg1 }}'
+    fish_color fish_color_command        '{{ $blue_b }}'
+    fish_color fish_color_keyword        '{{ $orange_b }}'
+    fish_color fish_color_quote          '{{ $green_b }}'
+    fish_color fish_color_redirection    '{{ $purple_b }}'
+    fish_color fish_color_end            '{{ $fg4 }}'
+    fish_color fish_color_error          '{{ $red_b }}'
+    fish_color fish_color_param          '{{ $fg1 }}'
+    fish_color fish_color_option         '{{ $blue_b }}'
+    fish_color fish_color_comment        '{{ $gray }}'
+    fish_color fish_color_match          '{{ $yellow_b }}' --background '{{ $bg2 }}'
+    fish_color fish_color_selection      '{{ $fg1 }}' --background '{{ $bg2 }}'
+    fish_color fish_color_search_match   '{{ $yellow_b }}' --background '{{ $bg2 }}'
+    fish_color fish_color_history_current --bold
+    fish_color fish_color_operator       '{{ $yellow_b }}'
+    fish_color fish_color_escape         '{{ $orange_b }}'
+    fish_color fish_color_valid_path     --underline
+    fish_color fish_color_autosuggestion '{{ $bg4 }}'
+    fish_color fish_color_cancel         -r
+
+    # completion pager
+    fish_color fish_pager_color_completion          '{{ $fg1 }}'
+    fish_color fish_pager_color_description         '{{ $yellow_b }}'
+    fish_color fish_pager_color_prefix              --bold --underline
+    fish_color fish_pager_color_progress            '{{ $fg0 }}' --background '{{ $bg3 }}'
+    fish_color fish_pager_color_selected_background --background '{{ $bg2 }}'
+
+    # fzf colors (set alongside fish colors so both update together)
+    set -Ua fish_colors FZF_DEFAULT_OPTS
+    set -Ux FZF_DEFAULT_OPTS "\
+--ansi --no-bold --cycle --layout=reverse --preview-window=wrap \
+--bind 'ctrl-\:toggle-preview' \
+--color=fg:{{ $fg1 }},bg:{{ $bg0 }},hl:{{ $yellow_b }} \
+--color=fg+:{{ $fg1 }},bg+:{{ $bg1 }},hl+:{{ $yellow_b }} \
+--color=info:{{ $blue_b }},prompt:{{ $red_b }},pointer:{{ $purple_b }} \
+--color=marker:{{ $green_b }},spinner:{{ $purple_b }},header:{{ $blue_b }}"
+
+    # eza colors (modified=orange, owner=muted)
+    set -Ua fish_colors EZA_COLORS
+    set -Ux EZA_COLORS 'gm=33;1:uu=35:gu=35:un=33:gn=33'
+
+    functions -e fish_color
+    set -U fish_colors_hash {{ $hash }}
+end
+
+# ── Terminal palette via OSC sequences ────────────────────────────────────────
+# Programs the terminal's 16-color palette + special colors to Gruvbox Dark.
+# Works in Ghostty and any xterm-compatible terminal supporting OSC 4/10/11.
+
+status is-interactive; or exit
+# Only set on the outermost shell (not inside tmux panes that inherit from parent)
+status is-login; or test $SHLVL -eq 1; or exit
+
+function __osc -a data
+    printf '\e]%s\e\\' $data
+end
+
+function __term_color -a name hex
+    set -l palette \
+        black red green yellow blue magenta cyan white \
+        br_black br_red br_green br_yellow br_blue br_magenta br_cyan br_white
+    set -l special     fg bg selbg selfg curbg curfg
+    set -l special_osc 10 11 17   19    12    ''
+
+    if set idx (contains -i $name $palette)
+        __osc (printf '4;%d;%s' (math $idx - 1) $hex)
+    else if set sidx (contains -i $name $special)
+        set -l osc $special_osc[$sidx]
+        test -n "$osc"; and __osc (printf '%s;%s' $osc $hex)
+    end
+end
+
+__term_color bg      '{{ $bg0 }}'
+__term_color fg      '{{ $fg1 }}'
+__term_color selbg   '{{ $bg2 }}'
+__term_color selfg   '{{ $fg1 }}'
+__term_color curbg   '{{ $fg1 }}'
+__term_color curfg   '{{ $bg0 }}'
+
+__term_color black      '{{ $bg0 }}'
+__term_color red        '{{ $red }}'
+__term_color green      '{{ $green }}'
+__term_color yellow     '{{ $yellow }}'
+__term_color blue       '{{ $blue }}'
+__term_color magenta    '{{ $purple }}'
+__term_color cyan       '{{ $aqua }}'
+__term_color white      '{{ $fg4 }}'
+__term_color br_black   '{{ $bg4 }}'
+__term_color br_red     '{{ $red_b }}'
+__term_color br_green   '{{ $green_b }}'
+__term_color br_yellow  '{{ $yellow_b }}'
+__term_color br_blue    '{{ $blue_b }}'
+__term_color br_magenta '{{ $purple_b }}'
+__term_color br_cyan    '{{ $aqua_b }}'
+__term_color br_white   '{{ $fg0 }}'
+
+functions -e __osc __term_color

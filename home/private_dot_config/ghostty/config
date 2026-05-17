@@ -1,6 +1,6 @@
 theme = "Gruvbox Dark"
 font-family = "JetBrains Mono"
-shell-integration-features = no-cursor,sudo,title
+shell-integration-features = no-cursor,sudo,title,ssh-env
 macos-titlebar-style = tabs
 window-save-state = always
 window-colorspace = display-p3
@@ -8,7 +8,9 @@ cursor-style = block
 copy-on-select = clipboard
 
 #### Keys ####
-macos-option-as-alt = true
+macos-option-as-alt = left
+macos-auto-secure-input = true
+macos-secure-input-indication = true
 
 keybind = cmd+left=previous_tab
 keybind = cmd+right=next_tab

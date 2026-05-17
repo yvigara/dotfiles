@@ -1,0 +1,28 @@
+function __manup
+    for entry in $argv
+        if not contains $entry $MANPATH; and test -d $entry
+            set -px MANPATH $entry
+        end
+    end
+end
+
+set -q MANPATH; or set -x MANPATH ''
+
+{{- if eq .chezmoi.os "darwin" }}
+__manup $HOMEBREW_PREFIX/share/man
+set -x INFOPATH $HOMEBREW_PREFIX/share/info $INFOPATH
+{{- end }}
+
+# rust (rustup managed toolchain)
+if test -d $RUSTUP_HOME/toolchains
+    set -l toolchain stable
+    set -q RUSTUP_TOOLCHAIN; and set toolchain $RUSTUP_TOOLCHAIN
+    for tc in $RUSTUP_HOME/toolchains/$toolchain*/share/man
+        __manup $tc
+    end
+end
+
+# local
+__manup $HOME/.local/share/man
+
+functions -e __manup

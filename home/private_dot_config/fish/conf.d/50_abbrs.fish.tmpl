@@ -1,0 +1,75 @@
+status is-interactive; or exit
+
+# ── editor ────────────────────────────────────────────────────────────────────
+abbr -a -- vi      nvim
+abbr -a -- vim     nvim
+abbr -a -- vimdiff 'nvim -d'
+
+# ── listing (eza wrapper is in functions.d/aliases/ls.fish) ───────────────────
+abbr -a -- l   'ls -l'
+abbr -a -- ll  'ls -lah'
+abbr -a -- la  'ls -lah --sort modified'
+abbr -a -- lt  'ls -T'
+abbr -a -- llt 'ls -lahT'
+
+# ── git ───────────────────────────────────────────────────────────────────────
+abbr -a -- g   git
+abbr -a -- gs  'git status'
+abbr -a -- ga  'git add'
+abbr -a -- gc  'git commit'
+abbr -a -- gcm 'git commit -m'
+abbr -a -- gca 'git commit --amend'
+abbr -a -- gp  'git push'
+abbr -a -- gpl 'git pull'
+abbr -a -- gd  'git diff'
+abbr -a -- gst 'git diff --staged'
+abbr -a -- gco 'git checkout'
+abbr -a -- gb  'git branch'
+abbr -a -- gl  'git log --oneline --graph --decorate'
+
+# ── gh ────────────────────────────────────────────────────────────────────────
+abbr -a -- ghw  'gh repo view --web'
+abbr -a -- gpc  'gh pr create -a "@me" --fill'
+abbr -a -- ghpr 'gh pr create -a "@me" --fill'
+abbr -a -- ghd  'gh dash'
+
+# ── chezmoi ───────────────────────────────────────────────────────────────────
+abbr -a -- cz   chezmoi
+abbr -a -- cza  'chezmoi add'
+abbr -a -- czap 'chezmoi apply --init'
+abbr -a -- cze  'chezmoi edit'
+abbr -a -- czd  'chezmoi diff'
+abbr -a -- czu  'chezmoi update --init'
+
+# ── package managers ─────────────────────────────────────────────────────────
+abbr -a -- pn  pnpm
+abbr -a -- px  'pnpm dlx'
+abbr -a -- bru 'brew update && brew upgrade'
+
+# ── docker ────────────────────────────────────────────────────────────────────
+abbr -a -- dk  docker
+abbr -a -- dc  'docker compose'
+abbr -a -- dsp 'docker system prune'
+
+# ── kubernetes ────────────────────────────────────────────────────────────────
+abbr -a -- k   kubectl
+abbr -a -- kgp 'kubectl get pods'
+abbr -a -- kgs 'kubectl get svc'
+abbr -a -- kgn 'kubectl get nodes'
+
+# ── terraform ─────────────────────────────────────────────────────────────────
+abbr -a -- tf   terraform
+abbr -a -- tfi  'terraform init'
+abbr -a -- tfp  'terraform plan'
+abbr -a -- tfa  'terraform apply'
+
+# ── system ────────────────────────────────────────────────────────────────────
+abbr -a -- reload   'exec fish'
+abbr -a -- ip       'dig +short myip.opendns.com @resolver1.opendns.com'
+abbr -a -- ipl      'ipconfig getifaddr en0'
+abbr -a -- flushdns 'sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
+
+{{- if eq .chezmoi.os "darwin" }}
+abbr -a -- oa  'open -a'
+abbr -a -- oo  'open .'
+{{- end }}

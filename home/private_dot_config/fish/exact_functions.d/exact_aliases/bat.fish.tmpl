@@ -1,0 +1,7 @@
+{{- if lookPath "bat" -}}
+status is-interactive; or exit
+
+function cat -w bat --description 'bat with plain output (no line numbers or git diff)'
+    command bat --style=plain $argv
+end
+{{- end }}
