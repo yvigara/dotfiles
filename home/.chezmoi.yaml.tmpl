@@ -2,6 +2,7 @@
 {{- $ephemeral := false -}}
 {{- $personal := true -}}
 {{- $restricted := false -}}
+{{- $llmenv := false -}}
 {{- $name := "Yann Vigara" -}}
 {{- $email := "your@email.com" -}}
 
@@ -20,6 +21,7 @@
 {{- $restricted = promptBoolOnce . "restricted" "Restricted Environment (no sudo access)" $restricted -}}
 {{- $name = promptStringOnce . "name" "Your Name" $name -}}
 {{- $email = promptStringOnce . "email" "Your Email" $email -}}
+{{- $llmenv := promptStringOnce . "llmebv" "Will this machine run LLM background services" $llmenv -}}
 
 {{- writeToStdout "💡 Tip: you can re-enter your name and email with `chezmoi init --data=false`.\n" -}}
 
@@ -52,3 +54,4 @@ data:
     restricted: {{ $restricted }}
     headless: {{ $headless }}
     ephemeral: {{ $ephemeral }}
+    llmenv: {{ $llmenv }}
