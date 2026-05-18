@@ -5,4 +5,5 @@ set -Eeuo pipefail
 
 
 mise trust {{ .chezmoi.homeDir }}/.config/mise/config.toml
+mise token github --oauth
 mise install
