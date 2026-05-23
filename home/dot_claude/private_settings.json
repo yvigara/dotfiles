@@ -1,9 +1,15 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
-  "autoMemoryEnabled": true,
-  "alwaysThinkingEnabled": true,
-  "showThinkingSummaries": true,
-  "editorMode": "vim",
+  "env": {
+    "ENABLE_LSP_TOOL": "1",
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+    "CLAUDE_CODE_AUTO_CONNECT_IDE": "true",
+    "DISABLE_ERROR_REPORTING": "1",
+    "CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY": "1",
+    "GOTMPDIR": "/tmp/claude/go/tmp",
+    "GOCACHE": "/tmp/claude/go/cache",
+    "GOMODCACHE": "/tmp/claude/go/mod"
+  },
   "permissions": {
     "allow": [
       "mcp__qmd__*",
@@ -75,14 +81,6 @@
       "Skill(gstack-upgrade)"
     ]
   },
-  "env": {
-    "ENABLE_LSP_TOOL": "1",
-    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
-    "CLAUDE_CODE_AUTO_CONNECT_IDE": "true",
-    "DISABLE_ERROR_REPORTING": "1",
-    "CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY": "1"
-  },
-  "model": "sonnet",
   "statusLine": {
     "type": "command",
     "command": "ccline",
@@ -115,18 +113,30 @@
   "sandbox": {
     "enabled": true,
     "autoAllowBashIfSandboxed": true,
-    "enableWeakerNetworkIsolation": true,
-    "excludedCommands": [
-      "git",
-      "docker",
-      "gh",
-      "kubectl"
-    ],
+    "network": {
+      "allowedDomains": [
+        "github.com",
+        "*.github.com",
+        "*.githubusercontent.com",
+        "registry.npmjs.org",
+        "proxy.golang.org",
+        "sum.golang.org",
+        "*.golang.org",
+        "gopkg.in",
+        "*.googleapis.com",
+        "anthropic.com",
+        "*.anthropic.com"
+      ],
+      "allowUnixSockets": [
+        "~/.ssh/agent-socket"
+      ],
+      "allowLocalBinding": true
+    },
     "filesystem": {
-      "allowRead": [
-        "~/.ssh/known_hosts",
-        "~/.ssh/config",
-        "~/.config/gh/hosts.yml"
+      "denyWrite": [
+        "~/.aws",
+        "~/.config",
+        "~/Library/Keychains"
       ],
       "denyRead": [
         "~/.ssh",
@@ -134,31 +144,27 @@
         "~/.authinfo.gpg",
         "~/.aws/credentials"
       ],
-      "denyWrite": [
-        "~/.aws",
-        "~/.config",
-        "~/Library/Keychains"
+      "allowRead": [
+        "~/.ssh/known_hosts",
+        "~/.ssh/config",
+        "~/.config/gh/hosts.yml"
+      ],
+      "allowWrite": [
+        "/tmp/claude/go"
       ]
     },
-    "network": {
-      "allowedDomains": [
-        "github.com",
-        "*.github.com",
-        "raw.githubusercontent.com",
-        "objects.githubusercontent.com",
-        "registry.npmjs.org",
-        "proxy.golang.org",
-        "sum.golang.org",
-        "*.googleapis.com",
-        "anthropic.com",
-        "*.anthropic.com"
-      ],
-      "allowLocalBinding": true,
-      "allowUnixSockets": [
-        "~/.ssh/agent-socket"
-      ]
-    }
+    "enableWeakerNetworkIsolation": true,
+    "excludedCommands": [
+      "git",
+      "docker",
+      "gh",
+      "kubectl"
+    ]
   },
-  "preferredNotifChannel": "ghostty",
-  "tui": "fullscreen"
+  "alwaysThinkingEnabled": true,
+  "tui": "fullscreen",
+  "autoMemoryEnabled": true,
+  "showThinkingSummaries": true,
+  "editorMode": "vim",
+  "preferredNotifChannel": "ghostty"
 }
