@@ -19,7 +19,7 @@
     "source.organizeImports.oxc": "explicit",
     "source.addMissingImports.ts": "explicit",
     // "source.organizeImports": "explicit",
-    "source.fixAll": "explicit"
+    "source.fixAll": "explicit",
   },
   // Workbench
   "workbench.colorTheme": "Gruvbox Dark Medium",
@@ -44,7 +44,7 @@
     "**/.DS_Store": true,
     "**/bower_components": true,
     "**/.sass-cache": true,
-    ".nyc_output": true
+    ".nyc_output": true,
   },
   "files.trimTrailingWhitespace": true,
   "files.insertFinalNewline": true,
@@ -62,36 +62,38 @@
     "**/ansible/**/hosts": "ini",
     "**/ansible/**/inventory": "ini",
     "ansible.cfg": "ini",
-    "*.css": "tailwindcss"
+    "*.css": "tailwindcss",
   },
   // Golang
+  "go.showWelcome": false,
+  "go.survey.prompt": false,
   "go.lintTool": "golangci-lint-v2",
   "go.lintFlags": ["--path-mode=abs", "--fast-only"],
   "go.formatTool": "custom",
   "go.formatFlags": ["fmt", "--stdin"],
   "go.alternateTools": {
-    "customFormatter": "golangci-lint-v2"
+    "customFormatter": "golangci-lint-v2",
   },
   "go.testFlags": ["-v"],
-  "go.toolsManagement.autoUpdate": true,
   "go.useLanguageServer": true,
-  "go.languageServerFlags": [],
+  "go.languageServerFlags": ["-remote=auto", "-remote.listen.timeout=1h"],
   "gopls": {
-    "formatting.gofumpt": false,
-    "usePlaceholders": true, // add parameter placeholders when completing a function
-    // Experimental settings
-    "completeUnimported": true, // autocomplete unimported packages
+    "ui.completion.usePlaceholders": true,
     "ui.semanticTokens": true,
-    "deepCompletion": true // enable deep completion
+    "ui.diagnostic.staticcheck": true,
+    "ui.renameMovesSubpackages": true,
+  },
+  "go.editorContextMenuCommands": {
+    "fillStruct": true,
   },
   "[go]": {
     "editor.snippetSuggestions": "none",
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
       "source.organizeImports": "explicit",
-      "source.sortImports": "explicit"
+      "source.sortImports": "explicit",
     },
-    "editor.defaultFormatter": "golang.go"
+    "editor.defaultFormatter": "golang.go",
   },
   // Integrated terminal
   "terminal.external.osxExec": "iterm2",
@@ -115,10 +117,7 @@
   "explorer.openEditors.visible": 1,
   "explorer.confirmDelete": false,
   "yaml.format.enable": true,
-  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-  "javascript.updateImportsOnFileMove.enabled": "always",
-  "typescript.updateImportsOnFileMove.enabled": "always",
-  "typescript.surveys.enabled": false,
+  "js/ts.updateImportsOnFileMove.enabled": "always",
   "extensions.ignoreRecommendations": true,
   // Python
   "python.jediEnabled": false,
@@ -127,37 +126,37 @@
   "python.formatting.provider": "yapf",
   "python.showStartPage": false,
   "[astro]": {
-    "editor.defaultFormatter": "astro-build.astro-vscode"
+    "editor.defaultFormatter": "astro-build.astro-vscode",
   },
   "[css]": {
-    "editor.defaultFormatter": "biomejs.biome"
+    "editor.defaultFormatter": "biomejs.biome",
   },
   "[html]": {
-    "editor.defaultFormatter": "biomejs.biome"
+    "editor.defaultFormatter": "biomejs.biome",
   },
   "[javascript]": {
-    "editor.defaultFormatter": "oxc.oxc-vscode"
+    "editor.defaultFormatter": "oxc.oxc-vscode",
   },
   "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[proto3]": {
-    "editor.defaultFormatter": "bufbuild.vscode-buf"
+    "editor.defaultFormatter": "bufbuild.vscode-buf",
   },
   "[typescript]": {
-    "editor.defaultFormatter": "oxc.oxc-vscode"
+    "editor.defaultFormatter": "oxc.oxc-vscode",
   },
   "[typescriptreact]": {
-    "editor.defaultFormatter": "oxc.oxc-vscode"
+    "editor.defaultFormatter": "oxc.oxc-vscode",
   },
   "[javascriptreact]": {
-    "editor.defaultFormatter": "oxc.oxc-vscode"
+    "editor.defaultFormatter": "oxc.oxc-vscode",
   },
   "[yaml]": {
-    "editor.defaultFormatter": "redhat.vscode-yaml"
+    "editor.defaultFormatter": "redhat.vscode-yaml",
   },
   "editor.semanticHighlighting.enabled": true,
   "editor.semanticTokenColorCustomizations": {
@@ -166,32 +165,32 @@
       "rules": {
         "parameter": {
           "foreground": "#83a598",
-          "fontStyle": "italic"
+          "fontStyle": "italic",
         },
         "type": {
-          "fontStyle": "underline"
+          "fontStyle": "underline",
         },
         "interface": {
-          "foreground": "#d79921"
+          "foreground": "#d79921",
         },
         "storage.type": {
           "foreground": "#0FF000",
-          "fontStyle": "italic"
+          "fontStyle": "italic",
         },
         "variable.other.readwrite.alias": {
-          "foreground": "#a89984"
+          "foreground": "#a89984",
         },
         "meta.import": {
-          "foreground": "#a89984"
+          "foreground": "#a89984",
         },
         "namespace": {
-          "foreground": "#8EC07C"
+          "foreground": "#8EC07C",
         },
         "string": {
-          "foreground": "#90A4AE"
+          "foreground": "#90A4AE",
         },
         "function": {
-          "foreground": "#babb26"
+          "foreground": "#babb26",
           // "fontStyle": "bold"
         },
         "keyword": "#b16286",
@@ -199,30 +198,30 @@
         "class": "#f07178",
         "class.readonly": {
           "foreground": "#ffd580",
-          "fontStyle": ""
+          "fontStyle": "",
         },
         "class.defaultLibrary": {
           "foreground": "#d79921",
-          "fontStyle": "italic"
+          "fontStyle": "italic",
         },
         "class.declaration": {
           "foreground": "#83a598",
-          "fontStyle": ""
+          "fontStyle": "",
         },
         "enum": "#9dd2bb",
         "macro": "#ffd580",
         "variable": "#83A598",
         "variable.declaration": {
           "foreground": "#83A598",
-          "fontStyle": ""
+          "fontStyle": "",
         },
         "variable.declaration.readonly": {
           "foreground": "#d3869b",
-          "fontStyle": "italic"
+          "fontStyle": "italic",
         },
         "variable.readonly": {
           "foreground": "#d3869b",
-          "fontStyle": "italic"
+          "fontStyle": "italic",
         },
         "variable.defaultLibrary": "#458588",
         "typeParameter": "#83a598",
@@ -231,7 +230,7 @@
         "property.readonly": "#d3869b",
         "property.defaultLibrary": {
           "foreground": "#ebdbb2",
-          "fontStyle": ""
+          "fontStyle": "",
         },
         "enumMember": "#9dd2bb",
         "event": "#83a598",
@@ -255,9 +254,9 @@
         "12": "#83a598",
         "13": "#d3869b",
         "15": "#8ec07c",
-        "x": "#ebdbb2"
-      }
-    }
+        "x": "#ebdbb2",
+      },
+    },
   },
   "editor.tokenColorCustomizations": {
     "[Gruvbox Dark Medium]": {
@@ -265,52 +264,45 @@
         {
           "scope": ["string"],
           "settings": {
-            "foreground": "#98971a"
-          }
+            "foreground": "#98971a",
+          },
         },
         {
           "scope": ["storage.type"],
           "settings": {
             "foreground": "#fb4934",
-            "fontStyle": "italic"
-          }
-        }
-      ]
-    }
-  },
-  "workbench.editorAssociations": {
-    "*.ipynb": "jupyter.notebook.ipynb"
+            "fontStyle": "italic",
+          },
+        },
+      ],
+    },
   },
   "redhat.telemetry.enabled": false,
   "editor.insertSpaces": false,
   "editor.lineNumbers": "on",
   "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
   "editor.wordWrap": "off",
-  "docker.showStartPage": false,
   "editor.bracketPairColorization.enabled": true,
   "editor.guides.bracketPairs": true,
   "telemetry.telemetryLevel": "off",
   "workbench.startupEditor": "none",
   "editor.quickSuggestions": {
-    "strings": true // forces VS Code to trigger completions when editing "string" content
+    "strings": true, // forces VS Code to trigger completions when editing "string" content
   },
   "tailwindCSS.experimental.classRegex": [
     ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
     // ["tv\\((([^()]*|\\([^()]*\\))*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
-    ["([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]"]
+    ["([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]"],
   ],
   "editor.stickyScroll.enabled": true,
   "editor.inlineSuggest.enabled": true,
   "terminal.integrated.persistentSessionScrollback": 10000,
   "terminal.integrated.scrollback": 10000,
   "workbench.activityBar.location": "top",
-  "editor.multiDocumentOccurrencesHighlight": true,
   "application.shellEnvironmentResolutionTimeout": 30,
   "prettier.enableDebugLogs": true,
-  "github.copilot.chat.welcomeMessage": "never",
   "explorer.confirmUndo": "verbose",
   "explorer.enableUndo": false,
-  "eslint.packageManager": "pnpm",
   "eslint.useFlatConfig": true,
   "eslint.debug": true,
   "tailwindcss-intellisense.trace.server": "verbose",
@@ -318,19 +310,14 @@
   "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
   "eslint.codeActionsOnSave.rules": null,
   "eslint.useESLintClass": true,
-  "javascript.experimental.updateImportsOnPaste": true,
-  "typescript.experimental.updateImportsOnPaste": true,
   "git.openRepositoryInParentFolders": "never",
-  "github.copilot.chat.completionContext.typescript.mode": "sidecar",
   "[xml]": {
     "editor.autoClosingBrackets": "never",
-    "files.trimFinalNewlines": true
+    "files.trimFinalNewlines": true,
   },
   "editor.inlineSuggest.edits.showCollapsed": true,
-  "chat.experimental.statusIndicator.enabled": true,
   "docker.extension.enableComposeLanguageServer": false,
   "github.copilot.selectedCompletionModel": "",
-  "chat.disableAIFeatures": true,
   "[dockercompose]": {
     "editor.insertSpaces": true,
     "editor.tabSize": 2,
@@ -338,16 +325,14 @@
     "editor.quickSuggestions": {
       "other": true,
       "comments": false,
-      "strings": true
+      "strings": true,
     },
-    "editor.defaultFormatter": "redhat.vscode-yaml"
+    "editor.defaultFormatter": "redhat.vscode-yaml",
   },
   "[github-actions-workflow]": {
-    "editor.defaultFormatter": "redhat.vscode-yaml"
+    "editor.defaultFormatter": "redhat.vscode-yaml",
   },
-  "oxc.flags": {},
   "oxc.requireConfig": true,
-  "oxc.fmt.experimental": true,
   "oxc.typeAware": true,
   "yaml.customTags": [
     "!Base64 scalar",
@@ -368,15 +353,16 @@
     "!Sub scalar",
     "!Transform mapping",
     "!Ref scalar",
-    "!GetAtt scalar"
+    "!GetAtt scalar",
   ],
   "aws.telemetry": false,
   "[markdown]": {
     "editor.defaultFormatter": "DavidAnson.vscode-markdownlint",
     "editor.formatOnSave": true,
-    "editor.formatOnPaste": true
+    "editor.formatOnPaste": true,
   },
   "pkl.lsp.java.path": "/opt/homebrew/opt/openjdk/bin/java",
   "docker.extension.dockerEngineAvailabilityPrompt": false,
-  "githubPullRequests.pullBranch": "never"
+  "githubPullRequests.pullBranch": "never",
+  "editor.tabCompletion": "on",
 }
