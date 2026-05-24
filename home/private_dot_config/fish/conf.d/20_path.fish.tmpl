@@ -11,6 +11,10 @@ if not set -q fish_path_hash; or test $fish_path_hash != {{ $hash }}
     {{- if eq .chezmoi.os "darwin" }}
     # homebrew
     fish_add_path -m $HOMEBREW_PREFIX/bin $HOMEBREW_PREFIX/sbin
+    {{ if isExecutable "/opt/workbrew/bin/brew" }}
+    # workbrew
+    fish_add_path -m "/opt/workbrew/bin"
+    {{- end }}
     # rancher desktop
     fish_add_path -m $HOME/.rd/bin
     {{- end }}
