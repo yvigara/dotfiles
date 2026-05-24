@@ -6,6 +6,7 @@ window-save-state = always
 window-colorspace = display-p3
 cursor-style = block
 copy-on-select = clipboard
+app-notifications = no-clipboard-copy
 
 #### Keys ####
 macos-option-as-alt = left
