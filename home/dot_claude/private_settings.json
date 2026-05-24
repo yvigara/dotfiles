@@ -164,6 +164,7 @@
   "alwaysThinkingEnabled": true,
   "tui": "fullscreen",
   "autoMemoryEnabled": true,
+  "autoDreamEnabled": true,
   "showThinkingSummaries": true,
   "editorMode": "vim",
   "preferredNotifChannel": "ghostty"
