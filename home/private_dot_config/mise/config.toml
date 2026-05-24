@@ -6,7 +6,7 @@ trusted_config_paths = ["{{ env.XDG_PROJECTS_DIR }}"]
 go_set_gobin = false
 go_set_goroot = true
 env_cache = true
-minimum_release_age = "3d"
+minimum_release_age = "2d"
 
 [settings.github]
 oauth_client_id = "Iv23liX49yGQdh8FIgC4"
