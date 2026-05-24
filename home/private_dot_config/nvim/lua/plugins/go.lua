@@ -1,3 +1,4 @@
+if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
 local on_attach = function(client, bufnr)
   local buf_opts = { noremap = true, silent = true, buffer = bufnr }
 
