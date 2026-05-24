@@ -2,6 +2,9 @@
 [supervisor]
 user = "{{ .chezmoi.username }}"
 
+[slugs]
+llmenv = { dir = "{{.chezmoi.homeDir}}/.config/llmenv" }
+
 [settings.general]
 mise = true
 
@@ -13,7 +16,7 @@ ready_http = "http://localhost:8181/health"
 {{ if .llmenv -}}
 [daemons.llmenv]
 run = "scripts/update.sh"
-dir = "$HOME/.config/llmenv"
+dir = "{{.chezmoi.homeDir}}/.config/llmenv"
 cron = "0 0 6 * * *"
 
 {{ end -}}
