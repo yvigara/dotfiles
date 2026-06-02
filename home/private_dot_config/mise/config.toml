@@ -18,8 +18,8 @@ node = "26"
 "npm:@cometix/ccline" = "1.1.2"
 uv = "latest"
 "npm:@tobilu/qmd" = { version = "2.5.3", allow_builds = ["better-sqlite3"] }
-"npm:@rivolink/leaf" = "1.24.0"
-pitchfork = { version = "2.11.0", postinstall = "pitchfork boot enable" }
+"npm:@rivolink/leaf" = { version = "1.24.0", aube_args = "--allow-low-downloads" }
+pitchfork = { version = "2.12.1", postinstall = "pitchfork boot enable" }
 "npm:gitnexus" = { version = "1.6.5", allow_builds = ["@ladybugdb/core"] }
 "npm:@bitbonsai/mcpvault" = "0.11.0"
 aube = "1.16.1"
