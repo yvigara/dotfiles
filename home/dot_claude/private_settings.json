@@ -1,11 +1,12 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "env": {
-    "ENABLE_LSP_TOOL": "1",
-    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
-    "CLAUDE_CODE_AUTO_CONNECT_IDE": "true",
-    "DISABLE_ERROR_REPORTING": "1",
+    "CLAUDE_CODE_AUTO_CONNECT_IDE": "false",
     "CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY": "1",
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+    "DISABLE_ERROR_REPORTING": "1",
+    "ENABLE_LSP_TOOL": "1",
+    "GOPATH": "/tmp/claude/go",
     "GOTMPDIR": "/tmp/claude/go/tmp",
     "GOCACHE": "/tmp/claude/go/cache",
     "GOMODCACHE": "/tmp/claude/go/mod"
@@ -13,6 +14,7 @@
   "permissions": {
     "allow": [
       "mcp__qmd__*",
+      "mcp__gitnexus__*",
       "LSP",
       "Bash(git add:*)",
       "Bash(git branch:*)",
@@ -59,26 +61,7 @@
       "Bash(ls:*)",
       "Bash(fd:*)",
       "Bash(rg:*)",
-      "Skill(office-hours)",
-      "Skill(plan-ceo-review)",
-      "Skill(plan-eng-review)",
-      "Skill(plan-design-review)",
-      "Skill(design-consultation)",
-      "Skill(review)",
-      "Skill(debug)",
-      "Skill(design-review)",
-      "Skill(qa)",
-      "Skill(qa-only)",
-      "Skill(ship)",
-      "Skill(document-release)",
-      "Skill(retro)",
-      "Skill(browse)",
-      "Skill(setup-browser-cookies)",
-      "Skill(careful)",
-      "Skill(freeze)",
-      "Skill(guard)",
-      "Skill(unfreeze)",
-      "Skill(gstack-upgrade)"
+      "Read(/tmp/claude/go/mod)"
     ]
   },
   "statusLine": {
@@ -128,11 +111,15 @@
         "*.anthropic.com"
       ],
       "allowUnixSockets": [
-        "~/.ssh/agent-socket"
+        "~/.ssh/agent-socket",
+        "/private/tmp/com.apple.launchd.*/Listeners"
       ],
       "allowLocalBinding": true
     },
     "filesystem": {
+      "allowWrite": [
+        "/tmp/claude/go"
+      ],
       "denyWrite": [
         "~/.aws",
         "~/.config",
@@ -148,9 +135,6 @@
         "~/.ssh/known_hosts",
         "~/.ssh/config",
         "~/.config/gh/hosts.yml"
-      ],
-      "allowWrite": [
-        "/tmp/claude/go"
       ]
     },
     "enableWeakerNetworkIsolation": true,
@@ -167,5 +151,6 @@
   "autoDreamEnabled": true,
   "showThinkingSummaries": true,
   "editorMode": "vim",
-  "preferredNotifChannel": "ghostty"
+  "preferredNotifChannel": "ghostty",
+  "agentPushNotifEnabled": true
 }
