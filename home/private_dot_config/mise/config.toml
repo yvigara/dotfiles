@@ -10,7 +10,9 @@ minimum_release_age = "2d"
 npm.package_manager = "aube"
 
 [settings.github]
+gh_cli_tokens = true
 oauth_client_id = "Iv23liX49yGQdh8FIgC4"
+oauth_export_env = ""
 
 [tools]
 node = "26"
@@ -22,4 +24,4 @@ uv = "latest"
 pitchfork = { version = "2.12.1", postinstall = "pitchfork boot enable" }
 "npm:gitnexus" = { version = "1.6.5", allow_builds = ["@ladybugdb/core"] }
 "npm:@bitbonsai/mcpvault" = "0.11.0"
-aube = "1.16.1"
+aube = "1.18.0"
