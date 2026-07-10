@@ -7,7 +7,6 @@ brew "starship"
 brew "zoxide"
 brew "romkatv/gitstatus/gitstatus"
 
-tap "bufbuild/buf"
 tap "cloudflare/cloudflare"
 tap "danielfoehrkn/switch"
 tap "fluxcd/tap"
@@ -15,7 +14,6 @@ tap "github/gh"
 tap "helm/tap"
 tap "hashicorp/tap"
 tap "johanhaleby/kubetail"
-tap "k0sproject/tap"
 tap "oven-sh/bun"
 
 # {{- if eq .chezmoi.os "darwin" }}
@@ -77,8 +75,6 @@ brew "johanhaleby/kubetail/kubetail"
 brew "stern"
 brew "danielfoehrkn/switch/switch"
 brew "fluxcd/tap/flux"
-brew "helm/tap/chart-releaser"
-brew "k0sproject/tap/k0sctl"
 brew "derailed/k9s/k9s"
 brew "int128/kubelogin/kubelogin"
 
@@ -96,6 +92,7 @@ brew "pwgen"
 brew "beads"
 brew "sqlite"
 brew "ollama"
+brew "herdr"
 
 # {{- if eq .chezmoi.os "darwin" }}
 
