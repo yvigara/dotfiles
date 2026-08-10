@@ -44,9 +44,9 @@ abbr -a -- czd 'chezmoi diff'
 abbr -a -- czu 'chezmoi update --init'
 
 # ── package managers ─────────────────────────────────────────────────────────
-abbr -a -- pn pnpm
-abbr -a -- px 'pnpm dlx'
-alias bru='brew update && brew upgrade'
+alias pn=pnpm
+alias px='pnpm dlx'
+alias bru='brew update && brew upgrade --yes'
 
 # ── docker ────────────────────────────────────────────────────────────────────
 alias dk=docker
@@ -77,4 +77,4 @@ abbr -a -- oo 'open .'
 {{- end }}
 
 # ── Claude Code ───────────────────────────────────────────────────────────────
-abbr -a -- cc 'claude'
+alias cc='claude'

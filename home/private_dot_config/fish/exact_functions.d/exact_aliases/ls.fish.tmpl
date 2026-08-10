@@ -3,6 +3,6 @@
 status is-interactive; or exit
 
 function ls -w eza --description 'eza with sensible defaults'
-    command eza --classify {{ if $git }}--git {{ end }}--group --icons $argv
+    command eza --classify {{ if $git }}--git {{ end }}--group --icons auto $argv
 end
 {{- end }}

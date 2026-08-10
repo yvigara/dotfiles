@@ -19,18 +19,24 @@ set_goroot = true
 [settings.npm]
 package_manager = "aube"
 
+[settings.node]
+compile = false
+
 [settings.python]
 compile = false
 uv_venv_auto = "create|source"
 
+[settings.ruby]
+compile = false
+
 [tools]
 node = "26"
-"npm:defuddle" = "0.19.1"
+"npm:defuddle" = "0.19.2"
 "npm:@cometix/ccline" = "1.1.2"
 uv = "latest"
 "npm:@tobilu/qmd" = { version = "2.5.3", allow_builds = ["better-sqlite3"] }
-"npm:@rivolink/leaf" = { version = "1.26.0", aube_args = "--allow-low-downloads" }
-pitchfork = { version = "2.15.0", postinstall = "pitchfork boot enable" }
+"npm:@rivolink/leaf" = { version = "1.27.0", aube_args = "--allow-low-downloads" }
+pitchfork = { version = "2.20.0", postinstall = "pitchfork boot enable" }
 "npm:gitnexus" = { version = "1.6.9", allow_builds = ["@ladybugdb/core"] }
-"npm:@bitbonsai/mcpvault" = "0.12.1"
-aube = "1.26.0"
+aube = "1.38.0"
+"npm:@firecrawl/anydoc" = "0.1.7"

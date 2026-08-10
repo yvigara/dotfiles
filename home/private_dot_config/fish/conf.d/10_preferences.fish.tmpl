@@ -28,7 +28,7 @@ if not set -q fish_prefs_hash; or test $fish_prefs_hash != {{ $hash }}
     def -x VISUAL nvim
     def -x MANPAGER "nvim +Man!"
     def -x PAGER less
-    def -x LESS '--mouse --tabs=2 --RAW-CONTROL-CHARS'
+    def -x LESS '--tabs=2 --RAW-CONTROL-CHARS'
     def -x LESSHISTFILE $XDG_DATA_HOME/less/history
 
     # ── go ────────────────────────────────────────────────────────────────────

@@ -15,4 +15,5 @@ tmp/**/*
 **/.claude/settings.local.json
 mise.local.*
 .gitnexus
+.gitworktrees
 

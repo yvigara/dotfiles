@@ -70,6 +70,7 @@
     "padding": 0
   },
   "enabledPlugins": {
+    "memini@memini": true,
     "core@yvigara-marketplace": true,
     "beads@beads-marketplace": true,
     "gopls-lsp@claude-plugins-official": true,
@@ -77,20 +78,30 @@
     "code-simplifier@claude-plugins-official": true,
     "claude-md-management@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": true,
-    "plugin-dev@claude-plugins-official": true
+    "plugin-dev@claude-plugins-official": true,
+    "mattpocock-skills@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
+    "memini": {
+      "source": {
+        "source": "github",
+        "repo": "eleboucher/memini"
+      },
+      "autoUpdate": true
+    },
     "yvigara-marketplace": {
       "source": {
         "source": "github",
         "repo": "yvigara/claude-plugins"
-      }
+      },
+      "autoUpdate": true
     },
     "beads-marketplace": {
       "source": {
         "source": "github",
         "repo": "gastownhall/beads"
-      }
+      },
+      "autoUpdate": true
     }
   },
   "sandbox": {

@@ -57,6 +57,7 @@
   fsmonitor = true
   untrackedCache = true
   trustctime = false
+  pager = hunk pager
 [filter "lfs"]
   clean = git-lfs clean %f
   smudge = git-lfs smudge %f
@@ -67,10 +68,10 @@
   hotfix = hotfix-
   support = support-
   versiontag = v
-[diff]
-  external = difft
-  compactionHeuristic = true
-  colorMoved = default
+; [diff]
+;   external = difft
+;   compactionHeuristic = true
+;   colorMoved = default
 [commit]
   template = ~/.gitmessage
   gpgsign = true
