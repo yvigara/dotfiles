@@ -15,6 +15,7 @@
     "allow": [
       "mcp__qmd__*",
       "mcp__gitnexus__*",
+      "mcp__zvec_grep__*",
       "LSP",
       "Bash(git add:*)",
       "Bash(git branch:*)",
@@ -62,7 +63,8 @@
       "Bash(fd:*)",
       "Bash(rg:*)",
       "Read(/tmp/claude/go/mod)"
-    ]
+    ],
+    "defaultMode": "plan"
   },
   "statusLine": {
     "type": "command",
@@ -72,7 +74,6 @@
   "enabledPlugins": {
     "memini@memini": true,
     "core@yvigara-marketplace": true,
-    "beads@beads-marketplace": true,
     "gopls-lsp@claude-plugins-official": true,
     "code-review@claude-plugins-official": true,
     "code-simplifier@claude-plugins-official": true,
@@ -96,10 +97,10 @@
       },
       "autoUpdate": true
     },
-    "beads-marketplace": {
+    "humanizer": {
       "source": {
         "source": "github",
-        "repo": "gastownhall/beads"
+        "repo": "blader/humanizer"
       },
       "autoUpdate": true
     }
@@ -158,10 +159,16 @@
   },
   "alwaysThinkingEnabled": true,
   "tui": "fullscreen",
+  "timeFormat": "24-hour",
   "autoMemoryEnabled": true,
   "autoDreamEnabled": true,
   "showThinkingSummaries": true,
+  "theme": "dark-ansi",
   "editorMode": "vim",
   "preferredNotifChannel": "ghostty",
+  "autoContinueAtUsageLimit": true,
+  "autoScrollEnabled": true,
+  "remoteControlAtStartup": true,
+  "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true
 }

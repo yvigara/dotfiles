@@ -3,8 +3,10 @@ experimental = true
 idiomatic_version_file_enable_tools = ["node"]
 pin = true
 lockfile = true
+locked_scopes = ["project"]
 trusted_config_paths = ["{{ env.XDG_PROJECTS_DIR }}"]
 env_cache = true
+env_conf_d = true
 minimum_release_age = "2d"
 
 [settings.github]
@@ -31,12 +33,12 @@ compile = false
 
 [tools]
 node = "26"
-"npm:defuddle" = "0.19.2"
+"npm:defuddle" = "0.19.4"
 "npm:@cometix/ccline" = "1.1.2"
 uv = "latest"
-"npm:@tobilu/qmd" = { version = "2.5.3", allow_builds = ["better-sqlite3"] }
-"npm:@rivolink/leaf" = { version = "1.27.0", aube_args = "--allow-low-downloads" }
-pitchfork = { version = "2.20.0", postinstall = "pitchfork boot enable" }
-"npm:gitnexus" = { version = "1.6.9", allow_builds = ["@ladybugdb/core"] }
-aube = "1.38.0"
-"npm:@firecrawl/anydoc" = "0.1.7"
+"npm:@tobilu/qmd" = { version = "2.8.3", allow_builds = ["better-sqlite3"] }
+pitchfork = { version = "2.25.0", postinstall = "pitchfork boot enable" }
+aube = "2.2.17"
+"npm:@firecrawl/anydoc" = "0.2.4"
+"go:github.com/eleboucher/memini/cmd/memini" = "0.7.29"
+"npm:@zvec/zvec-grep" = "0.2.2"

@@ -14,6 +14,12 @@ export EDITOR='nvim'
 export VISUAL="${EDITOR}"
 export MANPAGER='nvim +Man!'
 
+{{ if not .personal -}}
+# The following lines were added by Docker Desktop to add commands to your PATH.
+export PATH="$PATH:/Users/yvigara/.docker/bin"
+# End of Docker Desktop section.
+{{ end }}
+
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/.local/bin" ]; then
   PATH="$HOME/.local/bin:$PATH"

@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+{{ if not .personal -}}
+# The following lines were added by Docker Desktop to add commands to your PATH.
+export PATH="$PATH:/Users/yvigara/.docker/bin"
+# End of Docker Desktop section.
+{{ end -}}
+
 # Path to the bash it configuration
 export BASH_IT="$HOME/.bash_it"
 

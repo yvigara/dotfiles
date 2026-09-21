@@ -1,3 +1,5 @@
+onboarding = false
+
 [ui.sound]
 enabled = false
 
@@ -9,5 +11,6 @@ auto_switch = false
 delivery = "terminal"
 
 [ui]
-show_agent_labels_on_pane_borders = false
+show_agent_labels_on_pane_borders = true
+status_indicators = "symbols"
 agent_panel_sort = "spaces"

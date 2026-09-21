@@ -1,7 +1,8 @@
 theme = "Gruvbox Dark"
 font-family = "JetBrains Mono"
 shell-integration-features = no-cursor,sudo,title,ssh-env
-macos-titlebar-style = tabs
+# macos-titlebar-style = tabs
+macos-titlebar-style = native
 window-save-state = always
 window-colorspace = display-p3
 cursor-style = block

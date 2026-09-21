@@ -13,6 +13,11 @@ run = "qmd mcp --http --port 8181"
 boot_start = true
 ready_http = "http://localhost:8181/health"
 
+[daemons.zg]
+run = "zg server run"
+boot_start = true
+ready_cmd = "zg --server status --check-ready"
+
 {{ if .llmenv -}}
 [daemons.llmenv]
 run = "scripts/update.sh"
