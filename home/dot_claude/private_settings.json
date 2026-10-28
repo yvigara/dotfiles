@@ -64,12 +64,19 @@
       "Bash(rg:*)",
       "Read(/tmp/claude/go/mod)"
     ],
-    "defaultMode": "plan"
+    "defaultMode": "auto"
   },
+  "model": "sonnet",
   "statusLine": {
     "type": "command",
     "command": "ccline",
-    "padding": 0
+    "padding": 0,
+    "refreshInterval": 1,
+    "hideVimModeIndicator": true
+  },
+  "subagentStatusLine": {
+    "type": "command",
+    "command": "ccline"
   },
   "enabledPlugins": {
     "memini@memini": true,
@@ -159,6 +166,8 @@
   },
   "alwaysThinkingEnabled": true,
   "tui": "fullscreen",
+  "effortLevel": "high",
+  "advisorModel": "claude-opus-5-5",
   "timeFormat": "24-hour",
   "autoMemoryEnabled": true,
   "autoDreamEnabled": true,

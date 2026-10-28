@@ -1,0 +1,37 @@
+version = 2
+palette = "gruvbox"
+skin = "powerline"
+fill = "tinted"
+glyphs = "nerd"
+color_depth = "auto"
+separator = "  "
+
+[powerline]
+join = "arrow"
+end = "round"
+
+[layout]
+width = "auto"
+padding = "auto"
+reserve = 0
+
+[git]
+cache_ms = 2000
+
+[update]
+check = true
+interval_hours = 6
+
+[[line]]
+left = [
+    "vim",
+    "model",
+    "agent",
+    { metric = "dir", icon_color = "bright_yellow" },
+    "repo",
+    "git",
+    "pr",
+    "session_name",
+    { metric = "context", widget = "text", format = "{pct}%[ · {tokens} tokens]" },
+    "quota.5h",
+]
